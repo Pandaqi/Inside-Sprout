@@ -10,7 +10,9 @@ class_name EnemyType
 @export var weaknesses : Array[ElementType] = []
 @export var weaknesses_all := false
 @export var damage := 1.0
-@export var health := 1.0 # ?? if insta-killed by weaknesses, this is useless of course
+@export var health := 1.0
+@export var attack_delay := 1.0
+@export var shield := 0.0
 
 # @NOTE: spawnable elements would just create "random lucky kills" if any enemies reacted to them
 func distracted_by(e:ElementType) -> bool:

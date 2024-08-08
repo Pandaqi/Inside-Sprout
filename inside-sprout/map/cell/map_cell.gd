@@ -26,3 +26,6 @@ func has_area() -> bool:
 
 func get_center() -> Vector2:
 	return Vector2(pos.x+0.5, pos.y+0.5)
+
+func get_random_point_within() -> Vector2:
+	return Vector2(pos.x + randf(), pos.y + randf())

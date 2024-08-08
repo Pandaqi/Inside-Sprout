@@ -62,7 +62,7 @@ func refresh() -> void:
 		cur_num += 1
 
 func spawn(et:ElementType = null, pos:Vector2 = Vector2.ZERO) -> void:
-	var node = element_scene.instantiate()
+	var node : Element = element_scene.instantiate()
 	if pos.length() <= 0.0003:
 		pos = get_random_valid_position()
 	
@@ -76,6 +76,8 @@ func spawn(et:ElementType = null, pos:Vector2 = Vector2.ZERO) -> void:
 	
 	element_data.add_element(node)
 	node.died.connect(func(_no): element_data.remove_element(node))
+	
+	node.activate()
 
 # @TODO: also spawn away from other elements?
 func get_random_valid_position() -> Vector2:

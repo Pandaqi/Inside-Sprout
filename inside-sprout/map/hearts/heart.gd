@@ -9,7 +9,11 @@ var dead := false
 signal died(h:Heart)
 
 func _ready() -> void:
+	health.depleted.connect(on_health_depleted)
 	health.set_base_health(Global.config.heart_health * Global.config.enemy_damage_factor, true)
+
+func on_health_depleted() -> void:
+	kill()
 
 func kill() -> void:
 	dead = true

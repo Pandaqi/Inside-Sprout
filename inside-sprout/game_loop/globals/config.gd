@@ -4,6 +4,7 @@ class_name Config
 @export_group("Map")
 @export var map_size := Vector2i(10,10)
 @export var cell_size := 256.0
+@export var sprite_size := 128.0
 
 @export_subgroup("Background")
 @export var map_background_color := Color(1,1,1)
@@ -28,6 +29,8 @@ var waves_unlock_interval_bounds := Bounds.new(2, 4) # min/max waves before next
 @export_subgroup("Defaults")
 @export var enemy_damage_factor := 50.0
 @export var enemy_health_factor := 100.0
+@export var enemy_shield_factor := 10.0
+@export var enemy_attack_delay_factor := 1.0
 
 @export_group("Movement")
 @export var movement_speed_def := 50.0
@@ -35,8 +38,9 @@ var waves_unlock_interval_bounds := Bounds.new(2, 4) # min/max waves before next
 
 @export_group("Hearts")
 @export var hearts_num := 1
-@export var hearts_min_cells_between := 4
+@export var hearts_min_cells_between := 3
 @export var heart_health := 10.0 # ~enemy_damage
+@export var hearts_min_cells_to_edge := 2
 
 @export_group("Elements")
 @export_subgroup("Spawning")
@@ -45,3 +49,6 @@ var elements_spawn_bounds := Bounds.new(3.0, 6.0)
 var elements_conversion_duration_bounds := Bounds.new(2.0, 4.0)
 @export var elements_spawn_extra_prob := 0.8
 @export var elements_spawn_tick := 3.0
+
+@export_subgroup("Defaults")
+@export var elements_health_factor := 50.0

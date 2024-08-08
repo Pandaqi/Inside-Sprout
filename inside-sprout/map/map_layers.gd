@@ -8,6 +8,7 @@ func _ready():
 	
 	for layer in layer_names:
 		var node := Node2D.new()
+		node.y_sort_enabled = true
 		add_child(node)
 		layers[layer] = node
 

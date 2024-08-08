@@ -2,13 +2,37 @@ class_name ModuleSensor extends Node2D
 
 var target : Element = null
 @onready var entity : Enemy = get_parent()
+@onready var area_scan := $ScanArea
+@export var attacker : ModuleAttacker
 
-func set_target_element(e:Element):
+signal target_found(e:Element)
+signal target_lost(e:Element)
+
+func activate() -> void:
+	attacker.target_found.connect(on_attack_target_found)
+	attacker.target_lost.connect(on_attack_target_lost)
+
+func on_attack_target_found(_n:Node2D) -> void:
+	reset_target()
+
+func on_attack_target_lost(_n:Node2D) -> void:
+	recheck_bodies()
+
+func set_target_element(e:Element) -> void:
 	target = e
+	target_found.emit(e)
+
+func reset_target() -> void:
+	target_lost.emit(target)
+	target = null
 
 func get_target_element() -> Element:
-	if target and not is_instance_valid(target): target = null
+	if target and not is_instance_valid(target): reset_target()
 	return target
+
+func recheck_bodies() -> void:
+	for body in area_scan.get_overlapping_bodies():
+		_on_scan_area_body_entered(body)
 
 func _on_scan_area_body_entered(body: Node2D) -> void:
 	if not (body is Element): return
@@ -26,18 +50,3 @@ func _on_scan_area_body_entered(body: Node2D) -> void:
 	var dist_new := body.global_position.distance_squared_to(global_position)
 	if dist_cur < dist_new: return
 	set_target_element(body)
-
-func _on_kill_area_body_entered(body: Node2D) -> void:
-	var die := false
-	
-	if body is Element:
-		die = entity.type.is_weak_to(body.type)
-		body.kill()
-	
-	if body is Heart:
-		var damage := entity.type.damage * Global.config.enemy_damage_factor
-		body.health.change(-damage)
-		die = true
-	
-	if die:
-		entity.kill()

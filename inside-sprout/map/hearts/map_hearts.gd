@@ -4,6 +4,14 @@ var cells : Array[MapCell] = []
 
 func place(grid:MapGrid, num:int, min_dist:float) -> void:
 	var valid_cells := grid.get_cells()
+	
+	var min_dist_to_edge := Global.config.hearts_min_cells_to_edge
+	for i in range(valid_cells.size()-1,-1,-1):
+		var dist_to_edge := grid.get_cell_dist_to_edge(valid_cells[i])
+		print(dist_to_edge)
+		if dist_to_edge >= min_dist_to_edge: continue
+		valid_cells.remove_at(i)
+	
 	valid_cells.shuffle()
 	
 	for i in range(num):

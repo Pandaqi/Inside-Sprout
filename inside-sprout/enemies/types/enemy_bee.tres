@@ -8,7 +8,13 @@
 script = ExtResource("1_q4xle")
 frame = 0
 desc = "Distracted by every possible flower."
-strength = 1
+strength = 1.0
 distractions = Array[ExtResource("1_247h7")]([])
 distractions_all = true
 movement_type = ExtResource("2_jmsk2")
+weaknesses = Array[ExtResource("1_247h7")]([])
+weaknesses_all = true
+damage = 1.0
+health = 1.0
+attack_delay = 1.0
+shield = 0.0

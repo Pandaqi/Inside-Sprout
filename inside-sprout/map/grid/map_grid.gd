@@ -38,9 +38,12 @@ func get_cells() -> Array[MapCell]:
 func get_random_position_grid() -> Vector2i:
 	return Vector2i(randi_range(0, size.x-1), randi_range(0, size.y-1))
 
-# @NOTE: if we don't add the final bit, it only draws random positions perfectly in the top left of cells :p
-func get_random_position() -> Vector2:
-	return grid_pos_to_real_pos(get_random_position_grid()) + Vector2(randf(), randf()) * Global.config.cell_size
+func get_random_position(dist_edge := Vector2.ZERO) -> Vector2:
+	var bds := get_bounds()
+	return Vector2(
+		randf() * (bds.size.x - 2*dist_edge.x) + dist_edge.x, 
+		randf() * (bds.size.y - 2*dist_edge.y) + dist_edge.y
+	)
 
 func pos_to_grid_id(pos:Vector2i) -> int:
 	return pos.x + pos.y * size.x
@@ -49,7 +52,10 @@ func grid_id_to_pos(id:int) -> Vector2i:
 	return Vector2i(id % size.x, floor(id / float(size.x)))
 
 func grid_pos_to_real_pos(grid_pos:Vector2i) -> Vector2:
-	return Global.config.cell_size * Vector2(grid_pos)
+	return grid_pos_float_to_real_pos(Vector2(grid_pos))
+
+func grid_pos_float_to_real_pos(grid_pos:Vector2) -> Vector2:
+	return Global.config.cell_size * grid_pos
 
 func real_pos_to_grid_pos(real_pos:Vector2) -> Vector2i:
 	return Vector2i(floor(real_pos.x / Global.config.cell_size), floor(real_pos.y / Global.config.cell_size))
@@ -81,3 +87,17 @@ func get_other_side_of_edge(l:Line) -> MapCell:
 func get_bounds() -> Rect2:
 	var cs := Global.config.cell_size
 	return Rect2(0, 0, size.x*cs, size.y*cs)
+
+func get_random_position_cells(include : Array[MapCell] = [], exclude : Array[MapCell] = []) -> Vector2:
+	var cells := include.duplicate(false) if include.size() > 0 else get_cells()
+	for cell in exclude:
+		cells.erase(cell)
+	if cells.size() <= 0: return Vector2.ZERO
+	
+	var rand_cell : MapCell = cells.pick_random()
+	return grid_pos_float_to_real_pos(rand_cell.get_random_point_within())
+
+func get_cell_dist_to_edge(cell:MapCell) -> int:
+	var x_dist : int = min(cell.pos.x, size.x - 1 - cell.pos.x)
+	var y_dist : int = min(cell.pos.y, size.y - 1 - cell.pos.y)
+	return min(x_dist, y_dist)

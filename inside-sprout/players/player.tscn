@@ -1,12 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccmri4p1e8uks"]
+[gd_scene load_steps=12 format=3 uid="uid://ccmri4p1e8uks"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_qca82"]
 [ext_resource type="Script" path="res://players/modules/map_tracker.gd" id="2_care2"]
 [ext_resource type="Script" path="res://players/modules/input.gd" id="2_fdeqs"]
 [ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="2_l4xhl"]
 [ext_resource type="Resource" uid="uid://dx6cw7nxy341v" path="res://map/data/map_data.tres" id="3_6wfpq"]
-[ext_resource type="Script" path="res://players/modules/mover.gd" id="4_vvrtl"]
-[ext_resource type="Resource" uid="uid://ce6mpcxnh7v2f" path="res://players/movement/movement_player.tres" id="6_okqom"]
+[ext_resource type="PackedScene" uid="uid://bd8jt2m8mng1r" path="res://players/modules/mover.tscn" id="6_ef44r"]
 [ext_resource type="Script" path="res://players/modules/element_grabber.gd" id="8_rcqdi"]
 [ext_resource type="Script" path="res://players/modules/element_converter.gd" id="9_3g7iy"]
 [ext_resource type="Script" path="res://players/modules/element_dropper.gd" id="10_vbua5"]
@@ -33,10 +32,8 @@ script = ExtResource("2_fdeqs")
 script = ExtResource("2_care2")
 map_data = ExtResource("3_6wfpq")
 
-[node name="Mover" type="Node2D" parent="." node_paths=PackedStringArray("input")]
-script = ExtResource("4_vvrtl")
+[node name="Mover" parent="." node_paths=PackedStringArray("input") instance=ExtResource("6_ef44r")]
 input = NodePath("../Input")
-res_move = ExtResource("6_okqom")
 
 [node name="ElementGrabber" type="Node2D" parent="."]
 script = ExtResource("8_rcqdi")

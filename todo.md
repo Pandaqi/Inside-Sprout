@@ -1,19 +1,33 @@
 
-# To-Do
+# To-Do (for Thursday)
 
+* Write that article about "for every rule/system you invent, think about what it does or doesn't say to the player. Make sure it says the right things (don't be passive), but also that there's variety (no one strategy to rule them all)"
 * PLAYER
-  * Way faster
   * Show what holding + time until drop
-* MONSTERS:
-  * Make monsters pause a little while removing an Element ( => again modifiable through their resource)
-  * Display their distraction + poisonous types
 * ELEMENTS:
   * Draw some simple images for that so I can see what the hell I'm even doing.
-* SPAWNING:
-  * Don't spawn the Heart anywhere near the edge
-  * Create a variant that draws a random position from _cells_ as input
-    * Allow giving a "forbidden_cells" data => so we can query a random position while ignoring, for example, all Heart areas/Inside cells
+* INSIDE/OUTSIDE
+  * Allow marking as such. (Draw lines in _draw() for now to mark it) => 
+    * MapAreaGroup, with shared functionality either being a tool or extending the base class
+    * Yes, and this group only knows its _areas_ (and the areas know the groups they're in), so we can easily find connected stuff both ways
+  * Track in which state you are on the MapTracker.
+  * Create simple "recolor" function for all areas (separate it from the generation where it's now)
+  * Implement the simple rules of "timers don't extend here", or "you drop everything immediately", or "you move much faster", or "things dropped here heal the heart", or "things dropped here change into type X" (which would be "bullets" for some machine later)
+    * I should probably just have an "InsideRuleSet" and "OutsideRuleSet" with the modifications built-in => these are part of a general RuleSet resource that _could_ be reused for global roguelite unlocks
+
 * TRY ALL SORTS OF RULES TWEAKS TO MAKE IT FUN.
+
+
+TUTORIAL STEPS FOR NOW: 
+* Defend the Treeheart!
+* If you pick up seeds, they drop a few seconds later. Where you're standing at that moment determines the flower they become.
+* Enemies are distracted and/or damaged by certain flowers (displayed on their body).
+* If you drop seeds _inside_ the Heart chamber, they become bullets for the Treegun---a different path to defending nature ;)
+  * @TODO: Perhaps the Heart is simply one version/subclass of "Machines", so I can easily implement the ideas for different machines that are only placed and operated when _inside_.
+  * @TODO: Re-use the outline algorithm to determine the edges for "inside", then place hedges or whatever there to create a building naturally.
+  * @ALTERNATIVE: If dropped inside the Treeheart chamber, they heal the Heart a little bit.
+  * YES YES YES: because close to the heart ("inside"), your elements don't work, you _have_ to go further away and plant them there to defeat monsters.
+  * 
 
 
 ## Next
@@ -28,16 +42,19 @@ Further work:
 * Certain monsters _drop_ stuff too, that you can then use (or must avoid)
   * It feels like the "medicine" for the heart should be _changing_, otherwise one specific element will always be way more important.
   * And it feels like the player should have a _tiny_ bit of interaction possible with the enemies, otherwise it's all too "indirect"
-* Health module for players?
 * Progression: Track which rules are unlocked (roguelite things) + obviously give players the options to choose stuff between waves or something.
+* A debug method for the sight/kill area of enemies; reuse that dotted line shader. (Should probably fade these in/out for players to see.)
 
+BEE => Change to "Jack of all flowers, damaged by none." => That's a great simple first enemy, while reinforcing the need for some secondary mechanic to destroy monsters
 
 
 RULE: Poisonous is probably always a SUBSET of distractions => we show the distractions, then highlight those that are poisonous
 
+@IDEA: If we want to easily support multiplayer, we should just start half inside and half outside. But allow easy ways (or a common powerup/curse/whatever, maybe every wave) to _switch places_.
 
+@IDEA: We _can_ go the route of giving a health module to players, creating a "I need to risk getting close to distract them, but that risks me getting hurt" => but if we remove the Heart, well, there is no reason to distract/kill monsters in the first place :p
 
-@IDEA: When you go inside, you _eat_ your current elements? (Or you eat all plants that are there? Inside INVERTS the process => you pick up plants and spit out seeds?) => So you must choose whether you want to use a certain element to distract/kill monsters, or to give yourself a benefit now.
+@IDEA: When you go inside, you _eat/consume_ your current elements? (Or you eat all plants that are there? Inside INVERTS the process => you pick up plants and spit out seeds?) => So you must choose whether you want to use a certain element to distract/kill monsters, or to give yourself a benefit now.
 
 @IDEA: Elements have Health too? Some can take X monsters before they die.
 
