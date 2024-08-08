@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Config" load_steps=2 format=3 uid="uid://bkdbyuj1kmyar"]
+
+[ext_resource type="Script" path="res://game_loop/globals/config.gd" id="1_bwgg8"]
+
+[resource]
+script = ExtResource("1_bwgg8")
+map_size = Vector2i(10, 8)
+cell_size = 256.0
+map_background_color = Color(0.52332, 0.84, 0.3528, 1)
+area_min_size = 2
+camera_edge_margin = Vector2(32, 32)
+waves_max = 20
+enemy_damage_factor = 50.0
+enemy_health_factor = 100.0
+movement_speed_def = 50.0
+movement_speed_factor_player = 5.0
+hearts_num = 1
+hearts_min_cells_between = 4
+heart_health = 10.0
+elements_spawn_min_dist_to_player = 3.0
+elements_spawn_extra_prob = 0.8
+elements_spawn_tick = 3.0

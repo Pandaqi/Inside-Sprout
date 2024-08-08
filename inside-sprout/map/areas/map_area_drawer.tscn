@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cufc1ferl717d"]
+
+[ext_resource type="Script" path="res://map/areas/map_area_drawer.gd" id="1_5el16"]
+[ext_resource type="Resource" uid="uid://dx6cw7nxy341v" path="res://map/data/map_data.tres" id="2_e4b70"]
+[ext_resource type="Material" uid="uid://b1axtlglnxk4q" path="res://map/areas/map_area_drawer_shader.tres" id="3_o8fnv"]
+
+[node name="Area" type="Node2D"]
+material = ExtResource("3_o8fnv")
+script = ExtResource("1_5el16")
+map_data = ExtResource("2_e4b70")
+
+[node name="DebugLabel" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="DebugLabel"]
+offset_left = -51.0
+offset_top = -30.0
+offset_right = 43.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "#0"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://coed4jc64xcuo"]
+
+[ext_resource type="Script" path="res://map/hearts/heart.gd" id="1_1j50u"]
+[ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="1_ll0ws"]
+[ext_resource type="PackedScene" uid="uid://dy0f3m12rq7tj" path="res://players/modules/health.tscn" id="3_xgapb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxll4"]
+size = Vector2(128, 128)
+
+[node name="Heart" type="StaticBody2D"]
+script = ExtResource("1_1j50u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xxll4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.664167, 0.000455606, 0.692819, 1)
+texture = ExtResource("1_ll0ws")
+
+[node name="Health" parent="." instance=ExtResource("3_xgapb")]

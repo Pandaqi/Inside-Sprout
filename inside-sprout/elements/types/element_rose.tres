@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ElementType" load_steps=2 format=3 uid="uid://c3m4rrqbt5y4p"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_48hbf"]
+
+[resource]
+script = ExtResource("1_48hbf")
+frame = 1
+name = "Rose"
+desc = ""
+color = Color(1, 0, 0.366667, 1)
+spawnable = false

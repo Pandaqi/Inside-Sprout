@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="MovementEnemyDefault" load_steps=2 format=3 uid="uid://dfphubkfnrwe0"]
+
+[ext_resource type="Script" path="res://players/movement/movement_enemy_default.gd" id="1_kmyqu"]
+
+[resource]
+script = ExtResource("1_kmyqu")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ElementData" load_steps=6 format=3 uid="uid://bed1b4cijdpsn"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_jscdb"]
+[ext_resource type="Script" path="res://elements/data/element_data.gd" id="2_temsh"]
+[ext_resource type="Resource" uid="uid://blojtsfrgiabt" path="res://elements/types/element_seed.tres" id="2_y2qva"]
+[ext_resource type="Resource" uid="uid://c3m4rrqbt5y4p" path="res://elements/types/element_rose.tres" id="3_2qjdq"]
+[ext_resource type="Resource" uid="uid://r0fjcv0w2stk" path="res://elements/types/element_dandelion.tres" id="4_nvsqu"]
+
+[resource]
+script = ExtResource("2_temsh")
+all_types = Array[ExtResource("1_jscdb")]([ExtResource("2_y2qva"), ExtResource("3_2qjdq"), ExtResource("4_nvsqu")])

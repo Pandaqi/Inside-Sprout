@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ElementType" load_steps=2 format=3 uid="uid://r0fjcv0w2stk"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_0kkja"]
+
+[resource]
+script = ExtResource("1_0kkja")
+frame = 2
+name = "Dandelion"
+desc = ""
+color = Color(1, 0.8895, 0.61, 1)
+spawnable = false
