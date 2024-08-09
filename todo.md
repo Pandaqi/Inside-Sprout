@@ -1,23 +1,14 @@
 
 # To-Do (for Friday)
 
-* Graphics (just enough to see the basics):
-  * Progress bar ( + the "busy converting" thing) ( + arrow)
-  * Hedges + Heart
-  * Player character(s)
+* Graphics:
   * A few flowers, monsters
-  * Some wave-advance graphic?
-* Tutorial
-  * To see how easy it is to explain
-  * And to get a general style for menu/ui too
+  * Then actually add to game
+* Tutorial: 
+  * Fill in the details
+  * Code and display
 * Invent the different monsters + elements + any other rule changes that might be fun
 
-
-TUTORIAL STEPS FOR NOW: 
-* Defend the Treeheart!
-* If you pick up seeds, they drop a few seconds later. Where you're standing at that moment determines the flower they become.
-* Enemies are distracted and/or damaged by certain flowers (displayed on their body).
-* If you drop seeds _inside_ the Heart chamber, they become bullets for the Treegun---a different path to defending nature ;)
 
 
 @IDEA: That idea of local multiplayer Olympic games, with all of them "simplified" and "partified". For example: any solo/take-turns sports now just _happen together_.
@@ -28,6 +19,10 @@ TUTORIAL STEPS FOR NOW:
 
 * Hockey? You're just a blob with a huge stick and huge feet. The only rule we're really copying is that you get penalized for getting hit on your foot.
 
+* Rowing? It's about sharing a boat, pressing buttons at the right time to go forward (with most speed). Mis-timing means you go sideways, as expected, which can be bad (penalty for going out of bounds etcetera) or good (you're able to grab some powerups or avoid some collision before you)
+  * The most powerful feature here would be that you are "locked" in your direction for X time, because paddling needs a recharge. This makes movement unique and strategic. 
+
+
 
 
 ## Next
@@ -36,7 +31,7 @@ Further work:
 
 * @TODO: clear indication/progress on the heart loading up for shooting
 * @TODO: protection against going out of bounds
-
+* @TODO: Don't make the tree gun too overpowered now; the flowers themselves should be far stronger and lead to _longer_ distractions or _instakills_
 * ENSURE YOU'RE GROWING STRONGER TOO (as the waves grow stronger)
 * Certain monsters _drop_ stuff too, that you can then use (or must avoid)
   * It feels like the "medicine" for the heart should be _changing_, otherwise one specific element will always be way more important.
@@ -48,7 +43,10 @@ Further work:
 * RadiusViewer => update whenever radius of col_shape changes
   * Need to set this properly from EnemyType first => then call signal
 
+Articles
+
 * Write that article about "for every rule/system you invent, think about what it does or doesn't say to the player. Make sure it says the right things (don't be passive), but also that there's variety (no one strategy to rule them all)"
+* Write that article about why Bombgoggles ... bombed in that jam, what I learned from that and how I improved it.
 
 
 BEE => Change to "Jack of all flowers, damaged by none." => That's a great simple first enemy, while reinforcing the need for some secondary mechanic to destroy monsters
