@@ -76,6 +76,7 @@ func spawn(ev:SpawnEvent) -> void:
 	e.set_type(ev.type)
 	enemy_data.add_enemy(e)
 	e.died.connect(func(_enem): enemy_data.remove_enemy(e))
+	e.activate()
 
 func unlock_types_if_needed() -> void:
 	if unlock_order.size() <= 0: return

@@ -8,6 +8,8 @@ var area_types : Array[ElementType] = [] # the types that areas can be (and thus
 
 var elements : Array[Element] = []
 
+@export var type_interior : ElementType
+
 signal element_added(e:Element)
 signal element_removed(e:Element)
 

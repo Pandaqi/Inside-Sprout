@@ -3,6 +3,8 @@ class_name ModuleSensor extends Node2D
 var target : Element = null
 @onready var entity : Enemy = get_parent()
 @onready var area_scan := $ScanArea
+@onready var col_shape := $ScanArea/CollisionShape2D
+@onready var radius_viewer := $RadiusViewer
 @export var attacker : ModuleAttacker
 
 signal target_found(e:Element)
@@ -11,11 +13,12 @@ signal target_lost(e:Element)
 func activate() -> void:
 	attacker.target_found.connect(on_attack_target_found)
 	attacker.target_lost.connect(on_attack_target_lost)
+	radius_viewer.update(col_shape)
 
-func on_attack_target_found(_n:Node2D) -> void:
+func on_attack_target_found(_n) -> void:
 	reset_target()
 
-func on_attack_target_lost(_n:Node2D) -> void:
+func on_attack_target_lost(_n) -> void:
 	recheck_bodies()
 
 func set_target_element(e:Element) -> void:

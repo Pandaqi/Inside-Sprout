@@ -7,6 +7,7 @@ var dead := false
 @onready var mover := $Mover
 @onready var element_converter := $ElementConverter
 @onready var element_dropper := $ElementDropper
+@onready var map_tracker := $MapTracker
 
 signal died(p:Player)
 
@@ -16,6 +17,7 @@ func activate(pnum:int) -> void:
 	element_converter.activate()
 	element_dropper.activate()
 	mover.activate()
+	map_tracker.activate()
 
 func kill() -> void:
 	dead = true

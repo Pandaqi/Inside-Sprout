@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cb47sym4gh7og"]
+[gd_scene load_steps=22 format=3 uid="uid://cb47sym4gh7og"]
 
 [ext_resource type="Script" path="res://map/map.gd" id="1_5tnlf"]
 [ext_resource type="Script" path="res://game_loop/main/main.gd" id="1_f1yhs"]
@@ -7,12 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://cufc1ferl717d" path="res://map/areas/map_area_drawer.tscn" id="4_b718y"]
 [ext_resource type="Script" path="res://map/map_layers.gd" id="5_1d8gs"]
 [ext_resource type="Script" path="res://game_loop/main/camera.gd" id="5_6bxij"]
-[ext_resource type="PackedScene" uid="uid://coed4jc64xcuo" path="res://map/hearts/heart.tscn" id="6_xkgi1"]
+[ext_resource type="PackedScene" uid="uid://bj8hk8ab4rvs1" path="res://map/areas/map_area_group_drawer.tscn" id="6_siol7"]
+[ext_resource type="PackedScene" uid="uid://coed4jc64xcuo" path="res://machines/hearts/heart.tscn" id="6_xkgi1"]
 [ext_resource type="Script" path="res://enemies/enemies.gd" id="7_ol3u7"]
 [ext_resource type="Resource" uid="uid://bed1b4cijdpsn" path="res://elements/data/element_data.tres" id="7_wibnk"]
 [ext_resource type="Resource" uid="uid://dsfn5yup3586j" path="res://enemies/data/enemy_data.tres" id="8_nasb2"]
 [ext_resource type="PackedScene" uid="uid://bj3v401pudx4g" path="res://map/misc/background_rect.tscn" id="9_m4u4d"]
 [ext_resource type="PackedScene" uid="uid://cyyt8phymfdir" path="res://enemies/enemy.tscn" id="9_uimx3"]
+[ext_resource type="Resource" uid="uid://crw4qiaa7f3x3" path="res://machines/types/machine_hedge.tres" id="10_gh746"]
+[ext_resource type="PackedScene" uid="uid://bx5047cj80nnx" path="res://machines/machine.tscn" id="10_j7my8"]
 [ext_resource type="Script" path="res://players/players.gd" id="10_rely2"]
 [ext_resource type="Script" path="res://elements/elements.gd" id="11_22wdb"]
 [ext_resource type="PackedScene" uid="uid://ccmri4p1e8uks" path="res://players/player.tscn" id="11_734ne"]
@@ -40,9 +43,12 @@ script = ExtResource("2_gb10w")
 script = ExtResource("1_5tnlf")
 map_data = ExtResource("2_espwm")
 area_drawer_scene = ExtResource("4_b718y")
+area_group_drawer_scene = ExtResource("6_siol7")
 heart_scene = ExtResource("6_xkgi1")
 element_data = ExtResource("7_wibnk")
 bg_scene = ExtResource("9_m4u4d")
+machine_scene = ExtResource("10_j7my8")
+resource_hedge = ExtResource("10_gh746")
 
 [node name="MapLayers" type="Node2D" parent="Map"]
 script = ExtResource("5_1d8gs")

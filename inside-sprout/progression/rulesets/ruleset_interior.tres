@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ruleset" load_steps=2 format=3 uid="uid://cs4fs1ml6ypib"]
+
+[ext_resource type="Script" path="res://progression/rulesets/ruleset.gd" id="1_bfyuy"]
+
+[resource]
+script = ExtResource("1_bfyuy")
+conversion_timer_factor = 1.0
+conversion_insta_finish = false
+speed_factor = 1.0
+drop_heal_factor = 0.0
+drop_regrow_hedge = true

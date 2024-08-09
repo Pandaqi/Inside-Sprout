@@ -19,6 +19,10 @@ var polygon_uvs : PackedVector2Array
 func update(a:MapArea) -> void:
 	area = a
 	
+	print(area.id)
+	print(area.type)
+	print(area.group)
+	
 	material = material.duplicate(false)
 	material.set_shader_parameter("color", area.type.color)
 	material.set_shader_parameter("jaggy_start_threshold", randf_range(0.035, 0.055))
@@ -55,13 +59,9 @@ func create_uvs() -> void:
 		# var uv_precise := (area.outline[i] - bb_min) / size
 		var uv_circular := Vector2(0.5, 0.5) + 0.5*Vector2.from_angle(i / float(num_points - 1) * 2 * PI)
 		polygon_uvs.append(uv_circular)
-		
-	print("AREA WITH ID", area.id)
-	print(polygon)
-	print(polygon_uvs)
 	
 	debug_label_cont.set_position(center * Global.config.cell_size)
-	debug_label.set_text("#" + str(area.id))
+	debug_label.set_text("#" + str(area.id) + " / #" + str(area.group))
 
 func _draw() -> void:
 	if draw_mode == AreaDrawMode.CELLS:

@@ -1,8 +1,8 @@
-class_name ElementConversionProcess extends Node
+class_name ElementConversionProcess
 
 var type : ElementType
 var duration := 0.0
-var timer : Timer
+var time_spent := 0.0
 
 signal finished()
 
@@ -10,13 +10,16 @@ func _init(dur:float, tp:ElementType) -> void:
 	duration = dur
 	type = tp
 
-func create_timer() -> void:
-	timer = Timer.new()
-	timer.wait_time = duration
-	timer.one_shot = true
-	timer.timeout.connect(on_timer_timeout)
-	add_child(timer)
-	timer.start()
+func update(dt:float) -> void:
+	change(dt)
 
-func on_timer_timeout() -> void:
-	finished.emit(self)
+func get_ratio() -> float:
+	return time_spent / duration
+
+func finish() -> void:
+	change(duration)
+
+func change(val:float) -> void:
+	time_spent += val
+	if time_spent >= duration: 
+		finished.emit(self)

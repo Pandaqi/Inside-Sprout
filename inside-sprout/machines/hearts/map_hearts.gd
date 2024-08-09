@@ -8,7 +8,6 @@ func place(grid:MapGrid, num:int, min_dist:float) -> void:
 	var min_dist_to_edge := Global.config.hearts_min_cells_to_edge
 	for i in range(valid_cells.size()-1,-1,-1):
 		var dist_to_edge := grid.get_cell_dist_to_edge(valid_cells[i])
-		print(dist_to_edge)
 		if dist_to_edge >= min_dist_to_edge: continue
 		valid_cells.remove_at(i)
 	
@@ -36,3 +35,11 @@ func on_heart_died(h:Heart) -> void:
 	
 	if cells.size() > 0: return
 	GSignal.game_over.emit(false)
+
+func get_base_health() -> float:
+	return Global.config.heart_health * Global.config.enemy_damage_factor
+
+func heal(factor:float) -> void:
+	factor *= get_base_health()
+	for cell in cells:
+		cell.heart_node.health.change(+factor)

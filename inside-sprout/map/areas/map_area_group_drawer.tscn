@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj8hk8ab4rvs1"]
+
+[ext_resource type="Script" path="res://map/areas/map_area_group_drawer.gd" id="2_ybgof"]
+[ext_resource type="Resource" uid="uid://dx6cw7nxy341v" path="res://map/data/map_data.tres" id="3_s3d5t"]
+
+[node name="AreaGroup" type="Node2D"]
+script = ExtResource("2_ybgof")
+map_data = ExtResource("3_s3d5t")
+
+[node name="DebugLabel" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="DebugLabel"]
+offset_left = -51.0
+offset_top = -30.0
+offset_right = 43.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "#0"
+horizontal_alignment = 1
+vertical_alignment = 1

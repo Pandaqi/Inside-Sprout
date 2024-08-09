@@ -7,11 +7,15 @@ var dead := false
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var health := $Health
 @onready var properties := $Properties
+@onready var map_tracker := $MapTracker
+@onready var sensor := $Sensor
 
 signal died(e:Enemy)
 
 func activate() -> void:
 	health.depleted.connect(on_health_depleted)
+	map_tracker.activate()
+	sensor.activate()
 
 func set_type(tp:EnemyType) -> void:
 	type = tp

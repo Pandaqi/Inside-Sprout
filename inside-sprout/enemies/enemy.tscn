@@ -1,14 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://cyyt8phymfdir"]
+[gd_scene load_steps=14 format=3 uid="uid://cyyt8phymfdir"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_1wsl5"]
 [ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="1_cotgo"]
 [ext_resource type="PackedScene" uid="uid://bd8jt2m8mng1r" path="res://players/modules/mover.tscn" id="3_s3wwf"]
+[ext_resource type="PackedScene" uid="uid://bmjbix27b7xsf" path="res://enemies/radius_viewer/radius_viewer.tscn" id="5_b2f5s"]
 [ext_resource type="Script" path="res://players/modules/sensor.gd" id="5_whyhm"]
 [ext_resource type="PackedScene" uid="uid://dy0f3m12rq7tj" path="res://players/modules/health.tscn" id="6_6yd27"]
 [ext_resource type="PackedScene" uid="uid://pnvne6eie12p" path="res://enemies/modules/attacker.tscn" id="6_akwkh"]
 [ext_resource type="Script" path="res://enemies/modules/properties.gd" id="7_05ehy"]
 [ext_resource type="PackedScene" uid="uid://dhky6fwi0a47v" path="res://elements/element_sprite/element_sprite.tscn" id="8_0im4v"]
 [ext_resource type="Resource" uid="uid://bed1b4cijdpsn" path="res://elements/data/element_data.tres" id="8_velou"]
+[ext_resource type="PackedScene" uid="uid://c2oggs2rqrlc3" path="res://players/modules/map_tracker.tscn" id="11_cu8iu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xjavt"]
 radius = 45.0111
@@ -23,18 +25,22 @@ script = ExtResource("1_1wsl5")
 shape = SubResource("CircleShape2D_xjavt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -62)
 texture = ExtResource("1_cotgo")
 
 [node name="Mover" parent="." node_paths=PackedStringArray("sensor") instance=ExtResource("3_s3wwf")]
 sensor = NodePath("../Sensor")
 
-[node name="Sensor" type="Node2D" parent="."]
+[node name="Sensor" type="Node2D" parent="." node_paths=PackedStringArray("attacker")]
 script = ExtResource("5_whyhm")
+attacker = NodePath("../Attacker")
 
 [node name="ScanArea" type="Area2D" parent="Sensor"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor/ScanArea"]
 shape = SubResource("CircleShape2D_xvyop")
+
+[node name="RadiusViewer" parent="Sensor" instance=ExtResource("5_b2f5s")]
 
 [node name="Health" parent="." instance=ExtResource("6_6yd27")]
 
@@ -45,5 +51,7 @@ scale = Vector2(0.25, 0.25)
 script = ExtResource("7_05ehy")
 element_data = ExtResource("8_velou")
 sprite_scene = ExtResource("8_0im4v")
+
+[node name="MapTracker" parent="." instance=ExtResource("11_cu8iu")]
 
 [connection signal="body_entered" from="Sensor/ScanArea" to="Sensor" method="_on_scan_area_body_entered"]

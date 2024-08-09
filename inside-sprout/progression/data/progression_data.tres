@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ProgressionData" load_steps=4 format=3 uid="uid://cx3oq84spkyut"]
+
+[ext_resource type="Script" path="res://progression/data/progression_data.gd" id="1_hp26v"]
+[ext_resource type="Resource" uid="uid://lfkmviapv85k" path="res://progression/rulesets/ruleset_exterior.tres" id="1_ou5uf"]
+[ext_resource type="Resource" uid="uid://cs4fs1ml6ypib" path="res://progression/rulesets/ruleset_interior.tres" id="2_pe2jg"]
+
+[resource]
+script = ExtResource("1_hp26v")
+rules_interior = ExtResource("2_pe2jg")
+rules_exterior = ExtResource("1_ou5uf")

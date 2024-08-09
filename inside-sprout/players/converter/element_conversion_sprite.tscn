@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://511ucltcdx4d"]
+
+[ext_resource type="Script" path="res://players/converter/element_conversion_sprite.gd" id="1_0ryxx"]
+[ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="2_ex1js"]
+
+[node name="ElementConversionSprite" type="Node2D"]
+script = ExtResource("1_0ryxx")
+
+[node name="Container" type="Node2D" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Container"]
+offset_left = -66.0
+offset_top = -64.0
+offset_right = 62.0
+offset_bottom = 64.0
+value = 50.0
+fill_mode = 3
+texture_under = ExtResource("2_ex1js")
+texture_progress = ExtResource("2_ex1js")
+tint_progress = Color(0.28, 0.28, 1, 1)

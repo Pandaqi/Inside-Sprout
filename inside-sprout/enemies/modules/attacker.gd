@@ -3,16 +3,24 @@ class_name ModuleAttacker extends Node2D
 @onready var entity = get_parent()
 @onready var timer := $Timer
 @onready var kill_area := $KillArea
+@onready var radius_viewer := $RadiusViewer
+@onready var col_shape := $KillArea/CollisionShape2D
 @export var attack_if_provoked := true
 @export var never_attack_first := false
-var target : Node2D
+@export var show_radius := true
+var target 
 
-signal target_found(n:Node2D)
-signal attacked(n:Node2D)
-signal target_lost(n:Node2D)
+signal target_found(n)
+signal attacked(n)
+signal target_lost(n)
+
+func _ready() -> void:
+	radius_viewer.update(col_shape)
+	radius_viewer.set_visible(show_radius)
 
 func attack() -> void:
 	if not get_target(): return
+	if is_busy(): return
 	
 	var damage : float = entity.type.damage * Global.config.enemy_damage_factor - entity.type.shield * Global.config.enemy_shield_factor
 	target.health.change(-damage)
@@ -21,18 +29,22 @@ func attack() -> void:
 	restart_timer()
 
 func restart_timer():
-	if not is_instance_valid(timer): return # we died while doing our attack
+	if entity.dead: return # we died while doing our attack
 	timer.wait_time = entity.type.attack_delay * Global.config.enemy_attack_delay_factor
 	timer.start()
 
 func _on_timer_timeout() -> void:
 	attack()
 
+func is_busy() -> bool:
+	return timer.time_left > 0
+
 func get_target() -> Node2D:
 	if target and not is_instance_valid(target): reset_target()
 	return target
 
 func set_target(t:Node2D) -> void:
+	if is_busy(): return
 	if not can_damage_target(t): return
 	
 	target = t
@@ -41,7 +53,7 @@ func set_target(t:Node2D) -> void:
 
 func reset_target() -> void:
 	timer.stop()
-	target_lost.emit(target)
+	if target: target_lost.emit(target)
 	target = null
 	recheck_bodies()
 
@@ -69,6 +81,7 @@ func provoke(attacker:Node2D) -> void:
 
 # @TODO: some cleaner code structure/module/resource/whatever to check if things can hit each other
 func can_damage_target(body = target) -> bool:
+	if (body is Enemy) and (entity is Enemy): return false
 	if (body is Enemy) and (entity is Element):
 		return body.type.is_weak_to(entity.type)
 	return true

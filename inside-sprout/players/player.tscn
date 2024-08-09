@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://ccmri4p1e8uks"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_qca82"]
-[ext_resource type="Script" path="res://players/modules/map_tracker.gd" id="2_care2"]
 [ext_resource type="Script" path="res://players/modules/input.gd" id="2_fdeqs"]
 [ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="2_l4xhl"]
-[ext_resource type="Resource" uid="uid://dx6cw7nxy341v" path="res://map/data/map_data.tres" id="3_6wfpq"]
+[ext_resource type="PackedScene" uid="uid://c2oggs2rqrlc3" path="res://players/modules/map_tracker.tscn" id="4_b5l7i"]
 [ext_resource type="PackedScene" uid="uid://bd8jt2m8mng1r" path="res://players/modules/mover.tscn" id="6_ef44r"]
 [ext_resource type="Script" path="res://players/modules/element_grabber.gd" id="8_rcqdi"]
 [ext_resource type="Script" path="res://players/modules/element_converter.gd" id="9_3g7iy"]
+[ext_resource type="PackedScene" uid="uid://511ucltcdx4d" path="res://players/converter/element_conversion_sprite.tscn" id="9_u6ypa"]
 [ext_resource type="Script" path="res://players/modules/element_dropper.gd" id="10_vbua5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1gbop"]
@@ -23,14 +23,13 @@ script = ExtResource("1_qca82")
 shape = SubResource("CircleShape2D_1gbop")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -63)
 texture = ExtResource("2_l4xhl")
 
 [node name="Input" type="Node" parent="."]
 script = ExtResource("2_fdeqs")
 
-[node name="MapTracker" type="Node2D" parent="."]
-script = ExtResource("2_care2")
-map_data = ExtResource("3_6wfpq")
+[node name="MapTracker" parent="." instance=ExtResource("4_b5l7i")]
 
 [node name="Mover" parent="." node_paths=PackedStringArray("input") instance=ExtResource("6_ef44r")]
 input = NodePath("../Input")
@@ -44,12 +43,16 @@ script = ExtResource("8_rcqdi")
 shape = SubResource("CircleShape2D_7n1ft")
 
 [node name="ElementConverter" type="Node2D" parent="." node_paths=PackedStringArray("map_tracker", "element_grabber")]
+position = Vector2(0, -94)
+scale = Vector2(0.66, 0.66)
 script = ExtResource("9_3g7iy")
 map_tracker = NodePath("../MapTracker")
 element_grabber = NodePath("../ElementGrabber")
+conversion_sprite_scene = ExtResource("9_u6ypa")
 
-[node name="ElementDropper" type="Node2D" parent="." node_paths=PackedStringArray("element_converter")]
+[node name="ElementDropper" type="Node2D" parent="." node_paths=PackedStringArray("element_converter", "map_tracker")]
 script = ExtResource("10_vbua5")
 element_converter = NodePath("../ElementConverter")
+map_tracker = NodePath("../MapTracker")
 
 [connection signal="body_entered" from="ElementGrabber/Area2D" to="ElementGrabber" method="_on_area_2d_body_entered"]

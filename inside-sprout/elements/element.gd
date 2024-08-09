@@ -6,11 +6,13 @@ var dead := false
 @onready var sprite := $Sprite2D
 @onready var attacker := $Attacker
 @onready var health := $Health
+@onready var map_tracker := $MapTracker
 
 signal died(e:Element)
 
 func activate() -> void:
 	health.depleted.connect(on_health_depleted)
+	map_tracker.activate()
 
 func set_type(tp:ElementType) -> void:
 	type = tp

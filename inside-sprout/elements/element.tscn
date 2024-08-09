@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://rpn1uqm07q3u"]
+[gd_scene load_steps=7 format=3 uid="uid://rpn1uqm07q3u"]
 
 [ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="1_fgp3d"]
 [ext_resource type="Script" path="res://elements/element.gd" id="1_k6b6t"]
 [ext_resource type="PackedScene" uid="uid://pnvne6eie12p" path="res://enemies/modules/attacker.tscn" id="3_3el7l"]
 [ext_resource type="PackedScene" uid="uid://dy0f3m12rq7tj" path="res://players/modules/health.tscn" id="4_4lwf1"]
+[ext_resource type="PackedScene" uid="uid://c2oggs2rqrlc3" path="res://players/modules/map_tracker.tscn" id="5_531ny"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q8w2a"]
 
@@ -14,10 +15,15 @@ script = ExtResource("1_k6b6t")
 shape = SubResource("CircleShape2D_q8w2a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -21)
 scale = Vector2(0.33, 0.33)
 texture = ExtResource("1_fgp3d")
 
 [node name="Attacker" parent="." instance=ExtResource("3_3el7l")]
 never_attack_first = true
+show_radius = false
 
 [node name="Health" parent="." instance=ExtResource("4_4lwf1")]
+
+[node name="MapTracker" parent="." instance=ExtResource("5_531ny")]
+static_object = true

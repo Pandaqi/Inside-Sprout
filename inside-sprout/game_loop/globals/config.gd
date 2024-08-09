@@ -14,6 +14,8 @@ class_name Config
 @export_subgroup("Areas")
 @export var area_min_size := 2
 var area_max_size_bounds := Bounds.new(4,7)
+@export var area_group_min_size := 3 # this is in CELLS, not AREAS
+var area_group_max_size_bounds := Bounds.new(3,5)
 
 @export_subgroup("Camera")
 @export var camera_edge_margin := Vector2(32.0, 32.0)
@@ -40,7 +42,8 @@ var waves_unlock_interval_bounds := Bounds.new(2, 4) # min/max waves before next
 @export var hearts_num := 1
 @export var hearts_min_cells_between := 3
 @export var heart_health := 10.0 # ~enemy_damage
-@export var hearts_min_cells_to_edge := 2
+@export var hearts_min_cells_to_edge := 3
+@export var hearts_heal_def := 0.15 # ~heart_health; how much is healed if that rule is enabled
 
 @export_group("Elements")
 @export_subgroup("Spawning")
@@ -52,3 +55,9 @@ var elements_conversion_duration_bounds := Bounds.new(2.0, 4.0)
 
 @export_subgroup("Defaults")
 @export var elements_health_factor := 50.0
+
+@export_group("Machines")
+@export_subgroup("TreeGun")
+@export var gun_bullet_speed := 1.0 # ~map_size.x * cell_size; the idea is that 1/this gives time needed to traverse entire map
+@export var gun_timer_duration := 2.0
+@export var gun_bullet_damage := 1.0 # ~enemy_health

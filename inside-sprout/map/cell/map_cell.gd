@@ -5,9 +5,23 @@ var edges : Array[Line]
 var nbs : Array[MapCell]
 var area : MapArea = null
 var heart_node : Heart
+var objects = []
+
+signal object_entered(o)
+signal object_exited(o)
 
 func _init(p:Vector2i):
 	set_position(p)
+
+func add_object(o) -> void:
+	if not ("map_tracker" in o): return
+	objects.append(o)
+	object_entered.emit(o)
+
+func remove_object(o) -> void:
+	if not ("map_tracker" in o): return
+	objects.erase(o)
+	object_exited.emit(o)
 
 func set_position(p:Vector2i) -> void:
 	pos = p

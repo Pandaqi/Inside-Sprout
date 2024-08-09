@@ -76,6 +76,19 @@ func get_random_neighbors_of(cells:Array[MapCell], have_no_area := false) -> Arr
 	nbs_valid.shuffle()
 	return nbs_valid
 
+func get_random_neighbor_areas_of(group:MapAreaGroup) -> Array[MapArea]:
+	var nbs_valid : Array[MapArea] = []
+	
+	for cell in group.get_cells():
+		for nb in cell.nbs:
+			var new_area := nb.area
+			if group.is_inside(new_area): continue
+			if nbs_valid.has(new_area): continue
+			nbs_valid.append(new_area)
+	
+	nbs_valid.shuffle()
+	return nbs_valid
+
 # @NOTE: everything is wound clockwise in this grid system
 # So we can just pull the vector back 90 degrees to get it pointing to the center of OTHER cell (that didn't call this) => Then floor this to get grid index
 func get_other_side_of_edge(l:Line) -> MapCell:

@@ -3,8 +3,13 @@ class_name MapArea
 var type : ElementType
 var id := -1
 var cells : Array[MapCell] = []
-var outline_edges : Array[Line] = []
+# var outline_edges : Array[Line] = []
 var outline : PackedVector2Array = []
+var group : MapAreaGroup
+var objects = []
+
+signal object_entered(o)
+signal object_exited(o)
 
 func count() -> int:
 	return cells.size()
@@ -12,48 +17,46 @@ func count() -> int:
 func add_cell(c:MapCell) -> void:
 	cells.append(c)
 	c.area = self
+	c.object_entered.connect(on_object_entered)
+	c.object_exited.connect(on_object_exited)
+
+func on_object_entered(o) -> void:
+	if not o.map_tracker.last_update_changed_area(): return
+	objects.append(o)
+	object_entered.emit(o)
+
+func on_object_exited(o) -> void:
+	if not o.map_tracker.last_update_changed_area(): return
+	objects.erase(o)
+	object_exited.emit(o)
+
+func get_cells() -> Array[MapCell]:
+	return cells.duplicate(false)
 
 func is_inside(c:MapCell) -> bool:
 	return cells.has(c)
 
-func finalize(grid:MapGrid) -> void:
-	determine_outline(grid)
+func is_interior() -> bool:
+	if group and group.is_interior(): return true
+	return false
 
-func determine_outline(grid:MapGrid):
-	
-	# first collect a loose array of outer edges
-	var outer_edges : Array[Line] = []
-	for cell in cells:
-		for cell_edge in cell.edges:
-			var nb := grid.get_other_side_of_edge(cell_edge)
-			if nb and is_inside(nb): continue
-			outer_edges.append(cell_edge)
-	
-	# then sort them in clockwise order
-	var first_edge : Line = outer_edges.pop_back()
-	var edges_sorted : Array[Line] = [first_edge]
-	var first_pos := first_edge.start
-	var last_pos := first_edge.end
-	
-	while not last_pos.is_equal_approx(first_pos) and outer_edges.size() > 0:
-		var next_index : int
-		for i in range(outer_edges.size()):
-			if not outer_edges[i].start.is_equal_approx(last_pos): continue
-			next_index = i
-			break
+func finalize(grid:MapGrid) -> void:
+	outline = MapAreas.determine_outline(grid, cells)
+
+func reset_type() -> void:
+	type = null
+
+func flood_fill(start_cell:MapCell, grid:MapGrid) -> void:
+	add_cell(start_cell)
 		
-		var next_edge : Line = outer_edges.pop_at(next_index)
-		edges_sorted.append(next_edge)
-		last_pos = next_edge.end
-	
-	print("OUTER_EDGES_LEFT", outer_edges.size())
-			
-	# @TODO: possible optimization is to combine edges in the same direction into one big line
-	
-	
-	
-	# finally, keep only their points 
-	outline_edges = edges_sorted
-	outline = [first_pos]
-	for edge in edges_sorted:
-		outline.append(edge.end)
+	# keep growing until conditions met
+	var keep_growing := true
+	var min_area_size := Global.config.area_min_size
+	var max_area_size := Global.config.area_max_size_bounds.rand_int()
+	while keep_growing:
+		var nbs := grid.get_random_neighbors_of(get_cells(), true)
+		if nbs.size() <= 0: break
+		
+		var nb : MapCell = nbs.pick_random()
+		add_cell(nb)
+		keep_growing = count() < min_area_size or count() < max_area_size

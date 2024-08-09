@@ -6,7 +6,10 @@ class_name ElementType
 @export var desc := ""
 @export var color := Color(1,1,1)
 @export var spawnable := false
+@export var auto_area := true # automatically create areas from this
 @export var pickupable := false
+@export var enemy_ignore := false
+@export var can_be_bullet := false
 
 @export var damage := 1.0
 @export var health := 1.0

@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bbcusvptp64be"]
+
+[ext_resource type="Shader" path="res://enemies/dotted_line_shader.gdshader" id="1_hugaa"]
+
+[resource]
+shader = ExtResource("1_hugaa")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/diameter = 1.0
+shader_parameter/thickness = 0.02
+shader_parameter/frequency = 25.0
+shader_parameter/phase = 0.0
+shader_parameter/alpha = 1.0

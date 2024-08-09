@@ -29,10 +29,8 @@ func prepare_types() -> void:
 	var spawnable_types : Array[ElementType] = []
 	var area_types : Array[ElementType] = []
 	for type in available_types:
-		if not type.spawnable: 
-			area_types.append(type)
-			continue
-		spawnable_types.append(type)
+		if type.auto_area: area_types.append(type)
+		if type.spawnable: spawnable_types.append(type)
 	
 	element_data.available_types = available_types
 	element_data.spawnable_types = spawnable_types

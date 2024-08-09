@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ElementType" load_steps=2 format=3 uid="uid://do86k4n7wvww0"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_aefwo"]
+
+[resource]
+script = ExtResource("1_aefwo")
+frame = 0
+name = ""
+desc = ""
+color = Color(0.27, 0.27, 0.27, 1)
+spawnable = false
+auto_area = false
+pickupable = false
+enemy_ignore = true
+can_be_bullet = true
+damage = 1.0
+health = 1.0
+attack_delay = 1.0
+shield = 1.0
