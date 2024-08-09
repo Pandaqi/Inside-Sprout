@@ -1,17 +1,52 @@
 
-# To-Do (for Friday)
+# To-Do (for Saturday)
 
-* Graphics:
-  * A few flowers, monsters
-  * Then actually add to game
-* Tutorial: 
-  * Fill in the details
-  * Code and display
-* Invent the different monsters + elements + any other rule changes that might be fun
+* Put all graphics in the game! ( + properly flip_h enemies based on where they're looking + rotate bullet sideways to match flight angle)
+* Tutorial: Code and display
+* Create resource for all enemies + elements => assign correct frame and properties => make wave spawner use these properly
+  * Only select a subset per round. Don't spawn any enemies that can only be killed by elements that are not in the level. Also don't _display_ weaknesses/distractions that aren't in the current run.
+
+CRUCIAL FIXES:
+* Enable the "recolor all" (if inside entered) thing again, check if fun
+* @TODO: clear indication/progress on the heart loading up for shooting
+* @TODO: protection against going out of bounds
+* @TODO: Don't make the tree gun too overpowered now; the flowers themselves should be far stronger and lead to _longer_ distractions or _instakills_
+* RadiusViewer => update whenever radius of col_shape changes
+  * Need to set this properly from EnemyType first => then call signal
+
+PROGRESSION:
+* Actually create menu + game over screen + spawner progression
+  * Spawner should display a simple graphic with new enemies unlocked + their description?
+* Track which rules are unlocked (roguelite things) + obviously give players the options to choose stuff between waves or something. IDEAS:
+  * "Things dropped here change into type X"
+  * "Kill/Sight radius changes by Y"
+  * "Damage/Health changes by Z"
+  * The ProgData should return a _modified_ version of rules that mediates between int/ext and progression => It multiplies all factors, and makes booleans true if at least one is true
+
+**Check all the ideas below.** If they can be simple _progression tweaks_, I can add them as an option. Otherwise, they must be put on the "future to-do" and completely ignored.
+
+POLISHING:
+* Finetune all the data (speed, monsters, health, wave progression, etcetera)
+* Sound effects everywhere
+* Some animations and particles, if possible.
+* ENSURE YOU'RE GROWING STRONGER TOO (as the waves grow stronger)
+
+# To-Do (for Sunday)
+
+* Go back to polishing the rowing game _enough_ to perhaps submit that.
+* Let this game be finished and tested.
+
+# To-Do (for Monday)
+
+* Merely create the page and simple marketing, decide which one to send in.
+* Most of the day should be free.
 
 
 
-@IDEA: That idea of local multiplayer Olympic games, with all of them "simplified" and "partified". For example: any solo/take-turns sports now just _happen together_.
+
+
+
+@IDEA (UNRELATED, BUT REALLY GOOD): That idea of local multiplayer Olympic games, with all of them "simplified" and "partified". For example: any solo/take-turns sports now just _happen together_.
 * Spear throwing? You're all throwing at the same time.
 * There's a time limit. If you want to have the most tries, you need to walk into the field and collect your spear, and hope nobody spears you (which is death = long timeout) in the mean time.
 * And the mechanics for throwing are always just the same few buttons.
@@ -27,30 +62,19 @@
 
 ## Next
 
-Further work:
 
-* @TODO: clear indication/progress on the heart loading up for shooting
-* @TODO: protection against going out of bounds
-* @TODO: Don't make the tree gun too overpowered now; the flowers themselves should be far stronger and lead to _longer_ distractions or _instakills_
-* ENSURE YOU'RE GROWING STRONGER TOO (as the waves grow stronger)
-* Certain monsters _drop_ stuff too, that you can then use (or must avoid)
-  * It feels like the "medicine" for the heart should be _changing_, otherwise one specific element will always be way more important.
-* Progression: Track which rules are unlocked (roguelite things) + obviously give players the options to choose stuff between waves or something. IDEAS:
-  * "Things dropped here change into type X"
-  * "Kill/Sight radius changes by Y"
-  * "Damage/Health changes by Z"
-  * The ProgData should return a _modified_ version of rules that mediates between int/ext and progression => It multiplies all factors, and makes booleans true if at least one is true
-* RadiusViewer => update whenever radius of col_shape changes
-  * Need to set this properly from EnemyType first => then call signal
 
 Articles
 
 * Write that article about "for every rule/system you invent, think about what it does or doesn't say to the player. Make sure it says the right things (don't be passive), but also that there's variety (no one strategy to rule them all)"
 * Write that article about why Bombgoggles ... bombed in that jam, what I learned from that and how I improved it.
+* Write about "the problem of dreamshrink" => halfway any project, you have to realize that most of the possibilities/opportunities/ideas will not be done, and pick the one fixed/final path the project will head into. Always the hardest part, as if getting nostalgic for a game you never made.
 
 
 BEE => Change to "Jack of all flowers, damaged by none." => That's a great simple first enemy, while reinforcing the need for some secondary mechanic to destroy monsters
 
+* @IDEA: Certain monsters _drop_ stuff too, that you can then use (or must avoid)
+  * It feels like the "medicine" for the heart should be _changing_, otherwise one specific element will always be way more important.
 
 RULE: Poisonous is probably always a SUBSET of distractions => we show the distractions, then highlight those that are poisonous
 
@@ -71,8 +95,7 @@ RULE: Poisonous is probably always a SUBSET of distractions => we show the distr
 @IDEA: Some monsters will also avoid / walk much slower certain areas? And you can _repaint_ / _change_ as you go?
 * Maybe EATING a certain plant might poison them/slow them down/or actually speed them up
 
-@IDEA: There _is_ an inner circle. (A random set of polygons from the center is combined into one group to form the center.) Going there, lots of stuff doesn't work (no conversions, no pick up, etcetera). But you walk really fast and can do other stuff you might sometimes need, such as fight or heal the heart (by dropping the right element in that inside area.)
-* This might even allow completely FLIPPING the idea, such that the heart is DYING AUTOMATICALLY, and you merely use the monsters to get the MEDICINE for it :p (The monsters don't necessarily attack the Heart, but _you_?)
+@IDEA: This might even allow completely FLIPPING the idea, such that the heart is DYING AUTOMATICALLY, and you merely use the monsters to get the MEDICINE for it :p (The monsters don't necessarily attack the Heart, but _you_?)
 * **@MONSTER IDEA: Drops Seeds/whatever element upon death.**
 
 * The inside player _purchases new seeds_. They have stations for buying certain elements / making them spawn in certain locations. That's how you must manually make stuff appear, and hopefully in a tactical way.
