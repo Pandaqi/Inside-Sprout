@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=5 format=3 uid="uid://do66uj58r10om"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_f6xyf"]
+[ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="2_2iqn4"]
+[ext_resource type="Resource" uid="uid://r0fjcv0w2stk" path="res://elements/types/element_dandelion.tres" id="2_lbwpi"]
+[ext_resource type="Resource" uid="uid://bxgfdo1reom1a" path="res://elements/types/element_tulip.tres" id="3_xo2l5"]
+
+[resource]
+script = ExtResource("2_2iqn4")
+frame = 4
+desc = "High health and damage, but slow and attacks take a long time."
+strength = 3.0
+distractions = Array[ExtResource("1_f6xyf")]([ExtResource("2_lbwpi"), ExtResource("3_xo2l5")])
+distractions_all = false
+weaknesses = Array[ExtResource("1_f6xyf")]([])
+weaknesses_all = true
+damage = 2.5
+health = 2.0
+attack_delay = 2.0
+shield = 0.0
+sight_range = 1.0
+kill_range = 1.0
+speed = 0.5

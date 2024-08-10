@@ -7,5 +7,7 @@ func _ready() -> void:
 	sprite.material = sprite.material.duplicate(false)
 	sprite.material.set_shader_parameter("color", color)
 
-func update(col_shape:CollisionShape2D) -> void:
-	sprite.set_scale(2.0 * col_shape.shape.radius / Global.config.sprite_size * Vector2.ONE)
+func update(r:float) -> void:
+	sprite.set_scale(2.0 * r / Global.config.sprite_size * Vector2.ONE)
+	sprite.material.set_shader_parameter("thickness", 0.02 / sprite.scale.x)
+	sprite.material.set_shader_parameter("frequency", 25 / sprite.scale.x)

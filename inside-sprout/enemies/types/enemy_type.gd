@@ -4,15 +4,20 @@ class_name EnemyType
 @export var frame := 0
 @export var desc := ""
 @export var strength := 1.0
+
 @export var distractions : Array[ElementType] = []
 @export var distractions_all := false
 @export var movement_type : MovementType
 @export var weaknesses : Array[ElementType] = []
-@export var weaknesses_all := false
+@export var weaknesses_all := true
+
 @export var damage := 1.0
 @export var health := 1.0
 @export var attack_delay := 1.0
 @export var shield := 0.0
+@export var sight_range := 1.0
+@export var kill_range := 1.0
+@export var speed := 1.0
 
 # @NOTE: spawnable elements would just create "random lucky kills" if any enemies reacted to them
 func distracted_by(e:ElementType) -> bool:

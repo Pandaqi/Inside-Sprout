@@ -2,12 +2,16 @@ class_name ModuleElementDropper extends Node2D
 
 @export var element_converter : ModuleElementConverter
 @export var map_tracker : ModuleMapTracker
+@onready var audio_player := $AudioStreamPlayer2D
 
 func activate() -> void:
 	element_converter.available_for_drop.connect(drop)
 
 func drop(et:ElementType) -> void:
 	GSignal.drop_element.emit(et, global_position)
+	
+	audio_player.pitch_scale = randf_range(0.9, 1.1)
+	audio_player.play()
 	
 	var r := map_tracker.get_rules()
 	if r.drop_regrow_hedge:

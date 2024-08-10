@@ -1,11 +1,14 @@
 class_name ModuleHealth extends Node2D
 
 @export var show_progress_bar := true
+@export var show_hit_flash := true
 
 @onready var entity = get_parent()
 @onready var anim_player : AnimationPlayer = $BarContainer/AnimationPlayer
 @onready var prog_bar : TextureProgressBar = $BarContainer/Bar
 @onready var prog_bar_cont : Node2D = $BarContainer
+
+@onready var audio_player := $AudioStreamPlayer2D
 
 var base_health := 100.0
 var health := 0.0
@@ -35,6 +38,16 @@ func change(h:float) -> void:
 		prog_bar.set_value(get_health_ratio() * 100)
 		anim_player.stop()
 		anim_player.play("health_change")
+	
+	audio_player.pitch_scale = randf_range(0.9, 1.1)
+	audio_player.play()
+	
+	if show_hit_flash:
+		var tw := get_tree().create_tween()
+		tw.tween_property(entity, "modulate", Color(3,2,2), 0.05)
+		tw.parallel().tween_property(entity, "scale", 1.05*Vector2.ONE, 0.05)
+		tw.tween_property(entity, "modulate", Color(1,1,1), 0.05)
+		tw.parallel().tween_property(entity, "scale", Vector2.ONE, 0.05)
 	
 	if health <= 0:
 		depleted.emit()

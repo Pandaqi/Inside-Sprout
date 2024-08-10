@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=7 format=3 uid="uid://bxblvykjtr8w2"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_16s62"]
+[ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="2_4t0ki"]
+[ext_resource type="Resource" uid="uid://c3m4rrqbt5y4p" path="res://elements/types/element_rose.tres" id="2_c7o8g"]
+[ext_resource type="Resource" uid="uid://r0fjcv0w2stk" path="res://elements/types/element_dandelion.tres" id="3_p37kw"]
+[ext_resource type="Resource" uid="uid://bxgfdo1reom1a" path="res://elements/types/element_tulip.tres" id="4_bc4h6"]
+[ext_resource type="Resource" uid="uid://dfphubkfnrwe0" path="res://players/movement/movement_enemy_default.tres" id="5_kblm6"]
+
+[resource]
+script = ExtResource("2_4t0ki")
+frame = 7
+desc = "A slow animal that takes its sweet time attacking."
+strength = 1.0
+distractions = Array[ExtResource("1_16s62")]([ExtResource("2_c7o8g"), ExtResource("3_p37kw"), ExtResource("4_bc4h6")])
+distractions_all = false
+movement_type = ExtResource("5_kblm6")
+weaknesses = Array[ExtResource("1_16s62")]([])
+weaknesses_all = true
+damage = 1.0
+health = 1.0
+attack_delay = 2.0
+shield = 0.0
+sight_range = 1.0
+kill_range = 1.0
+speed = 0.5

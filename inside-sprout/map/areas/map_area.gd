@@ -10,6 +10,7 @@ var objects = []
 
 signal object_entered(o)
 signal object_exited(o)
+signal type_changed(t:ElementType)
 
 func count() -> int:
 	return cells.size()
@@ -45,6 +46,10 @@ func finalize(grid:MapGrid) -> void:
 
 func reset_type() -> void:
 	type = null
+
+func set_type(t:ElementType) -> void:
+	type = t
+	type_changed.emit(t)
 
 func flood_fill(start_cell:MapCell, grid:MapGrid) -> void:
 	add_cell(start_cell)

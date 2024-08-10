@@ -1,7 +1,6 @@
 class_name Enemy extends CharacterBody2D
 
 var type : EnemyType
-var dead := false
 
 @onready var mover := $Mover
 @onready var sprite : Sprite2D = $Sprite2D
@@ -9,27 +8,30 @@ var dead := false
 @onready var properties := $Properties
 @onready var map_tracker := $MapTracker
 @onready var sensor := $Sensor
-
-signal died(e:Enemy)
+@onready var attacker := $Attacker
+@onready var state := $State
+@onready var visuals := $Visuals
 
 func activate() -> void:
-	health.depleted.connect(on_health_depleted)
+	state.activate()
 	map_tracker.activate()
 	sensor.activate()
+	state.died.connect(on_death)
 
 func set_type(tp:EnemyType) -> void:
 	type = tp
 	
-	sprite.set_frame(tp.frame)
+	visuals.set_data(tp)
 	mover.res_move = tp.movement_type
+	mover.extra_speed_factor = tp.speed
 	health.set_base_health(tp.health * Global.config.enemy_health_factor, true)
 	properties.set_type(tp)
-	# @TODO: update everything accordingly
+	sensor.set_type(tp)
+	attacker.set_type(tp)
 
-func on_health_depleted() -> void:
-	kill()
-
-func kill() -> void:
-	dead = true
-	died.emit(self)
-	self.queue_free()
+func on_death(_n) -> void:
+	if map_tracker.get_rules().enemies_drop_seeds:
+		var num := Global.config.enemy_seed_drop_bounds.rand_int()
+		for _i in range(num):
+			var rand_scatter := Vector2.from_angle(randf() * 2 * PI) * Global.config.sprite_size
+			GSignal.drop_element.emit(null, global_position + rand_scatter)

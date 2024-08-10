@@ -1,0 +1,37 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://db0bce6hwasvt"]
+
+[ext_resource type="FontFile" uid="uid://dxt62leshfoig" path="res://ui/fonts/body_text.ttf" id="1_ga1s2"]
+[ext_resource type="StyleBox" uid="uid://d215c32t6ngyg" path="res://ui/button_style_box.tres" id="1_lb88p"]
+[ext_resource type="Texture2D" uid="uid://7y2s6n6cc5aj" path="res://game_loop/main/misc.webp" id="1_ve40i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rkdh"]
+atlas = ExtResource("1_ve40i")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_73f48"]
+texture = SubResource("AtlasTexture_7rkdh")
+texture_margin_left = 42.0
+texture_margin_top = 42.0
+texture_margin_right = 42.0
+texture_margin_bottom = 42.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+modulate_color = Color(0.689858, 0.4465, 0.95, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8jmxk"]
+texture = SubResource("AtlasTexture_7rkdh")
+texture_margin_left = 42.0
+texture_margin_top = 42.0
+texture_margin_right = 42.0
+texture_margin_bottom = 42.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+modulate_color = Color(0.92, 0.46, 0.46, 1)
+
+[resource]
+default_font = ExtResource("1_ga1s2")
+default_font_size = 32
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/styles/focus = SubResource("StyleBoxTexture_73f48")
+Button/styles/hover = SubResource("StyleBoxTexture_8jmxk")
+Button/styles/normal = ExtResource("1_lb88p")

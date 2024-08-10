@@ -1,13 +1,34 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd8jt2m8mng1r"]
+[gd_scene load_steps=7 format=3 uid="uid://bd8jt2m8mng1r"]
 
 [ext_resource type="Script" path="res://players/modules/mover.gd" id="1_w37ss"]
 [ext_resource type="Resource" uid="uid://ce6mpcxnh7v2f" path="res://players/movement/movement_player.tres" id="2_32l3x"]
 [ext_resource type="Resource" uid="uid://dx6cw7nxy341v" path="res://map/data/map_data.tres" id="2_a7rwc"]
+[ext_resource type="Texture2D" uid="uid://clggnu8wg4h11" path="res://players/movement/movement_particle_circle.tres" id="4_upcr0"]
+
+[sub_resource type="Curve" id="Curve_y1jrv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0560345, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.08112, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_4iqla"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Mover" type="Node2D"]
 script = ExtResource("1_w37ss")
 res_move = ExtResource("2_32l3x")
 map_data = ExtResource("2_a7rwc")
+extra_speed_factor = null
 
 [node name="TimerPause" type="Timer" parent="."]
 one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+texture = ExtResource("4_upcr0")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+angle_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.15
+scale_amount_curve = SubResource("Curve_y1jrv")
+color_ramp = SubResource("Gradient_4iqla")

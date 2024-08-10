@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=4 format=3 uid="uid://vqo2e0o3hele"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_yamcn"]
+[ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="2_7grrg"]
+[ext_resource type="Resource" uid="uid://dfphubkfnrwe0" path="res://players/movement/movement_enemy_default.tres" id="2_08ukx"]
+
+[resource]
+script = ExtResource("2_7grrg")
+frame = 6
+desc = "Distracted by all flowers, damaged by none."
+strength = 3.0
+distractions = Array[ExtResource("1_yamcn")]([])
+distractions_all = true
+movement_type = ExtResource("2_08ukx")
+weaknesses = Array[ExtResource("1_yamcn")]([])
+weaknesses_all = false
+damage = 1.0
+health = 1.0
+attack_delay = 1.0
+shield = 0.0
+sight_range = 1.0
+kill_range = 1.0
+speed = 1.0

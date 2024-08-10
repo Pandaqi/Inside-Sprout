@@ -4,6 +4,21 @@
 [ext_resource type="Material" uid="uid://bbcusvptp64be" path="res://enemies/dotted_line_material.tres" id="2_wmq5f"]
 [ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="3_4abih"]
 
+[sub_resource type="Animation" id="Animation_o1c6x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteRadius:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
 [sub_resource type="Animation" id="Animation_e5mmn"]
 resource_name = "fade_radius"
 length = 2.0
@@ -19,21 +34,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.6, 0.15, 0.6]
-}
-
-[sub_resource type="Animation" id="Animation_o1c6x"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteRadius:material:shader_parameter/alpha")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iosbg"]

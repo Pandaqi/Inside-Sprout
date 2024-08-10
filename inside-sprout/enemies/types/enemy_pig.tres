@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=8 format=3 uid="uid://beugy6mmmm45k"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_pu06a"]
+[ext_resource type="Resource" uid="uid://mklfwep2r1uq" path="res://elements/types/element_sunflower.tres" id="2_78gbh"]
+[ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="2_qltpd"]
+[ext_resource type="Resource" uid="uid://bxgfdo1reom1a" path="res://elements/types/element_tulip.tres" id="3_8yrio"]
+[ext_resource type="Resource" uid="uid://ckqash1abw7v5" path="res://elements/types/element_grass.tres" id="4_d430d"]
+[ext_resource type="Resource" uid="uid://ceifl72c6wxax" path="res://elements/types/element_ginger.tres" id="5_76xou"]
+[ext_resource type="Resource" uid="uid://dfphubkfnrwe0" path="res://players/movement/movement_enemy_default.tres" id="6_7petc"]
+
+[resource]
+script = ExtResource("2_qltpd")
+frame = 2
+desc = "Powerful and hard to kill, but many ways to distract."
+strength = 2.0
+distractions = Array[ExtResource("1_pu06a")]([ExtResource("2_78gbh"), ExtResource("3_8yrio"), ExtResource("4_d430d"), ExtResource("5_76xou")])
+distractions_all = false
+movement_type = ExtResource("6_7petc")
+weaknesses = Array[ExtResource("1_pu06a")]([])
+weaknesses_all = true
+damage = 2.0
+health = 1.0
+attack_delay = 2.0
+shield = 0.5
+sight_range = 2.0
+kill_range = 1.0
+speed = 1.0

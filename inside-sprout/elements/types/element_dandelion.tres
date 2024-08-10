@@ -4,8 +4,16 @@
 
 [resource]
 script = ExtResource("1_0kkja")
-frame = 2
+frame = 3
 name = "Dandelion"
 desc = ""
-color = Color(1, 0.8895, 0.61, 1)
+color = Color(0, 0.423529, 0.564706, 1)
 spawnable = false
+auto_area = true
+pickupable = false
+enemy_ignore = false
+can_be_bullet = false
+damage = 1.0
+health = 1.0
+attack_delay = 1.0
+shield = 1.0

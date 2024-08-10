@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=5 format=3 uid="uid://beqceixo781bm"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_ke1ns"]
+[ext_resource type="Resource" uid="uid://mklfwep2r1uq" path="res://elements/types/element_sunflower.tres" id="2_h1arj"]
+[ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="2_ijk2r"]
+[ext_resource type="Resource" uid="uid://dfphubkfnrwe0" path="res://players/movement/movement_enemy_default.tres" id="3_h3x3x"]
+
+[resource]
+script = ExtResource("2_ijk2r")
+frame = 9
+desc = "Fast, ruthless, hard to distract, but fortunately low health."
+strength = 4.0
+distractions = Array[ExtResource("1_ke1ns")]([ExtResource("2_h1arj")])
+distractions_all = false
+movement_type = ExtResource("3_h3x3x")
+weaknesses = Array[ExtResource("1_ke1ns")]([])
+weaknesses_all = true
+damage = 2.0
+health = 0.5
+attack_delay = 1.0
+shield = 0.0
+sight_range = 2.0
+kill_range = 1.0
+speed = 2.0

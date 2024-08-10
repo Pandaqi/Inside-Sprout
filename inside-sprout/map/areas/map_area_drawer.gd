@@ -16,18 +16,16 @@ var polygon_uvs : PackedVector2Array
 @onready var debug_label := $DebugLabel/Label
 @export var draw_mode := AreaDrawMode.OUTLINE
 
-func update(a:MapArea) -> void:
-	area = a
-	
-	print(area.id)
-	print(area.type)
-	print(area.group)
-	
+func _ready() -> void:
 	material = material.duplicate(false)
-	material.set_shader_parameter("color", area.type.color)
 	material.set_shader_parameter("jaggy_start_threshold", randf_range(0.035, 0.055))
 	material.set_shader_parameter("speed", randf_range(0.5, 0.86))
 	material.set_shader_parameter("noise_hard_cutoff_threshold", randf_range(0.25, 0.35))
+
+func update(a:MapArea) -> void:
+	area = a
+	area.type_changed.connect(on_type_changed)
+	on_type_changed()
 	
 	# @NOTE: this is used to make bigger areas lower their scale, so that the shader effect looks roughly same size everywhere
 	var base_scale := 8.0 # for which number of edges the parameters above have been calibrated
@@ -36,6 +34,9 @@ func update(a:MapArea) -> void:
 	
 	create_uvs()
 	queue_redraw()
+
+func on_type_changed() -> void:
+	material.set_shader_parameter("color", area.type.color)
 
 func create_uvs() -> void:
 	polygon = []

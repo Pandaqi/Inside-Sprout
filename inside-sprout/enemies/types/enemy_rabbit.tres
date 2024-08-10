@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=6 format=3 uid="uid://b425y4tritek2"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_6lk0f"]
+[ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="2_jj5v6"]
+[ext_resource type="Resource" uid="uid://ckqash1abw7v5" path="res://elements/types/element_grass.tres" id="2_x177x"]
+[ext_resource type="Resource" uid="uid://r0fjcv0w2stk" path="res://elements/types/element_dandelion.tres" id="3_mvybe"]
+[ext_resource type="Resource" uid="uid://be1pftapihobe" path="res://players/movement/movement_jump.tres" id="4_a3lpr"]
+
+[resource]
+script = ExtResource("2_jj5v6")
+frame = 3
+desc = "Moves in sudden jumps."
+strength = 3.0
+distractions = Array[ExtResource("1_6lk0f")]([ExtResource("2_x177x"), ExtResource("3_mvybe")])
+distractions_all = false
+movement_type = ExtResource("4_a3lpr")
+weaknesses = Array[ExtResource("1_6lk0f")]([])
+weaknesses_all = true
+damage = 1.0
+health = 1.0
+attack_delay = 1.0
+shield = 0.0
+sight_range = 1.0
+kill_range = 1.0
+speed = 1.0

@@ -1,30 +1,22 @@
 class_name Element extends StaticBody2D
 
 var type : ElementType
-var dead := false
 
 @onready var sprite := $Sprite2D
 @onready var attacker := $Attacker
 @onready var health := $Health
-@onready var map_tracker := $MapTracker
+@onready var map_tracker : ModuleMapTracker = $MapTracker
+@onready var state := $State
 
 signal died(e:Element)
 
 func activate() -> void:
-	health.depleted.connect(on_health_depleted)
+	state.activate()
 	map_tracker.activate()
 
 func set_type(tp:ElementType) -> void:
 	type = tp
 	
-	health.set_base_health(tp.health * Global.config.elements_health_factor, true)
+	var base_health := tp.health * map_tracker.get_rules().elements_health_factor * Global.config.elements_health_factor
+	health.set_base_health(base_health, true)
 	sprite.set_frame(tp.frame)
-	# @TODO: visuals and other changes and stuff
-
-func on_health_depleted() -> void:
-	kill()
-
-func kill() -> void:
-	dead = true
-	died.emit(self)
-	queue_free()

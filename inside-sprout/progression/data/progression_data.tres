@@ -1,10 +1,34 @@
-[gd_resource type="Resource" script_class="ProgressionData" load_steps=4 format=3 uid="uid://cx3oq84spkyut"]
+[gd_resource type="Resource" script_class="ProgressionData" load_steps=27 format=3 uid="uid://cx3oq84spkyut"]
 
 [ext_resource type="Script" path="res://progression/data/progression_data.gd" id="1_hp26v"]
 [ext_resource type="Resource" uid="uid://lfkmviapv85k" path="res://progression/rulesets/ruleset_exterior.tres" id="1_ou5uf"]
+[ext_resource type="Script" path="res://progression/rulesets/ruleset.gd" id="1_qrmvc"]
+[ext_resource type="Resource" uid="uid://mdn2o8w02kog" path="res://progression/rulesets/ruleset_all_faster.tres" id="2_ci0a7"]
 [ext_resource type="Resource" uid="uid://cs4fs1ml6ypib" path="res://progression/rulesets/ruleset_interior.tres" id="2_pe2jg"]
+[ext_resource type="Resource" uid="uid://chkgusipfft5b" path="res://progression/rulesets/ruleset_all_slower.tres" id="3_8mteb"]
+[ext_resource type="Resource" uid="uid://w74wqck1r8nd" path="res://progression/rulesets/ruleset_area_recolor.tres" id="4_4he2c"]
+[ext_resource type="Resource" uid="uid://c5cw23t8yg8sp" path="res://progression/rulesets/ruleset_bullet_damage.tres" id="5_cywuh"]
+[ext_resource type="Resource" uid="uid://sk4h7u4wq21t" path="res://progression/rulesets/ruleset_bullet_fire_rate.tres" id="6_juto2"]
+[ext_resource type="Resource" uid="uid://vw32an22hf6n" path="res://progression/rulesets/ruleset_drop_heals_heart.tres" id="7_jkckx"]
+[ext_resource type="Resource" uid="uid://dr5gi3siudi5t" path="res://progression/rulesets/ruleset_element_health.tres" id="8_jku2n"]
+[ext_resource type="Resource" uid="uid://b5o0f3mlysg0t" path="res://progression/rulesets/ruleset_enemy_damage.tres" id="9_kla2t"]
+[ext_resource type="Resource" uid="uid://78826y2uinxc" path="res://progression/rulesets/ruleset_enemy_drop_seed.tres" id="10_tydsg"]
+[ext_resource type="Resource" uid="uid://cqln5mwuh4t5g" path="res://progression/rulesets/ruleset_enemy_no_bottom.tres" id="11_48epr"]
+[ext_resource type="Resource" uid="uid://dbsaefm47i320" path="res://progression/rulesets/ruleset_enemy_no_top.tres" id="12_th3gu"]
+[ext_resource type="Resource" uid="uid://bocqmrap4dm3k" path="res://progression/rulesets/ruleset_enemy_slower.tres" id="13_mbipg"]
+[ext_resource type="Resource" uid="uid://du5q55p8irgj7" path="res://progression/rulesets/ruleset_player_speed_up.tres" id="14_7uspj"]
+[ext_resource type="Resource" uid="uid://dcqy1kld57pjp" path="res://progression/rulesets/ruleset_regrow_hedge.tres" id="15_sgvl6"]
+[ext_resource type="Resource" uid="uid://b7v7grqv0odeh" path="res://progression/rulesets/ruleset_seed_conv_faster.tres" id="16_4ml7k"]
+[ext_resource type="Resource" uid="uid://dipq323a8c845" path="res://progression/rulesets/ruleset_seed_conv_slower.tres" id="17_l6laq"]
+[ext_resource type="Resource" uid="uid://nilf7r8fr4yi" path="res://progression/rulesets/ruleset_seed_spawn_speed.tres" id="18_4binm"]
+[ext_resource type="Resource" uid="uid://c67k51k720c4a" path="res://progression/rulesets/ruleset_sight_range.tres" id="19_a21i0"]
+[ext_resource type="Resource" uid="uid://d0swit8qxfm56" path="res://progression/rulesets/ruleset_sight_range_larger.tres" id="20_h0p4f"]
+[ext_resource type="Resource" uid="uid://b84812rsyeimi" path="res://progression/rulesets/ruleset_slower_attack.tres" id="21_p087t"]
+[ext_resource type="Resource" uid="uid://uyvv5f4lhcha" path="res://progression/rulesets/ruleset_waves_bounds.tres" id="22_ht834"]
+[ext_resource type="Resource" uid="uid://dfa82q00egcwy" path="res://progression/rulesets/ruleset_waves_longer.tres" id="23_huuc8"]
 
 [resource]
 script = ExtResource("1_hp26v")
+all_rules = Array[ExtResource("1_qrmvc")]([ExtResource("2_ci0a7"), ExtResource("3_8mteb"), ExtResource("4_4he2c"), ExtResource("5_cywuh"), ExtResource("6_juto2"), ExtResource("7_jkckx"), ExtResource("8_jku2n"), ExtResource("9_kla2t"), ExtResource("10_tydsg"), ExtResource("11_48epr"), ExtResource("12_th3gu"), ExtResource("13_mbipg"), ExtResource("14_7uspj"), ExtResource("15_sgvl6"), ExtResource("16_4ml7k"), ExtResource("17_l6laq"), ExtResource("18_4binm"), ExtResource("19_a21i0"), ExtResource("20_h0p4f"), ExtResource("21_p087t"), ExtResource("22_ht834"), ExtResource("23_huuc8")])
 rules_interior = ExtResource("2_pe2jg")
 rules_exterior = ExtResource("1_ou5uf")

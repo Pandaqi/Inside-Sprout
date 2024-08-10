@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ElementType" load_steps=2 format=3 uid="uid://bxgfdo1reom1a"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_hcfha"]
+
+[resource]
+script = ExtResource("1_hcfha")
+frame = 5
+name = "Tulip"
+desc = ""
+color = Color(0.278431, 0.160784, 0.721569, 1)
+spawnable = false
+auto_area = true
+pickupable = false
+enemy_ignore = false
+can_be_bullet = false
+damage = 1.0
+health = 1.0
+attack_delay = 1.0
+shield = 1.0

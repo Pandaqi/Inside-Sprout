@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_q4xle")
 frame = 0
-desc = "Distracted by every possible flower."
+desc = "A very average animal for an easy time, hopefully."
 strength = 1.0
 distractions = Array[ExtResource("1_247h7")]([])
 distractions_all = true
@@ -18,3 +18,6 @@ damage = 1.0
 health = 1.0
 attack_delay = 1.0
 shield = 0.0
+sight_range = 1.0
+kill_range = 1.0
+speed = 1.0

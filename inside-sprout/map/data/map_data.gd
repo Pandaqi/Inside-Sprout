@@ -8,12 +8,15 @@ var hearts : MapHearts
 func get_bounds() -> Rect2:
 	return grid.get_bounds()
 
-func get_random_edge_position() -> Vector2:
+func get_random_edge_position(forbid_top := false, forbid_bottom := false) -> Vector2:
 	var horizontal_edge := randf() <= 0.5
+	if (forbid_top and forbid_bottom): horizontal_edge = false
+	
 	var pos_grid := Vector2i.ZERO
 	if horizontal_edge:
 		pos_grid.x = floor( randf() * grid.size.x )
-		if randf() <= 0.5: pos_grid.y = grid.size.y
+		if randf() <= 0.5 or forbid_top: pos_grid.y = grid.size.y
+		if forbid_bottom: pos_grid.y = 0
 	else:
 		pos_grid.y = floor( randf() * grid.size.y )
 		if randf() <= 0.5: pos_grid.x = grid.size.x

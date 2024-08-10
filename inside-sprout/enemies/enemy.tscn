@@ -1,19 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://cyyt8phymfdir"]
+[gd_scene load_steps=17 format=3 uid="uid://cyyt8phymfdir"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_1wsl5"]
-[ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="1_cotgo"]
+[ext_resource type="Script" path="res://players/modules/visuals.gd" id="2_7vga5"]
+[ext_resource type="Texture2D" uid="uid://gh2a3gh1fs7s" path="res://enemies/enemies.webp" id="2_maf3f"]
+[ext_resource type="Script" path="res://players/modules/state.gd" id="3_217kc"]
 [ext_resource type="PackedScene" uid="uid://bd8jt2m8mng1r" path="res://players/modules/mover.tscn" id="3_s3wwf"]
 [ext_resource type="PackedScene" uid="uid://bmjbix27b7xsf" path="res://enemies/radius_viewer/radius_viewer.tscn" id="5_b2f5s"]
 [ext_resource type="Script" path="res://players/modules/sensor.gd" id="5_whyhm"]
 [ext_resource type="PackedScene" uid="uid://dy0f3m12rq7tj" path="res://players/modules/health.tscn" id="6_6yd27"]
 [ext_resource type="PackedScene" uid="uid://pnvne6eie12p" path="res://enemies/modules/attacker.tscn" id="6_akwkh"]
 [ext_resource type="Script" path="res://enemies/modules/properties.gd" id="7_05ehy"]
+[ext_resource type="Resource" uid="uid://cx3oq84spkyut" path="res://progression/data/progression_data.tres" id="7_5mb6d"]
 [ext_resource type="PackedScene" uid="uid://dhky6fwi0a47v" path="res://elements/element_sprite/element_sprite.tscn" id="8_0im4v"]
 [ext_resource type="Resource" uid="uid://bed1b4cijdpsn" path="res://elements/data/element_data.tres" id="8_velou"]
 [ext_resource type="PackedScene" uid="uid://c2oggs2rqrlc3" path="res://players/modules/map_tracker.tscn" id="11_cu8iu"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xjavt"]
-radius = 45.0111
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kbvb1"]
+height = 108.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xvyop"]
 radius = 475.232
@@ -22,17 +25,30 @@ radius = 475.232
 script = ExtResource("1_1wsl5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_xjavt")
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_kbvb1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
+script = ExtResource("2_7vga5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -62)
-texture = ExtResource("1_cotgo")
+texture = ExtResource("2_maf3f")
+hframes = 4
+vframes = 3
 
-[node name="Mover" parent="." node_paths=PackedStringArray("sensor") instance=ExtResource("3_s3wwf")]
+[node name="State" type="Node2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("3_217kc")
+health = NodePath("../Health")
+
+[node name="Mover" parent="." node_paths=PackedStringArray("sensor", "visuals", "map_tracker") instance=ExtResource("3_s3wwf")]
 sensor = NodePath("../Sensor")
+visuals = NodePath("../Visuals")
+map_tracker = NodePath("../MapTracker")
 
 [node name="Sensor" type="Node2D" parent="." node_paths=PackedStringArray("attacker")]
 script = ExtResource("5_whyhm")
+prog_data = ExtResource("7_5mb6d")
 attacker = NodePath("../Attacker")
 
 [node name="ScanArea" type="Area2D" parent="Sensor"]

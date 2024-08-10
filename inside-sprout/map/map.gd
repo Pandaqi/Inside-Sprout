@@ -7,6 +7,7 @@ class_name Map extends Node2D
 @export var element_data : ElementData
 @export var bg_scene : PackedScene
 @onready var map_layers : MapLayers = $MapLayers
+@onready var border_bodies := $BorderBodies
 
 @export var machine_scene : PackedScene
 @export var resource_hedge : MachineType
@@ -76,6 +77,35 @@ func regenerate() -> void:
 	# the heart cells where they need to be
 	for heart_cell in hearts.cells:
 		place_heart(heart_cell)
+	
+	# create physical map bounds
+	create_map_bounds()
+
+func create_map_bounds() -> void:
+	var border_thickness := 24.0
+	var grid_bounds := map_data.grid.get_bounds()
+	var border_size := grid_bounds.size
+	border_size.x = max(border_size.x, border_size.y)
+	border_size.y = border_thickness
+	
+	var shp := RectangleShape2D.new()
+	shp.size = border_size
+	
+	var positions = [
+		Vector2(0.5*grid_bounds.size.x, 0),
+		Vector2(grid_bounds.size.x, 0.5*grid_bounds.size.y),
+		Vector2(0.5 * grid_bounds.size.x, grid_bounds.size.y),
+		Vector2(0, 0.5*grid_bounds.size.y)
+	]
+	
+	for i in range(4):
+		var body := StaticBody2D.new()
+		var col_shape := CollisionShape2D.new()
+		col_shape.shape = shp
+		body.add_child(col_shape)
+		body.set_position(positions[i])
+		body.set_rotation(i * 0.5 * PI)
+		border_bodies.add_child(body)
 
 func place_heart(cell:MapCell) -> void:
 	var node : Heart = heart_scene.instantiate()
@@ -83,7 +113,8 @@ func place_heart(cell:MapCell) -> void:
 	map_layers.add_to_layer("entities", node)
 	cell.heart_node = node
 	
-	node.died.connect(map_data.hearts.on_heart_died)
+	node.state.died.connect(map_data.hearts.on_heart_died)
+	node.activate()
 
 func place_hedge(group:MapAreaGroup) -> void:
 	if not group.can_place_hedge(): return
@@ -97,7 +128,8 @@ func place_hedge(group:MapAreaGroup) -> void:
 	node.set_direction(hedge.angle())
 	node.set_type(resource_hedge)
 	
-	node.died.connect(func(_n): group.add_hedge(hedge))
+	node.state.died.connect(func(_n): group.add_hedge(hedge))
+	node.activate()
 	group.remove_hedge(hedge)
 
 func on_hedge_requested(group:MapAreaGroup) -> void:

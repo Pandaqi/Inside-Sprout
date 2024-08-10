@@ -1,40 +1,23 @@
 
-# To-Do (for Saturday)
-
-* Put all graphics in the game! ( + properly flip_h enemies based on where they're looking + rotate bullet sideways to match flight angle)
-* Tutorial: Code and display
-* Create resource for all enemies + elements => assign correct frame and properties => make wave spawner use these properly
-  * Only select a subset per round. Don't spawn any enemies that can only be killed by elements that are not in the level. Also don't _display_ weaknesses/distractions that aren't in the current run.
-
-CRUCIAL FIXES:
-* Enable the "recolor all" (if inside entered) thing again, check if fun
-* @TODO: clear indication/progress on the heart loading up for shooting
-* @TODO: protection against going out of bounds
-* @TODO: Don't make the tree gun too overpowered now; the flowers themselves should be far stronger and lead to _longer_ distractions or _instakills_
-* RadiusViewer => update whenever radius of col_shape changes
-  * Need to set this properly from EnemyType first => then call signal
-
-PROGRESSION:
-* Actually create menu + game over screen + spawner progression
-  * Spawner should display a simple graphic with new enemies unlocked + their description?
-* Track which rules are unlocked (roguelite things) + obviously give players the options to choose stuff between waves or something. IDEAS:
-  * "Things dropped here change into type X"
-  * "Kill/Sight radius changes by Y"
-  * "Damage/Health changes by Z"
-  * The ProgData should return a _modified_ version of rules that mediates between int/ext and progression => It multiplies all factors, and makes booleans true if at least one is true
-
-**Check all the ideas below.** If they can be simple _progression tweaks_, I can add them as an option. Otherwise, they must be put on the "future to-do" and completely ignored.
-
-POLISHING:
-* Finetune all the data (speed, monsters, health, wave progression, etcetera)
-* Sound effects everywhere
-* Some animations and particles, if possible.
-* ENSURE YOU'RE GROWING STRONGER TOO (as the waves grow stronger)
 
 # To-Do (for Sunday)
 
-* Go back to polishing the rowing game _enough_ to perhaps submit that.
-* Let this game be finished and tested.
+FINETUNE INSIDE SPROUT:
+* Test if all the systems work.
+* Finetune all the data (speed, monsters, health, wave progression, etcetera)
+  * Make the flowers themselves far stronger, and lead to _longer_ distractions or _instakills_.
+* If possible, playtest
+
+ADVANCE FINSIDE OUT:
+* Water current fix => With that, we can make swimming much slower, to stop it from being too big of an advantage
+* The absolutely necessary graphics
+  * For the menus and game over
+  * For stuff in the game
+* Create Health+ powerup (remove the _mass one)
+* Create tutorial to explain how the game even works.
+* I should write a list of SFX/Particles/Juice, but not actually do it.
+
+At the end of the day, I want _both_ entries submittable.
 
 # To-Do (for Monday)
 
@@ -43,40 +26,19 @@ POLISHING:
 
 
 
+# Future To-Do
 
+## Crucial for proper release
 
+**Major: Implement multiplayer** => spawn multiple players, scale map size, input select screen.
 
-@IDEA (UNRELATED, BUT REALLY GOOD): That idea of local multiplayer Olympic games, with all of them "simplified" and "partified". For example: any solo/take-turns sports now just _happen together_.
-* Spear throwing? You're all throwing at the same time.
-* There's a time limit. If you want to have the most tries, you need to walk into the field and collect your spear, and hope nobody spears you (which is death = long timeout) in the mean time.
-* And the mechanics for throwing are always just the same few buttons.
-* ("Olympigs?" "The Olyfantic Flames!" => tie into that Saga of Life idea, or that general story idea I had.)
+**Major: Animate** => we probably want flowers to actually grow, enemies to actually walk/fly, etcetera.
 
-* Hockey? You're just a blob with a huge stick and huge feet. The only rule we're really copying is that you get penalized for getting hit on your foot.
+**Major: Save Game & More Customization** => such as choosing what you want to include, actually modifying the map in some way as you go, more machines, etcetera
 
-* Rowing? It's about sharing a boat, pressing buttons at the right time to go forward (with most speed). Mis-timing means you go sideways, as expected, which can be bad (penalty for going out of bounds etcetera) or good (you're able to grab some powerups or avoid some collision before you)
-  * The most powerful feature here would be that you are "locked" in your direction for X time, because paddling needs a recharge. This makes movement unique and strategic. 
+## Leftover Rules & Ideas
 
-
-
-
-## Next
-
-
-
-Articles
-
-* Write that article about "for every rule/system you invent, think about what it does or doesn't say to the player. Make sure it says the right things (don't be passive), but also that there's variety (no one strategy to rule them all)"
-* Write that article about why Bombgoggles ... bombed in that jam, what I learned from that and how I improved it.
-* Write about "the problem of dreamshrink" => halfway any project, you have to realize that most of the possibilities/opportunities/ideas will not be done, and pick the one fixed/final path the project will head into. Always the hardest part, as if getting nostalgic for a game you never made.
-
-
-BEE => Change to "Jack of all flowers, damaged by none." => That's a great simple first enemy, while reinforcing the need for some secondary mechanic to destroy monsters
-
-* @IDEA: Certain monsters _drop_ stuff too, that you can then use (or must avoid)
-  * It feels like the "medicine" for the heart should be _changing_, otherwise one specific element will always be way more important.
-
-RULE: Poisonous is probably always a SUBSET of distractions => we show the distractions, then highlight those that are poisonous
+@IDEA: Certain monsters _drop_ stuff too, that you can then use (or must avoid) => It feels like the "medicine" for the heart should be _changing_, otherwise one specific element will always be way more important.
 
 @IDEA: Some areas are "highlighted" or "boosted" / "weakened" at random? (Can just draw a border around them or make them more transparent.) This changes the health/damage of all your flowers there.
 
@@ -96,10 +58,159 @@ RULE: Poisonous is probably always a SUBSET of distractions => we show the distr
 * Maybe EATING a certain plant might poison them/slow them down/or actually speed them up
 
 @IDEA: This might even allow completely FLIPPING the idea, such that the heart is DYING AUTOMATICALLY, and you merely use the monsters to get the MEDICINE for it :p (The monsters don't necessarily attack the Heart, but _you_?)
-* **@MONSTER IDEA: Drops Seeds/whatever element upon death.**
 
 * The inside player _purchases new seeds_. They have stations for buying certain elements / making them spawn in certain locations. That's how you must manually make stuff appear, and hopefully in a tactical way.
 * There's a moat _between_ the two players, so they literally can't visit each other's spaces. (And that moat can reuse my organic river generation code.) They can pass stuff between them, though, which is a transition that should _matter somehow_.
   * Maybe you can visit/swap places, but you need to both be at the harbor and it takes time.
   * Maybe giving stuff back to the inside is the _only_ way the inner player can get defenses/weapons in case the monsters break through there.
   * Maybe there are bridges to the inside. Destroying/changing those bridges are a crucial part of strategy, but it takes resources/timing/being at the correct station to do so obviously.
+
+## Leftover polishing
+
+Sound: Walking? Flower noticed?
+
+# Library
+
+## Rulesets / Progression
+
+The specific percentages/values are just random guesses and will surely have changed on the fly.
+
+* [x] "All entities move with 10% less speed."
+* [x] "All entities move with 10% more speed."
+* [x] "All enemies have 10% less speed."
+* [x] "All flowers have 10% more health."
+* [x] "Seeds convert 10% slower."
+* [x] "Seeds convert 10% faster."
+* [x] "Waves take 10% more time (to spread out their units)."
+* [x] "Waves have 10% fewer units."
+* [x] "Enemies have a 15% smaller sight range."
+* [x] "Enemies have a 10% larger sight range."
+* [x] "Enemies attack 10% slower."
+* [x] "Enemies do 10% less damage."
+* [x] "New seeds spawn 10% faster." (this really raises the bounds too?)
+* [x] "Dropping Inside also heals the heart a tiny bit."
+* [x] "The Treeheart fires bullets 15% faster."
+* [x] "Bullets do 20% more damage before disappearing."
+* [x] "Dropping Inside regrows one hedge."
+* [x] "Monsters randomly drop seeds when they die."
+* [x] "Monsters don't spawn anymore at the top edge."
+* [x] "Monsters don't spawn anymore at the bottom edge."
+* [x] "Players have 10% more speed."
+* [x] "When entering Inside, all areas change colors."
+
+
+## Enemies
+
+Strength 1 Enemies: Bee, Butterfly, Sunbird (mostly flying ones)
+Strength 2 Enemies: Bat, Mole, Pig, Giraffe
+Strength 3 Enemies: Rabbit, Caterpillar, Moth
+Strength 4 Enemies: Deer, Vole
+
+### Bee (0)
+
+* STRENGTH: 1
+* DESC: "A very average animal for an easy time, hopefully."
+* DISTRACT: All
+
+### Mole (1)
+
+* STRENGTH: 2
+* DESC: "Slow and sees little, but hard to kill."
+* DISTRACT: Dandelion, Sunflower
+* MINUS: Speed, SightRange, KillRange
+* PLUS: Health, Shield
+
+### Pig (2)
+
+* STRENGTH: 2
+* DESC: "Powerful and hard to kill, but many ways to distract."
+* DISTRACT: Sunflower, Tulip, Grass, Ginger
+* PLUS: Damage, Shield, SightRange(?)
+* MINUS: AttackDelay(?)
+
+### Rabbit (3)
+
+* STRENGTH: 3
+* DESC: "Moves in sudden jumps."
+* DISTRACT: Grass, Dandelion
+* SPECIALTY: JumpMover => @TODO: assign
+
+
+### Deer (4)
+
+* STRENGTH: 3
+* DESC: "High health and damage, but slow and attacks take a long time."
+* DISTRACT: Dandelion, Tulip
+* PLUS: Health, Damage
+* MINUS: Delay, Speed
+
+### Vole (5)
+
+* STRENGTH: 4
+* DESC: "Completely ignores flowers, but otherwise weak."
+* DISTRACT: None
+* PLUS: Speed, Delay
+* MINUS: Health, Damage
+
+
+### Caterpillar (6)
+
+* STRENGTH: 3
+* DESC: "Distracted by all flowers, damaged by none."
+* DISTRACT: All
+* WEAK: None
+
+
+### Butterfly (7)
+
+* STRENGTH: 1
+* DESC: "A slow animal that takes its sweet time attacking."
+* DISTRACT: Rose, Dandelion, Tulip
+* MIN: Speed
+* PLUS: Delay
+
+
+### Sunbird (8)
+
+* STRENGTH: 1
+* DESC: "Has a very wide range, but low health and damage."
+* DISTRACT: Sunflower, Grass, Ginger
+* PLUS: SightRange, KillRange
+* MIN: Damage, Health
+
+### Moth (9)
+
+* STRENGTH: 4
+* DESC: "Fast, ruthless, hard to distract, but fortunately low health."
+* DISTRACT: Sunflower
+* PLUS: Speed, Damage, SightRange
+* MINUS: Health
+
+### Bat (10)
+
+* STRENGTH: 2
+* DESC: "A fast animal with very strict requirements."
+* DISTRACT: Rose
+* PLUS: Speed
+* MIN: Delay
+
+### Giraffe (11)
+
+* STRENGTH: 2
+* DESC: "Huge sight and kill range."
+* DISTRACT: Rose, Ginger
+* PLUS: SightRange, KillRange
+
+
+# Plants
+
+I could've given special properties to each plant, but ran out of time. (And saw no good way to _explain/communicate_ these.)
+
+* Rose
+* Dandelion
+* Sunflower
+* Tulip
+* Grass
+* Ginger
+
+

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Ruleset" load_steps=2 format=3 uid="uid://c67k51k720c4a"]
+
+[ext_resource type="Script" path="res://progression/rulesets/ruleset.gd" id="1_k8o5p"]
+
+[resource]
+script = ExtResource("1_k8o5p")
+desc = "Enemies have a 20% smaller sight range."
+conversion_timer_factor = 1.0
+conversion_insta_finish = false
+speed_factor = 1.0
+speed_factor_enemy = 1.0
+speed_factor_player = 1.0
+elements_health_factor = 1.0
+drop_heal_factor = 0.0
+drop_regrow_hedge = false
+recolor_upon_entry = false
+wave_duration_factor = 1.0
+wave_unit_factor = 1.0
+sight_range_factor = 0.8
+kill_range_factor = 1.0
+seed_spawn_speed_factor = 1.0
+bullet_speed_factor = 1.0
+bullet_damage_factor = 1.0
+enemy_spawn_forbidden_top = false
+enemy_spawn_forbidden_bottom = false
+enemies_drop_seeds = false

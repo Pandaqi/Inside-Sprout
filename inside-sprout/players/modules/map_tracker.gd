@@ -2,6 +2,7 @@ class_name ModuleMapTracker extends Node2D
 
 @onready var entity = get_parent()
 @export var map_data : MapData
+@export var element_data : ElementData
 @export var static_object := false
 @export var prog_data : ProgressionData
 var prev_cell : MapCell = null
@@ -12,6 +13,7 @@ signal switched_in_out(new_state:MapAreas.InOut)
 
 func activate() -> void:
 	if static_object: refresh()
+	self.switched_in_out.connect(on_switched_in_out)
 
 func _process(_dt:float) -> void:
 	if static_object: return
@@ -46,6 +48,10 @@ func update_in_out() -> void:
 	if new_in_out == in_out: return
 	in_out = new_in_out
 	switched_in_out.emit(in_out)
+
+func on_switched_in_out(_v) -> void:
+	if get_rules().recolor_upon_entry:
+		map_data.areas.recolor(map_data.grid, element_data)
 
 func get_area() -> MapArea:
 	return cur_cell.area

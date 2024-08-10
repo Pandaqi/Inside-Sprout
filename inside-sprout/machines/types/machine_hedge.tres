@@ -4,3 +4,5 @@
 
 [resource]
 script = ExtResource("1_06meh")
+frame = 8
+frame_vertical = 9

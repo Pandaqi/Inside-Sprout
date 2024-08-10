@@ -2,6 +2,7 @@ extends Node2D
 
 @export var players_data : PlayersData
 @export var map_data : MapData
+@export var prog_data : ProgressionData
 @export var bullet_scene : PackedScene
 
 var targets : Array[Player] = []
@@ -9,7 +10,8 @@ var area_group : MapAreaGroup
 var bullets : Array[Element] = []
 
 @onready var timer := $Timer
-@onready var sprite := $Sprite2D
+@onready var sprite := $SpriteArrow
+@onready var prog_bar := $SpriteArrow/TextureProgressBar
 
 func _ready() -> void:
 	var cell := map_data.grid.get_cell_at( map_data.grid.real_pos_to_grid_pos(global_position) )
@@ -50,6 +52,7 @@ func _physics_process(_dt:float) -> void:
 	var vec : Vector2 = (targets.front().global_position - global_position).normalized()
 	set_rotation(vec.angle())
 	set_visible(true)
+	prog_bar.set_value( get_powerup_ratio() * 100)
 
 func shoot() -> void:
 	if not has_bullets(): return
@@ -59,6 +62,7 @@ func shoot() -> void:
 	var b = bullet_scene.instantiate()
 	b.global_position = sprite.global_position
 	b.rotation = get_rotation()
+	b.damage_factor = prog_data.get_rules().bullet_damage_factor
 	GSignal.place_on_map.emit("entities", b)
 	
 	var base_speed := Global.config.gun_bullet_speed * Global.config.cell_size * Global.config.map_size.x
@@ -68,7 +72,7 @@ func shoot() -> void:
 	restart_timer()
 
 func restart_timer() -> void:
-	timer.wait_time = Global.config.gun_timer_duration
+	timer.wait_time = Global.config.gun_timer_duration * prog_data.get_rules().bullet_speed_factor
 	timer.start()
 
 func stop_timer() -> void:
@@ -79,3 +83,7 @@ func on_timer_timeout() -> void:
 
 func is_busy() -> bool:
 	return timer.time_left > 0
+
+func get_powerup_ratio() -> float:
+	if not is_busy(): return 1.0
+	return 1.0 - timer.time_left / timer.wait_time

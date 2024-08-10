@@ -1,38 +1,59 @@
-[gd_scene load_steps=9 format=3 uid="uid://coed4jc64xcuo"]
+[gd_scene load_steps=12 format=3 uid="uid://coed4jc64xcuo"]
 
 [ext_resource type="Script" path="res://machines/hearts/heart.gd" id="1_1j50u"]
-[ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="1_ll0ws"]
+[ext_resource type="Texture2D" uid="uid://7y2s6n6cc5aj" path="res://game_loop/main/misc.webp" id="2_dufbi"]
+[ext_resource type="Script" path="res://players/modules/state.gd" id="3_wo02t"]
 [ext_resource type="PackedScene" uid="uid://dy0f3m12rq7tj" path="res://players/modules/health.tscn" id="3_xgapb"]
 [ext_resource type="Script" path="res://machines/modules/tree_gun.gd" id="4_h70m0"]
 [ext_resource type="Resource" uid="uid://umdjeh5iwhd1" path="res://players/data/players_data.tres" id="5_oa2tq"]
 [ext_resource type="Resource" uid="uid://dx6cw7nxy341v" path="res://map/data/map_data.tres" id="6_grgrp"]
 [ext_resource type="PackedScene" uid="uid://bbb8esrdahbyj" path="res://machines/modules/bullet.tscn" id="7_6liub"]
+[ext_resource type="Resource" uid="uid://cx3oq84spkyut" path="res://progression/data/progression_data.tres" id="8_1oubr"]
+[ext_resource type="Texture2D" uid="uid://u4sa6qq6etfc" path="res://ui/arrow_atlas_ex.tres" id="8_sqd50"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxll4"]
-size = Vector2(128, 128)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_13aqk"]
+radius = 19.0
+height = 124.0
 
 [node name="Heart" type="StaticBody2D"]
 script = ExtResource("1_1j50u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_xxll4")
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_13aqk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.664167, 0.000455606, 0.692819, 1)
-texture = ExtResource("1_ll0ws")
+position = Vector2(0, -64)
+texture = ExtResource("2_dufbi")
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="State" type="Node2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("3_wo02t")
+health = NodePath("../Health")
 
 [node name="Health" parent="." instance=ExtResource("3_xgapb")]
 
 [node name="TreeGun" type="Node2D" parent="."]
+position = Vector2(0, -83)
 script = ExtResource("4_h70m0")
 players_data = ExtResource("5_oa2tq")
 map_data = ExtResource("6_grgrp")
+prog_data = ExtResource("8_1oubr")
 bullet_scene = ExtResource("7_6liub")
 
 [node name="Timer" type="Timer" parent="TreeGun"]
 one_shot = true
 
-[node name="Sprite2D" type="Sprite2D" parent="TreeGun"]
+[node name="SpriteArrow" type="Node2D" parent="TreeGun"]
 position = Vector2(128, 0)
-scale = Vector2(0.885417, 0.222222)
-texture = ExtResource("1_ll0ws")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="TreeGun/SpriteArrow"]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+texture_under = ExtResource("8_sqd50")
+texture_progress = ExtResource("8_sqd50")
+tint_under = Color(0.385493, 0.385492, 0.385492, 1)

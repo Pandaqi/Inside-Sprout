@@ -8,21 +8,41 @@ class_name ModuleAttacker extends Node2D
 @export var attack_if_provoked := true
 @export var never_attack_first := false
 @export var show_radius := true
+@export var prog_data : ProgressionData
 var target 
 
 signal target_found(n)
 signal attacked(n)
 signal target_lost(n)
+signal radius_changed(r:float)
 
 func _ready() -> void:
-	radius_viewer.update(col_shape)
 	radius_viewer.set_visible(show_radius)
+
+func set_type(tp:EnemyType) -> void:
+	var new_radius := tp.kill_range * prog_data.get_rules(entity).kill_range_factor * Global.config.enemy_kill_range_def * Global.config.cell_size
+	set_radius(new_radius)
+
+func set_radius(r:float) -> void:
+	var shp := CircleShape2D.new()
+	shp.radius = r
+	col_shape.shape = shp
+	radius_changed.emit(r)
+	radius_viewer.update(r)
 
 func attack() -> void:
 	if not get_target(): return
 	if is_busy(): return
 	
-	var damage : float = entity.type.damage * Global.config.enemy_damage_factor - entity.type.shield * Global.config.enemy_shield_factor
+	
+	var specific_damage_factor := 1.0
+	if (entity is Enemy):
+		specific_damage_factor = prog_data.get_rules().enemy_damage_factor
+	
+	var raw_damage : float = entity.type.damage * Global.config.enemy_damage_factor * specific_damage_factor
+	var raw_shield : float = entity.type.shield * Global.config.enemy_shield_factor
+	var damage : float = clamp(raw_damage - raw_shield, 0, 10000)
+	
 	target.health.change(-damage)
 	if ("attacker" in target): target.attacker.provoke(entity)
 	attacked.emit(target)
@@ -30,7 +50,12 @@ func attack() -> void:
 
 func restart_timer():
 	if entity.dead: return # we died while doing our attack
-	timer.wait_time = entity.type.attack_delay * Global.config.enemy_attack_delay_factor
+	
+	var specific_delay_factor := 1.0
+	if (entity is Enemy): 
+		specific_delay_factor = prog_data.get_rules().enemy_attack_delay_factor
+	
+	timer.wait_time = entity.type.attack_delay * Global.config.enemy_attack_delay_factor * specific_delay_factor
 	timer.start()
 
 func _on_timer_timeout() -> void:
@@ -79,7 +104,7 @@ func provoke(attacker:Node2D) -> void:
 	if not attack_if_provoked: return
 	set_target(attacker)
 
-# @TODO: some cleaner code structure/module/resource/whatever to check if things can hit each other
+# @TODO @IMPROV: some cleaner code structure/module/resource/whatever to check if things can hit each other
 func can_damage_target(body = target) -> bool:
 	if (body is Enemy) and (entity is Enemy): return false
 	if (body is Enemy) and (entity is Element):

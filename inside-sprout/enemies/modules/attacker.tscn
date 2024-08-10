@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://pnvne6eie12p"]
+[gd_scene load_steps=5 format=3 uid="uid://pnvne6eie12p"]
 
 [ext_resource type="Script" path="res://enemies/modules/attacker.gd" id="1_qa1x4"]
+[ext_resource type="Resource" uid="uid://cx3oq84spkyut" path="res://progression/data/progression_data.tres" id="2_csnfa"]
 [ext_resource type="PackedScene" uid="uid://bmjbix27b7xsf" path="res://enemies/radius_viewer/radius_viewer.tscn" id="2_xcm6w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rfchm"]
@@ -8,6 +9,7 @@ radius = 78.0064
 
 [node name="Attacker" type="Node2D"]
 script = ExtResource("1_qa1x4")
+prog_data = ExtResource("2_csnfa")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

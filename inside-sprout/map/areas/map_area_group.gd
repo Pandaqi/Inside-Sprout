@@ -57,12 +57,18 @@ func finalize(grid:MapGrid) -> void:
 	if is_interior():
 		hedges_taken = []
 		hedges_available = []
+		
+		# we don't want to remove hedges at the map edge, as those "openings" are useless to us
+		var hedges_non_edge := []
 		for i in range(outline.size()-1):
-			hedges_available.append(Line.new(outline[i], outline[i+1]))
+			var new_hedge := Line.new(outline[i], outline[i+1])
+			if not grid.is_line_at_edge(new_hedge): hedges_non_edge.append(new_hedge)
+			hedges_available.append(new_hedge)
 		
 		var num_remove := 3
 		for i in range(num_remove):
-			remove_hedge(hedges_available[i])
+			var hedge : Line = hedges_non_edge.pop_front()
+			remove_hedge(hedge)
 
 func can_place_hedge() -> bool:
 	return hedges_available.size() > 0

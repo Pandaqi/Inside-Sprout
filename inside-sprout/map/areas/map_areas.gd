@@ -28,8 +28,6 @@ func subdivide(grid:MapGrid) -> void:
 			cells_to_do.erase(cell)
 		
 		area.finalize(grid)
-	
-	print(areas)
 
 func create_interior_around(cell:MapCell, grid:MapGrid):
 	var start_area := cell.area
@@ -45,7 +43,7 @@ func recolor(grid:MapGrid, ed:ElementData):
 	
 	for area in areas:
 		if area.is_interior(): 
-			area.type = ed.type_interior
+			area.set_type(ed.type_interior)
 			continue
 		
 		# assign a type
@@ -60,7 +58,7 @@ func recolor(grid:MapGrid, ed:ElementData):
 		if possible_types.size() > 0: final_type = possible_types.pick_random()
 		
 		print("Set area type", final_type)
-		area.type = final_type
+		area.set_type(final_type)
 
 static func determine_outline(grid:MapGrid, cells:Array[MapCell]) -> PackedVector2Array:
 	
@@ -89,7 +87,7 @@ static func determine_outline(grid:MapGrid, cells:Array[MapCell]) -> PackedVecto
 		edges_sorted.append(next_edge)
 		last_pos = next_edge.end
 	
-	# @TODO: possible optimization is to combine edges in the same direction into one big line
+	# @TODO @IMPROV: possible optimization is to combine edges in the same direction into one big line
 	
 	# finally, keep only their points 
 	var outline : PackedVector2Array = [first_pos]

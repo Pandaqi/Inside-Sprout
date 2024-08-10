@@ -5,15 +5,27 @@ var target : Element = null
 @onready var area_scan := $ScanArea
 @onready var col_shape := $ScanArea/CollisionShape2D
 @onready var radius_viewer := $RadiusViewer
+@export var prog_data : ProgressionData
 @export var attacker : ModuleAttacker
 
 signal target_found(e:Element)
 signal target_lost(e:Element)
+signal radius_changed(r:float)
 
 func activate() -> void:
 	attacker.target_found.connect(on_attack_target_found)
 	attacker.target_lost.connect(on_attack_target_lost)
-	radius_viewer.update(col_shape)
+
+func set_type(tp:EnemyType) -> void:
+	var new_radius := tp.sight_range * prog_data.get_rules(entity).sight_range_factor * Global.config.enemy_sight_range_def * Global.config.cell_size
+	set_radius(new_radius)
+
+func set_radius(r:float) -> void:
+	var shp := CircleShape2D.new()
+	shp.radius = r
+	col_shape.shape = shp
+	radius_changed.emit(r)
+	radius_viewer.update(r)
 
 func on_attack_target_found(_n) -> void:
 	reset_target()

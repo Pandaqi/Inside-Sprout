@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwupnql05qe80"]
+
+[ext_resource type="Texture2D" uid="uid://7y2s6n6cc5aj" path="res://game_loop/main/misc.webp" id="1_wdofj"]
+[ext_resource type="Script" path="res://progression/waves/unlock.gd" id="1_ygpdq"]
+[ext_resource type="Texture2D" uid="uid://gh2a3gh1fs7s" path="res://enemies/enemies.webp" id="2_yxu3q"]
+[ext_resource type="Theme" uid="uid://db0bce6hwasvt" path="res://ui/default_theme.tres" id="3_vu5cn"]
+
+[node name="Unlock" type="Node2D"]
+position = Vector2(0, 186)
+script = ExtResource("1_ygpdq")
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(40, 0)
+texture = ExtResource("1_wdofj")
+hframes = 4
+vframes = 4
+frame = 7
+
+[node name="BGIcon" type="Sprite2D" parent="."]
+modulate = Color(1, 0.35, 0.22, 1)
+position = Vector2(-70.76, 0)
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("1_wdofj")
+hframes = 4
+vframes = 4
+frame = 7
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-70.76, 0)
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("2_yxu3q")
+hframes = 4
+vframes = 3
+
+[node name="Label" type="Label" parent="."]
+offset_left = -14.0
+offset_top = -55.0
+offset_right = 96.0
+offset_bottom = 57.0
+theme = ExtResource("3_vu5cn")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Distracted by all flowers, damaged by none."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

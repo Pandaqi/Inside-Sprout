@@ -1,12 +1,16 @@
-[gd_scene load_steps=22 format=3 uid="uid://cb47sym4gh7og"]
+[gd_scene load_steps=45 format=3 uid="uid://cb47sym4gh7og"]
 
 [ext_resource type="Script" path="res://map/map.gd" id="1_5tnlf"]
 [ext_resource type="Script" path="res://game_loop/main/main.gd" id="1_f1yhs"]
 [ext_resource type="Resource" uid="uid://dx6cw7nxy341v" path="res://map/data/map_data.tres" id="2_espwm"]
 [ext_resource type="Script" path="res://progression/progression.gd" id="2_gb10w"]
+[ext_resource type="Texture2D" uid="uid://7y2s6n6cc5aj" path="res://game_loop/main/misc.webp" id="3_nwqje"]
+[ext_resource type="Script" path="res://progression/waves/waves.gd" id="3_plj0s"]
 [ext_resource type="PackedScene" uid="uid://cufc1ferl717d" path="res://map/areas/map_area_drawer.tscn" id="4_b718y"]
 [ext_resource type="Script" path="res://map/map_layers.gd" id="5_1d8gs"]
+[ext_resource type="Theme" uid="uid://db0bce6hwasvt" path="res://ui/default_theme.tres" id="5_1hth8"]
 [ext_resource type="Script" path="res://game_loop/main/camera.gd" id="5_6bxij"]
+[ext_resource type="FontFile" uid="uid://c1lgxfrumhlwa" path="res://ui/fonts/body_numbers.ttf" id="6_pmqx6"]
 [ext_resource type="PackedScene" uid="uid://bj8hk8ab4rvs1" path="res://map/areas/map_area_group_drawer.tscn" id="6_siol7"]
 [ext_resource type="PackedScene" uid="uid://coed4jc64xcuo" path="res://machines/hearts/heart.tscn" id="6_xkgi1"]
 [ext_resource type="Script" path="res://enemies/enemies.gd" id="7_ol3u7"]
@@ -21,6 +25,222 @@
 [ext_resource type="PackedScene" uid="uid://ccmri4p1e8uks" path="res://players/player.tscn" id="11_734ne"]
 [ext_resource type="Resource" uid="uid://umdjeh5iwhd1" path="res://players/data/players_data.tres" id="14_jflrc"]
 [ext_resource type="PackedScene" uid="uid://rpn1uqm07q3u" path="res://elements/element.tscn" id="15_73jol"]
+[ext_resource type="Resource" uid="uid://cx3oq84spkyut" path="res://progression/data/progression_data.tres" id="17_nxj7e"]
+[ext_resource type="Script" path="res://ui/ui.gd" id="22_le16p"]
+[ext_resource type="PackedScene" uid="uid://bwupnql05qe80" path="res://progression/waves/unlock.tscn" id="26_54vj8"]
+[ext_resource type="Script" path="res://progression/choices/choices.gd" id="27_c56us"]
+[ext_resource type="Script" path="res://ui/tutorial/tutorial.gd" id="27_ja7uo"]
+[ext_resource type="AudioStream" uid="uid://mscgcndj7lsa" path="res://game_loop/menu/game_start_stop.ogg" id="28_i42e1"]
+[ext_resource type="Texture2D" uid="uid://d47x7khqmsjq" path="res://ui/tutorials.webp" id="28_rbs7y"]
+[ext_resource type="Script" path="res://ui/game_over/game_over.gd" id="30_na3s7"]
+[ext_resource type="FontFile" uid="uid://dofqtr0sig1gj" path="res://ui/fonts/heading.ttf" id="31_iyqix"]
+[ext_resource type="AudioStream" uid="uid://c8m2e6163qjnf" path="res://game_loop/main/game_loss.ogg" id="33_va8bi"]
+
+[sub_resource type="Animation" id="Animation_wnyqo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ovsnn"]
+resource_name = "tut_appear"
+length = 0.37
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.203333, 0.303333, 0.37),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.1, 1.1), Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.333333, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.174533, -0.0872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_luyoe"]
+_data = {
+"RESET": SubResource("Animation_wnyqo"),
+"tut_appear": SubResource("Animation_ovsnn")
+}
+
+[sub_resource type="Animation" id="Animation_hq80f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Container:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Container:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Container:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.174533]
+}
+
+[sub_resource type="Animation" id="Animation_14l24"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Container:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Container:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Container:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.366667, 0.533333, 0.833333, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5hje"]
+_data = {
+"RESET": SubResource("Animation_hq80f"),
+"appear": SubResource("Animation_14l24")
+}
+
+[sub_resource type="Animation" id="Animation_l8iaf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3ysd7"]
+resource_name = "fade_bg"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tc5nh"]
+_data = {
+"RESET": SubResource("Animation_l8iaf"),
+"fade_bg": SubResource("Animation_3ysd7")
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_f1yhs")
@@ -36,8 +256,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0567, 0.21, 0.161455, 1)
 
-[node name="Progression" type="Node" parent="."]
+[node name="Progression" type="Node2D" parent="." node_paths=PackedStringArray("game_over")]
 script = ExtResource("2_gb10w")
+game_over = NodePath("../UI/GameOver")
 
 [node name="Map" type="Node2D" parent="."]
 script = ExtResource("1_5tnlf")
@@ -54,6 +275,8 @@ resource_hedge = ExtResource("10_gh746")
 script = ExtResource("5_1d8gs")
 layer_names = Array[String](["bg", "floor", "entities", "overlay"])
 
+[node name="BorderBodies" type="Node2D" parent="Map"]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("5_6bxij")
 map_data = ExtResource("2_espwm")
@@ -63,6 +286,8 @@ script = ExtResource("7_ol3u7")
 enemy_scene = ExtResource("9_uimx3")
 enemy_data = ExtResource("8_nasb2")
 map_data = ExtResource("2_espwm")
+element_data = ExtResource("7_wibnk")
+prog_data = ExtResource("17_nxj7e")
 
 [node name="Elements" type="Node2D" parent="."]
 script = ExtResource("11_22wdb")
@@ -70,6 +295,8 @@ element_data = ExtResource("7_wibnk")
 map_data = ExtResource("2_espwm")
 players_data = ExtResource("14_jflrc")
 element_scene = ExtResource("15_73jol")
+prog_data = ExtResource("17_nxj7e")
+enemy_data = ExtResource("8_nasb2")
 
 [node name="Timer" type="Timer" parent="Elements"]
 
@@ -78,3 +305,196 @@ script = ExtResource("10_rely2")
 player_scene = ExtResource("11_734ne")
 players_data = ExtResource("14_jflrc")
 map_data = ExtResource("2_espwm")
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("22_le16p")
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.447059)
+
+[node name="WavesDisplayer" type="Node2D" parent="UI"]
+script = ExtResource("3_plj0s")
+enemy_data = ExtResource("8_nasb2")
+
+[node name="Container" type="Node2D" parent="UI/WavesDisplayer"]
+
+[node name="Petals" type="Node2D" parent="UI/WavesDisplayer/Container"]
+
+[node name="Petal1" type="Sprite2D" parent="UI/WavesDisplayer/Container/Petals"]
+texture = ExtResource("3_nwqje")
+centered = false
+offset = Vector2(-64, -128)
+hframes = 4
+vframes = 4
+frame = 11
+
+[node name="Unlocks" type="Node2D" parent="UI/WavesDisplayer/Container"]
+
+[node name="LabelHeading" type="Label" parent="UI/WavesDisplayer/Container/Unlocks"]
+offset_left = -142.0
+offset_top = 66.0
+offset_right = 143.0
+offset_bottom = 135.0
+theme = ExtResource("5_1hth8")
+text = "New Enemy"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Unlock" parent="UI/WavesDisplayer/Container/Unlocks" instance=ExtResource("26_54vj8")]
+
+[node name="Choices" type="Node2D" parent="UI/WavesDisplayer/Container"]
+script = ExtResource("27_c56us")
+
+[node name="LabelHeading" type="Label" parent="UI/WavesDisplayer/Container/Choices"]
+offset_left = -142.0
+offset_top = 66.0
+offset_right = 143.0
+offset_bottom = 135.0
+theme = ExtResource("5_1hth8")
+text = "Pick an Upgrade!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ChoiceLeft" type="Button" parent="UI/WavesDisplayer/Container/Choices"]
+custom_minimum_size = Vector2(192, 0)
+offset_left = -203.0
+offset_top = 128.0
+offset_right = -11.0
+offset_bottom = 242.0
+theme = ExtResource("5_1hth8")
+theme_override_font_sizes/font_size = 16
+text = "Lalal"
+autowrap_mode = 3
+
+[node name="ChoiceRight" type="Button" parent="UI/WavesDisplayer/Container/Choices"]
+custom_minimum_size = Vector2(192, 0)
+offset_left = 11.0
+offset_top = 128.0
+offset_right = 203.0
+offset_bottom = 242.0
+theme = ExtResource("5_1hth8")
+theme_override_font_sizes/font_size = 16
+text = "Lalal"
+autowrap_mode = 3
+
+[node name="FlowerCenter" type="Sprite2D" parent="UI/WavesDisplayer/Container"]
+texture = ExtResource("3_nwqje")
+hframes = 4
+vframes = 4
+frame = 10
+
+[node name="Label1" type="Label" parent="UI/WavesDisplayer/Container"]
+offset_left = -26.0
+offset_top = -59.0
+offset_right = 27.0
+offset_bottom = -16.0
+theme = ExtResource("5_1hth8")
+theme_override_colors/font_color = Color(0.75, 0.2885, 0.2175, 1)
+theme_override_fonts/font = ExtResource("6_pmqx6")
+theme_override_font_sizes/font_size = 18
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/WavesDisplayer/Container"]
+offset_left = -26.0
+offset_top = 16.0
+offset_right = 27.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(0.75, 0.2885, 0.2175, 1)
+theme_override_fonts/font = ExtResource("6_pmqx6")
+theme_override_font_sizes/font_size = 18
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/WavesDisplayer"]
+stream = ExtResource("28_i42e1")
+
+[node name="Tutorial" type="Node2D" parent="UI"]
+script = ExtResource("27_ja7uo")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Tutorial"]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("28_rbs7y")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Tutorial"]
+libraries = {
+"": SubResource("AnimationLibrary_luyoe")
+}
+
+[node name="GameOver" type="Node2D" parent="UI"]
+script = ExtResource("30_na3s7")
+
+[node name="Container" type="Node2D" parent="UI/GameOver"]
+modulate = Color(1, 1, 1, 0)
+rotation = -0.174533
+scale = Vector2(1e-05, 1e-05)
+
+[node name="Heading" type="Label" parent="UI/GameOver/Container"]
+offset_left = -176.0
+offset_top = -156.0
+offset_right = 195.0
+offset_bottom = -74.0
+theme_override_fonts/font = ExtResource("31_iyqix")
+theme_override_font_sizes/font_size = 64
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc" type="Label" parent="UI/GameOver/Container"]
+offset_left = -176.0
+offset_top = -82.0
+offset_right = 195.0
+offset_bottom = 74.0
+theme = ExtResource("5_1hth8")
+text = "Congratulations! You defeated the final wave! You're a true master gardener."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Buttons" type="Node2D" parent="UI/GameOver/Container"]
+position = Vector2(0, 149)
+
+[node name="Back" type="Button" parent="UI/GameOver/Container/Buttons"]
+offset_left = -318.0
+offset_top = -71.0
+offset_right = -2.0
+offset_bottom = 57.0
+theme = ExtResource("5_1hth8")
+text = "Back to Menu (ESC)"
+
+[node name="Restart" type="Button" parent="UI/GameOver/Container/Buttons"]
+offset_left = 6.0
+offset_top = -71.0
+offset_right = 312.0
+offset_bottom = 57.0
+theme = ExtResource("5_1hth8")
+text = "Try Again (SPACE)"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GameOver"]
+libraries = {
+"": SubResource("AnimationLibrary_l5hje")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/GameOver"]
+stream = ExtResource("33_va8bi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_tc5nh")
+}
+
+[connection signal="pressed" from="UI/GameOver/Container/Buttons/Back" to="UI/GameOver" method="_on_back_pressed"]
+[connection signal="pressed" from="UI/GameOver/Container/Buttons/Restart" to="UI/GameOver" method="_on_restart_pressed"]

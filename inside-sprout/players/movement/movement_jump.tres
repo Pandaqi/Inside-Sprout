@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MovementJump" load_steps=2 format=3 uid="uid://be1pftapihobe"]
+
+[ext_resource type="Script" path="res://players/movement/movement_jump.gd" id="1_33svm"]
+
+[resource]
+script = ExtResource("1_33svm")
+speed = 1.0

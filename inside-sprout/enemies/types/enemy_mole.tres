@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=6 format=3 uid="uid://cgiv2ti3w2rai"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_lthn5"]
+[ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="2_n5jyb"]
+[ext_resource type="Resource" uid="uid://r0fjcv0w2stk" path="res://elements/types/element_dandelion.tres" id="2_ruped"]
+[ext_resource type="Resource" uid="uid://mklfwep2r1uq" path="res://elements/types/element_sunflower.tres" id="3_ht8ev"]
+[ext_resource type="Resource" uid="uid://dfphubkfnrwe0" path="res://players/movement/movement_enemy_default.tres" id="4_acfsi"]
+
+[resource]
+script = ExtResource("2_n5jyb")
+frame = 1
+desc = "Slow and sees little, but hard to kill."
+strength = 2.0
+distractions = Array[ExtResource("1_lthn5")]([ExtResource("2_ruped"), ExtResource("3_ht8ev")])
+distractions_all = false
+movement_type = ExtResource("4_acfsi")
+weaknesses = Array[ExtResource("1_lthn5")]([])
+weaknesses_all = true
+damage = 1.0
+health = 2.0
+attack_delay = 1.0
+shield = 1.0
+sight_range = 0.5
+kill_range = 0.5
+speed = 0.5

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=6 format=3 uid="uid://du45vq6srqen5"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_vywds"]
+[ext_resource type="Resource" uid="uid://ceifl72c6wxax" path="res://elements/types/element_ginger.tres" id="2_cw3wr"]
+[ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="2_e74gq"]
+[ext_resource type="Resource" uid="uid://c3m4rrqbt5y4p" path="res://elements/types/element_rose.tres" id="3_1d85n"]
+[ext_resource type="Resource" uid="uid://dfphubkfnrwe0" path="res://players/movement/movement_enemy_default.tres" id="4_fw00f"]
+
+[resource]
+script = ExtResource("2_e74gq")
+frame = 11
+desc = "Huge sight and kill range."
+strength = 2.0
+distractions = Array[ExtResource("1_vywds")]([ExtResource("2_cw3wr"), ExtResource("3_1d85n")])
+distractions_all = false
+movement_type = ExtResource("4_fw00f")
+weaknesses = Array[ExtResource("1_vywds")]([])
+weaknesses_all = true
+damage = 1.0
+health = 1.0
+attack_delay = 1.0
+shield = 0.0
+sight_range = 3.0
+kill_range = 3.0
+speed = 1.0

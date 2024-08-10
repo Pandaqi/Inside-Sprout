@@ -5,13 +5,25 @@ class_name ModuleProperties extends Node2D
 var sprites : Array[ElementSprite] = []
 
 func set_type(tp:EnemyType) -> void:
+	# collect them all
 	var distractions := tp.distractions
 	if tp.distractions_all: distractions = element_data.area_types
 	
 	var weaknesses := tp.weaknesses
 	if tp.weaknesses_all: weaknesses = element_data.area_types
 	
-	visualize(distractions, weaknesses)
+	# only display the relevant ones ( = those elements are actually in the level)
+	var dis_filtered := []
+	var weak_filtered := []
+	for dis in distractions:
+		if element_data.area_types.has(dis):
+			dis_filtered.append(dis)
+	
+	for weak in weaknesses:
+		if element_data.area_types.has(weak):
+			weak_filtered.append(weak)
+	
+	visualize(dis_filtered, weak_filtered)
 
 func visualize(dis:Array[ElementType], weak:Array[ElementType]) -> void:
 	for sprite in sprites:

@@ -11,6 +11,8 @@ enum ElementSpawnMethod
 @export var map_data : MapData
 @export var players_data : PlayersData
 @export var element_scene : PackedScene
+@export var prog_data : ProgressionData
+@export var enemy_data : EnemyData
 @onready var timer := $Timer
 
 func preactivate() -> void:
@@ -22,8 +24,6 @@ func activate() -> void:
 	timer.timeout.connect(on_timer_timeout)
 	on_timer_timeout()
 
-# @TODO: for now, we just use all types, but we should probably cut it off of we start having too many
-# => And then at monsters, don't include monsters without the right weaknesses/distractions of course
 func prepare_types() -> void:
 	var available_types := element_data.all_types.duplicate(false)
 	var spawnable_types : Array[ElementType] = []
@@ -32,13 +32,23 @@ func prepare_types() -> void:
 		if type.auto_area: area_types.append(type)
 		if type.spawnable: spawnable_types.append(type)
 	
+	area_types.shuffle()
+	spawnable_types.shuffle()
+	
+	var num_area_types := Global.config.elements_num_selected_bounds.rand_int()
+	while area_types.size() > num_area_types:
+		area_types.pop_back()
+	
 	element_data.available_types = available_types
 	element_data.spawnable_types = spawnable_types
 	element_data.area_types = area_types
 
+func get_spawn_factor() -> float:
+	return prog_data.get_rules().seed_spawn_speed_factor
+
 func restart_timer() -> void:
 	if method != ElementSpawnMethod.AUTOMATIC: return
-	timer.wait_time = Global.config.elements_spawn_tick
+	timer.wait_time = Global.config.elements_spawn_tick * get_spawn_factor()
 	timer.start()
 
 func on_timer_timeout() -> void:
@@ -46,8 +56,10 @@ func on_timer_timeout() -> void:
 	restart_timer()
 
 func refresh() -> void:
-	# @TODO: scale with player count/wave/whatever
-	var num_bounds := Global.config.elements_spawn_bounds
+	var num_bounds := Global.config.elements_spawn_bounds.clone()
+	num_bounds.scale( get_spawn_factor() )
+	num_bounds.scale( Global.config.elements_spawn_bounds_scale_per_wave * enemy_data.spawner.wave_index )
+	
 	var cur_num := element_data.count()
 	if cur_num >= num_bounds.end: return
 	
@@ -73,11 +85,10 @@ func spawn(et:ElementType = null, pos:Vector2 = Vector2.ZERO) -> void:
 	node.set_type(et)
 	
 	element_data.add_element(node)
-	node.died.connect(func(_no): element_data.remove_element(node))
+	node.state.died.connect(func(_no): element_data.remove_element(node))
 	
 	node.activate()
 
-# @TODO: also spawn away from other elements?
 func get_random_valid_position() -> Vector2:
 	var avoid := players_data.players.duplicate(false)
 	var min_dist := Global.config.elements_spawn_min_dist_to_player * Global.config.cell_size

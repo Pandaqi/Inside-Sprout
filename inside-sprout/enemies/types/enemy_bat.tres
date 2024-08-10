@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=5 format=3 uid="uid://fxu30tk2ytwr"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_2vhte"]
+[ext_resource type="Resource" uid="uid://c3m4rrqbt5y4p" path="res://elements/types/element_rose.tres" id="2_fxrwh"]
+[ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="2_qblsb"]
+[ext_resource type="Resource" uid="uid://dfphubkfnrwe0" path="res://players/movement/movement_enemy_default.tres" id="3_e1c5d"]
+
+[resource]
+script = ExtResource("2_qblsb")
+frame = 10
+desc = "A fast animal with very strict requirements."
+strength = 2.0
+distractions = Array[ExtResource("1_2vhte")]([ExtResource("2_fxrwh")])
+distractions_all = false
+movement_type = ExtResource("3_e1c5d")
+weaknesses = Array[ExtResource("1_2vhte")]([])
+weaknesses_all = true
+damage = 1.0
+health = 1.0
+attack_delay = 2.0
+shield = 0.0
+sight_range = 1.0
+kill_range = 1.0
+speed = 2.0

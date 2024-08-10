@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=7 format=3 uid="uid://1mmobqxo1sbf"]
+
+[ext_resource type="Script" path="res://elements/types/element_type.gd" id="1_flp8j"]
+[ext_resource type="Resource" uid="uid://mklfwep2r1uq" path="res://elements/types/element_sunflower.tres" id="2_cdpm1"]
+[ext_resource type="Resource" uid="uid://ckqash1abw7v5" path="res://elements/types/element_grass.tres" id="3_8ofcq"]
+[ext_resource type="Resource" uid="uid://ceifl72c6wxax" path="res://elements/types/element_ginger.tres" id="4_3e0ip"]
+[ext_resource type="Resource" uid="uid://dfphubkfnrwe0" path="res://players/movement/movement_enemy_default.tres" id="5_d0c17"]
+[ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="6_hhq41"]
+
+[resource]
+script = ExtResource("6_hhq41")
+frame = 8
+desc = "Has a very wide range, but low health and damage."
+strength = 1.0
+distractions = Array[ExtResource("1_flp8j")]([ExtResource("2_cdpm1"), ExtResource("3_8ofcq"), ExtResource("4_3e0ip")])
+distractions_all = false
+movement_type = ExtResource("5_d0c17")
+weaknesses = Array[ExtResource("1_flp8j")]([])
+weaknesses_all = true
+damage = 0.5
+health = 0.5
+attack_delay = 1.0
+shield = 0.0
+sight_range = 2.0
+kill_range = 2.0
+speed = 1.0

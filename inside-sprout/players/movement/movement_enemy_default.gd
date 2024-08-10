@@ -1,7 +1,7 @@
 extends MovementType
 class_name MovementEnemyDefault
 
-func update(mover:ModuleMover) -> Vector2:
+func update(_dt:float, mover:ModuleMover) -> Vector2:
 	var target_element := mover.sensor.get_target_element()
 	var cur_pos := mover.global_position
 	var target_pos := cur_pos

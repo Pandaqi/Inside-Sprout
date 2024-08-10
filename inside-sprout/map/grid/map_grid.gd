@@ -114,3 +114,9 @@ func get_cell_dist_to_edge(cell:MapCell) -> int:
 	var x_dist : int = min(cell.pos.x, size.x - 1 - cell.pos.x)
 	var y_dist : int = min(cell.pos.y, size.y - 1 - cell.pos.y)
 	return min(x_dist, y_dist)
+
+func is_at_edge(pos:Vector2i) -> bool:
+	return pos.x == 0 or pos.x == (size.x - 1) or pos.y == 0 or pos.y == (size.y - 1)
+
+func is_line_at_edge(l:Line) -> bool:
+	return is_at_edge(Vector2i(l.start)) or is_at_edge(Vector2i(l.end))

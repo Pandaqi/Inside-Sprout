@@ -7,22 +7,39 @@ var wave_index := -1
 var spawn_scene : PackedScene
 var enemy_data : EnemyData
 var map_data : MapData
+var element_data : ElementData
 var wave_start_time : float
 var last_spawn_time : float
 var next_unlock_wave := -1
 var unlock_order : Array[EnemyType] = []
 var spawn_events : Array[SpawnEvent] = []
+var last_unlocked_type : EnemyType = null
+var prog_data : ProgressionData
 
-func set_config(scene:PackedScene, ed:EnemyData, md:MapData) -> void:
+func set_config(scene:PackedScene, ed:EnemyData, md:MapData, eld:ElementData, prd:ProgressionData) -> void:
 	spawn_scene = scene
 	enemy_data = ed
 	map_data = md
+	element_data = eld
+	prog_data = prd
 	
 	enemy_data.enemy_removed.connect(on_enemy_removed)
 	prepare_unlock_order()
 
 func prepare_unlock_order() -> void:
-	unlock_order = enemy_data.all_enemies.duplicate(false)
+	var all_enemies = enemy_data.all_enemies.duplicate(false)
+	unlock_order = []
+	
+	# only include all enemies that are actually relevant to types currently selected for play
+	for enemy in all_enemies:
+		var weakness := false
+		for weak in enemy.weaknesses:
+			if element_data.area_types.has(weak):
+				weakness = true
+		
+		if not weakness: continue
+		unlock_order.append(enemy)
+	
 	unlock_order.sort_custom(func(a:EnemyType, b:EnemyType):
 		if a.strength == b.strength: return randf() <= 0.5
 		if a.strength < b.strength: return true
@@ -71,22 +88,30 @@ func get_progression_ratio() -> float:
 
 func spawn(ev:SpawnEvent) -> void:
 	var e = spawn_scene.instantiate()
-	e.set_position( map_data.get_random_edge_position() )
+	
+	var top_forbidden := prog_data.get_rules().enemy_spawn_forbidden_top
+	var bottom_forbidden := prog_data.get_rules().enemy_spawn_forbidden_bottom
+	
+	e.set_position( map_data.get_random_edge_position(top_forbidden, bottom_forbidden) )
 	GSignal.place_on_map.emit("entities", e)
 	e.set_type(ev.type)
 	enemy_data.add_enemy(e)
-	e.died.connect(func(_enem): enemy_data.remove_enemy(e))
+	e.state.died.connect(func(_enem): enemy_data.remove_enemy(e))
 	e.activate()
 
 func unlock_types_if_needed() -> void:
+	last_unlocked_type = null
 	if unlock_order.size() <= 0: return
 	if wave_index < next_unlock_wave: return
 	
-	enemy_data.unlock(unlock_order.pop_front())
+	var new_type : EnemyType = unlock_order.pop_front()
+	enemy_data.unlock(new_type)
+	last_unlocked_type = new_type
 	next_unlock_wave = wave_index + Global.config.waves_unlock_interval_bounds.rand_int()
 
 func generate_wave() -> void:
 	var target_strength := Global.config.waves_strength_bounds.interpolate(get_progression_ratio())
+	target_strength *= prog_data.get_rules().wave_unit_factor
 
 	var cur_strength := 0.0
 	spawn_events = []
@@ -100,6 +125,8 @@ func generate_wave() -> void:
 	
 	# then spread them randomly across the duration of the wave
 	var target_duration := Global.config.waves_duration_bounds.interpolate(get_progression_ratio())
+	target_duration *= prog_data.get_rules().wave_duration_factor
+	
 	var time_diff_bounds := Global.config.waves_time_diff_bounds
 	var cur_duration := 0.0
 	var spawn_events_modifiable := spawn_events.duplicate(false)

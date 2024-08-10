@@ -1,7 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhky6fwi0a47v"]
+[gd_scene load_steps=7 format=3 uid="uid://dhky6fwi0a47v"]
 
 [ext_resource type="Script" path="res://elements/element_sprite/element_sprite.gd" id="1_xaa55"]
-[ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="2_6atcn"]
+[ext_resource type="Texture2D" uid="uid://8xbwcvglp5bc" path="res://elements/elements.webp" id="2_2mp8p"]
+[ext_resource type="Texture2D" uid="uid://7y2s6n6cc5aj" path="res://game_loop/main/misc.webp" id="2_oiefg"]
+
+[sub_resource type="Animation" id="Animation_druh7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_787b1"]
 resource_name = "is_weak"
@@ -31,33 +59,6 @@ tracks/1/keys = {
 "values": [Vector2(1, 1), Vector2(1.15, 1.15), Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_druh7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jbns3"]
 _data = {
 "RESET": SubResource("Animation_druh7"),
@@ -67,8 +68,17 @@ _data = {
 [node name="ElementSprite" type="Node2D"]
 script = ExtResource("1_xaa55")
 
+[node name="BG" type="Sprite2D" parent="."]
+texture = ExtResource("2_oiefg")
+hframes = 4
+vframes = 4
+frame = 7
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_6atcn")
+scale = Vector2(0.890625, 0.890625)
+texture = ExtResource("2_2mp8p")
+hframes = 4
+vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

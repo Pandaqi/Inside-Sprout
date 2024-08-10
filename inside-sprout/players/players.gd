@@ -19,5 +19,5 @@ func place_player(num:int) -> void:
 	p.set_position( map_data.grid.get_random_position() )
 	GSignal.place_on_map.emit("entities", p)
 	players_data.add_player(p)
-	p.died.connect(func(_p): players_data.remove_player(p))
+	p.state.died.connect(func(_p): players_data.remove_player(p))
 	p.activate(num)
