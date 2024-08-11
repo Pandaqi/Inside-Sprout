@@ -2,11 +2,11 @@
 
 # To-Do (for Sunday)
 
-FINETUNE INSIDE SPROUT:
-* Test if all the systems work.
-* Finetune all the data (speed, monsters, health, wave progression, etcetera)
-  * Make the flowers themselves far stronger, and lead to _longer_ distractions or _instakills_.
-* If possible, playtest
+INSIDE SPROUT:
+* Probably want a little bit faster conversions? (Or does that ruin the idea of the game?) => Shouldn't they be displayed much higher on the player?
+* Ugh, seems like the web build will not properly show characters not in the font.
+
+
 
 ADVANCE FINSIDE OUT:
 * Water current fix => With that, we can make swimming much slower, to stop it from being too big of an advantage
@@ -24,6 +24,13 @@ At the end of the day, I want _both_ entries submittable.
 * Merely create the page and simple marketing, decide which one to send in.
 * Most of the day should be free.
 
+
+
+## Collision Layers
+
+1 = Everything, but player doesn't check against that (so it doesn't bump into anything)
+2 = Hedges
+3 = Map Bounds (checked by player to prevent them going out of bounds)
 
 
 # Future To-Do
@@ -97,9 +104,11 @@ The specific percentages/values are just random guesses and will surely have cha
 * [x] "Monsters don't spawn anymore at the bottom edge."
 * [x] "Players have 10% more speed."
 * [x] "When entering Inside, all areas change colors."
+* [x] "Flowers do 15% more damage."
 
 
 ## Enemies
+
 
 Strength 1 Enemies: Bee, Butterfly, Sunbird (mostly flying ones)
 Strength 2 Enemies: Bat, Mole, Pig, Giraffe
@@ -110,7 +119,7 @@ Strength 4 Enemies: Deer, Vole
 
 * STRENGTH: 1
 * DESC: "A very average animal for an easy time, hopefully."
-* DISTRACT: All
+* DISTRACT: Rose, Grass => DISTRACT ALL just isn't a fun way to start the game
 
 ### Mole (1)
 
@@ -168,7 +177,6 @@ Strength 4 Enemies: Deer, Vole
 * DISTRACT: Rose, Dandelion, Tulip
 * MIN: Speed
 * PLUS: Delay
-
 
 ### Sunbird (8)
 

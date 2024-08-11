@@ -63,23 +63,29 @@ func finalize(grid:MapGrid) -> void:
 		for i in range(outline.size()-1):
 			var new_hedge := Line.new(outline[i], outline[i+1])
 			if not grid.is_line_at_edge(new_hedge): hedges_non_edge.append(new_hedge)
-			hedges_available.append(new_hedge)
+			add_hedge(new_hedge)
 		
-		var num_remove := 3
-		for i in range(num_remove):
-			var hedge : Line = hedges_non_edge.pop_front()
-			remove_hedge(hedge)
+		if not Global.config.interior_hedge_surround_auto:
+			var num_left_standing := Global.config.interior_hedge_starting_num
+			while hedges_taken.size() > num_left_standing:
+				remove_hedge(hedges_taken.pick_random())
+		
+		else:
+			var num_remove := Global.config.interior_hedge_remove_num
+			for i in range(num_remove):
+				var hedge : Line = hedges_non_edge.pop_front()
+				remove_hedge(hedge)
 
 func can_place_hedge() -> bool:
 	return hedges_available.size() > 0
 
 func add_hedge(h:Line) -> void:
-	hedges_taken.erase(h)
-	hedges_available.append(h)
-
-func remove_hedge(h:Line) -> void:
 	hedges_available.erase(h)
 	hedges_taken.append(h)
+
+func remove_hedge(h:Line) -> void:
+	hedges_taken.erase(h)
+	hedges_available.append(h)
 
 func flood_fill(start_area:MapArea, grid:MapGrid) -> void:
 	add_area(start_area)
@@ -88,9 +94,9 @@ func flood_fill(start_area:MapArea, grid:MapGrid) -> void:
 	var keep_growing := true
 	var min_area_size := Global.config.area_group_min_size
 	var max_area_size := Global.config.area_group_max_size_bounds.rand_int()
+	
 	while keep_growing:
-		var num_cells := cells.size()
-		keep_growing = num_cells < min_area_size or num_cells < max_area_size
+		keep_growing = count() < min_area_size or count() < max_area_size
 		if not keep_growing: break
 		
 		var nbs := grid.get_random_neighbor_areas_of(self)
@@ -98,5 +104,3 @@ func flood_fill(start_area:MapArea, grid:MapGrid) -> void:
 		
 		var nb_area : MapArea = nbs.pick_random()
 		add_area(nb_area)
-		
-		

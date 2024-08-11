@@ -5,6 +5,7 @@ class_name ModuleMapTracker extends Node2D
 @export var element_data : ElementData
 @export var static_object := false
 @export var prog_data : ProgressionData
+@export var is_player := false
 var prev_cell : MapCell = null
 var cur_cell : MapCell = null
 var in_out := MapAreas.InOut.EXTERIOR
@@ -32,7 +33,7 @@ func update_current_cell() -> void:
 	var cell_changed := prev_cell != cur_cell
 	if cell_changed:
 		if prev_cell: prev_cell.remove_object(entity)
-		if cur_cell: cur_cell.add_object(entity)
+		cur_cell.add_object(entity)
 
 func last_update_changed_area() -> bool:
 	if not prev_cell or not cur_cell: return true
@@ -50,7 +51,7 @@ func update_in_out() -> void:
 	switched_in_out.emit(in_out)
 
 func on_switched_in_out(_v) -> void:
-	if get_rules().recolor_upon_entry:
+	if is_player and get_rules().recolor_upon_entry:
 		map_data.areas.recolor(map_data.grid, element_data)
 
 func get_area() -> MapArea:

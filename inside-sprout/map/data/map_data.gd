@@ -33,6 +33,7 @@ func get_closest_heart_to(pos:Vector2) -> Heart:
 		if dist >= best_dist: continue
 		best_dist = dist
 		best_heart = cell.heart_node
+	if not is_instance_valid(best_heart): return null
 	return best_heart
 
 func query_position(params:Dictionary = {}) -> Vector2:
@@ -48,8 +49,13 @@ func query_position(params:Dictionary = {}) -> Vector2:
 	var cell_based : bool = cells_include.size() > 0 or cells_exclude.size() > 0
 	var dist_edge : Vector2 = params.dist_edge if ("dist_edge" in params) else Vector2.ZERO
 	
+	var num_tries := 0
+	var max_tries := 100
+	
 	while bad_pos:
 		bad_pos = false
+		num_tries += 1
+		if num_tries > max_tries: break
 		
 		if cell_based:
 			pos = grid.get_random_position_cells(cells_include, cells_exclude)

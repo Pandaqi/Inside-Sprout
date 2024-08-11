@@ -1,9 +1,20 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://dsfn5yup3586j"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=15 format=3 uid="uid://dsfn5yup3586j"]
 
 [ext_resource type="Script" path="res://enemies/types/enemy_type.gd" id="1_4imjb"]
 [ext_resource type="Script" path="res://enemies/data/enemy_data.gd" id="1_ivcsi"]
 [ext_resource type="Resource" uid="uid://cmna3ir48tq8p" path="res://enemies/types/enemy_bee.tres" id="2_oobp0"]
+[ext_resource type="Resource" uid="uid://fxu30tk2ytwr" path="res://enemies/types/enemy_bat.tres" id="3_u403n"]
+[ext_resource type="Resource" uid="uid://bxblvykjtr8w2" path="res://enemies/types/enemy_butterfly.tres" id="4_mybx2"]
+[ext_resource type="Resource" uid="uid://vqo2e0o3hele" path="res://enemies/types/enemy_caterpillar.tres" id="5_7mj2q"]
+[ext_resource type="Resource" uid="uid://do66uj58r10om" path="res://enemies/types/enemy_deer.tres" id="6_o6npt"]
+[ext_resource type="Resource" uid="uid://du45vq6srqen5" path="res://enemies/types/enemy_giraffe.tres" id="7_ob0vg"]
+[ext_resource type="Resource" uid="uid://cgiv2ti3w2rai" path="res://enemies/types/enemy_mole.tres" id="8_s7dqc"]
+[ext_resource type="Resource" uid="uid://beqceixo781bm" path="res://enemies/types/enemy_moth.tres" id="9_kp13v"]
+[ext_resource type="Resource" uid="uid://beugy6mmmm45k" path="res://enemies/types/enemy_pig.tres" id="10_pu7qb"]
+[ext_resource type="Resource" uid="uid://b425y4tritek2" path="res://enemies/types/enemy_rabbit.tres" id="11_0jqka"]
+[ext_resource type="Resource" uid="uid://1mmobqxo1sbf" path="res://enemies/types/enemy_sunbird.tres" id="12_bt1ps"]
+[ext_resource type="Resource" uid="uid://dwhka7rgl84rl" path="res://enemies/types/enemy_vole.tres" id="13_axmws"]
 
 [resource]
 script = ExtResource("1_ivcsi")
-all_enemies = Array[ExtResource("1_4imjb")]([ExtResource("2_oobp0")])
+all_enemies = Array[ExtResource("1_4imjb")]([ExtResource("2_oobp0"), ExtResource("3_u403n"), ExtResource("4_mybx2"), ExtResource("5_7mj2q"), ExtResource("6_o6npt"), ExtResource("7_ob0vg"), ExtResource("8_s7dqc"), ExtResource("9_kp13v"), ExtResource("10_pu7qb"), ExtResource("11_0jqka"), ExtResource("12_bt1ps"), ExtResource("13_axmws")])

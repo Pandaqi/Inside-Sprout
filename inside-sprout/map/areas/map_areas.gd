@@ -41,10 +41,21 @@ func recolor(grid:MapGrid, ed:ElementData):
 	for area in areas:
 		area.reset_type()
 	
-	for area in areas:
+	var areas_copy := areas.duplicate(false)
+	areas_copy.shuffle()
+	
+	var all_types_copy := ed.area_types.duplicate(false)
+	all_types_copy.shuffle()
+	
+	for area in areas_copy:
 		if area.is_interior(): 
 			area.set_type(ed.type_interior)
 			continue
+		
+		# this ensures each type appears at least once
+		# (the shuffling or area/type order above is necessary to prevent this being the exact same thing each recoloring)
+		if all_types_copy.size() > 0:
+			area.set_type(all_types_copy.pop_back())
 		
 		# assign a type
 		# prefer types our neighbors don't have; but if that's not possible, just pick any
@@ -57,7 +68,6 @@ func recolor(grid:MapGrid, ed:ElementData):
 		var final_type : ElementType = ed.area_types.pick_random()
 		if possible_types.size() > 0: final_type = possible_types.pick_random()
 		
-		print("Set area type", final_type)
 		area.set_type(final_type)
 
 static func determine_outline(grid:MapGrid, cells:Array[MapCell]) -> PackedVector2Array:

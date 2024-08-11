@@ -7,6 +7,7 @@ const LOSE_TEXT = "Unfortunately, your flower defence was just not enough ..."
 @onready var restart_btn := $Container/Buttons/Restart
 @onready var anim_player := $AnimationPlayer
 @onready var audio_player := $AudioStreamPlayer
+@onready var ui : UI = get_parent()
 
 var active := false
 
@@ -18,7 +19,8 @@ func appear(we_won:bool) -> void:
 	get_tree().paused = true
 	audio_player.play()
 	set_visible(true)
-	set_position(get_viewport_rect().size)
+	set_position(0.5*get_viewport_rect().size)
+	ui.set_bg(true)
 	
 	var txt := WIN_TEXT if we_won else LOSE_TEXT
 	desc.set_text(txt)

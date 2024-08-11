@@ -10,6 +10,7 @@ extends Node2D
 func _ready() -> void:
 	players.preactivate()
 	elements.preactivate()
+	progression.preactivate()
 	
 	map.activate()
 	players.activate()
@@ -18,7 +19,8 @@ func _ready() -> void:
 	progression.activate()
 	ui.activate()
 	
-	ui.tutorial.load_next()
-	await ui.tutorial.done
+	if not (OS.is_debug_build() and Global.config.skip_pregame):
+		ui.tutorial.load_next()
+		await ui.tutorial.done
 	
 	enemies.load_next_wave()

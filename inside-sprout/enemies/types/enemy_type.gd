@@ -26,4 +26,5 @@ func distracted_by(e:ElementType) -> bool:
 
 func is_weak_to(e:ElementType) -> bool:
 	if e.enemy_ignore: return false
+	if not distracted_by(e): return false
 	return weaknesses.has(e) or (weaknesses_all and not e.spawnable)

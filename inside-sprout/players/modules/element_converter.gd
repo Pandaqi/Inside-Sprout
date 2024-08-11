@@ -13,7 +13,15 @@ func activate() -> void:
 	map_tracker.switched_in_out.connect(on_switched_in_out)
 
 func process_element(et:ElementType):
-	var dur := Global.config.elements_conversion_duration_bounds.rand_float()
+	var dur := Global.config.elements_conversion_duration
+	var prev_dur := 0
+	if processes.size() > 0:
+		prev_dur = processes.back().get_time_remaining()
+	
+	var processes_too_close : bool = abs(dur - prev_dur) < Global.config.elements_conversion_min_diff
+	if processes_too_close:
+		dur = Global.config.elements_conversion_min_diff
+	
 	var proc := ElementConversionProcess.new(dur, et)
 	proc.finished.connect(on_process_complete)
 	processes.append(proc)

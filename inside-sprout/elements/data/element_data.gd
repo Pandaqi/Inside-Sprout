@@ -14,9 +14,17 @@ signal element_added(e:Element)
 signal element_removed(e:Element)
 
 func reset() -> void:
+	elements = []
 	available_types = []
 	spawnable_types = []
 	area_types = []
+
+func count_spawnables() -> int:
+	var num := 0
+	for elem in elements:
+		if not elem.type.spawnable: continue
+		num += 1
+	return num
 
 func count() -> int:
 	return elements.size()

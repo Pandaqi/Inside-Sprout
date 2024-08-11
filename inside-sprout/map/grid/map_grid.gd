@@ -61,6 +61,7 @@ func real_pos_to_grid_pos(real_pos:Vector2) -> Vector2i:
 	return Vector2i(floor(real_pos.x / Global.config.cell_size), floor(real_pos.y / Global.config.cell_size))
 
 func get_cell_at(grid_pos:Vector2i) -> MapCell:
+	if out_of_bounds(grid_pos): return null
 	return grid[pos_to_grid_id(grid_pos)]
 
 func out_of_bounds(grid_pos:Vector2i) -> bool:

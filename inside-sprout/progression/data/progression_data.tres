@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ProgressionData" load_steps=27 format=3 uid="uid://cx3oq84spkyut"]
+[gd_resource type="Resource" script_class="ProgressionData" load_steps=28 format=3 uid="uid://cx3oq84spkyut"]
 
 [ext_resource type="Script" path="res://progression/data/progression_data.gd" id="1_hp26v"]
 [ext_resource type="Resource" uid="uid://lfkmviapv85k" path="res://progression/rulesets/ruleset_exterior.tres" id="1_ou5uf"]
@@ -26,9 +26,11 @@
 [ext_resource type="Resource" uid="uid://b84812rsyeimi" path="res://progression/rulesets/ruleset_slower_attack.tres" id="21_p087t"]
 [ext_resource type="Resource" uid="uid://uyvv5f4lhcha" path="res://progression/rulesets/ruleset_waves_bounds.tres" id="22_ht834"]
 [ext_resource type="Resource" uid="uid://dfa82q00egcwy" path="res://progression/rulesets/ruleset_waves_longer.tres" id="23_huuc8"]
+[ext_resource type="Resource" uid="uid://2nx82jtyvu56" path="res://progression/rulesets/ruleset_default.tres" id="24_j6ghm"]
 
 [resource]
 script = ExtResource("1_hp26v")
-all_rules = Array[ExtResource("1_qrmvc")]([ExtResource("2_ci0a7"), ExtResource("3_8mteb"), ExtResource("4_4he2c"), ExtResource("5_cywuh"), ExtResource("6_juto2"), ExtResource("7_jkckx"), ExtResource("8_jku2n"), ExtResource("9_kla2t"), ExtResource("10_tydsg"), ExtResource("11_48epr"), ExtResource("12_th3gu"), ExtResource("13_mbipg"), ExtResource("14_7uspj"), ExtResource("15_sgvl6"), ExtResource("16_4ml7k"), ExtResource("17_l6laq"), ExtResource("18_4binm"), ExtResource("19_a21i0"), ExtResource("20_h0p4f"), ExtResource("21_p087t"), ExtResource("22_ht834"), ExtResource("23_huuc8")])
+all_rules = Array[ExtResource("1_qrmvc")]([ExtResource("2_ci0a7"), ExtResource("3_8mteb"), ExtResource("4_4he2c"), ExtResource("5_cywuh"), ExtResource("6_juto2"), ExtResource("7_jkckx"), ExtResource("8_jku2n"), ExtResource("9_kla2t"), ExtResource("10_tydsg"), ExtResource("11_48epr"), ExtResource("12_th3gu"), ExtResource("13_mbipg"), ExtResource("14_7uspj"), ExtResource("15_sgvl6"), ExtResource("16_4ml7k"), ExtResource("17_l6laq"), ExtResource("18_4binm"), ExtResource("19_a21i0"), ExtResource("20_h0p4f"), ExtResource("21_p087t"), ExtResource("22_ht834"), ExtResource("23_huuc8"), ExtResource("9_kla2t")])
 rules_interior = ExtResource("2_pe2jg")
 rules_exterior = ExtResource("1_ou5uf")
+rules_default = ExtResource("24_j6ghm")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://cyyt8phymfdir"]
+[gd_scene load_steps=19 format=3 uid="uid://cyyt8phymfdir"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_1wsl5"]
+[ext_resource type="PackedScene" uid="uid://cfvcapya3jg46" path="res://players/shadow/shadow.tscn" id="2_7epnh"]
 [ext_resource type="Script" path="res://players/modules/visuals.gd" id="2_7vga5"]
 [ext_resource type="Texture2D" uid="uid://gh2a3gh1fs7s" path="res://enemies/enemies.webp" id="2_maf3f"]
 [ext_resource type="Script" path="res://players/modules/state.gd" id="3_217kc"]
@@ -9,6 +10,7 @@
 [ext_resource type="Script" path="res://players/modules/sensor.gd" id="5_whyhm"]
 [ext_resource type="PackedScene" uid="uid://dy0f3m12rq7tj" path="res://players/modules/health.tscn" id="6_6yd27"]
 [ext_resource type="PackedScene" uid="uid://pnvne6eie12p" path="res://enemies/modules/attacker.tscn" id="6_akwkh"]
+[ext_resource type="PackedScene" uid="uid://ekhpfd7olbcy" path="res://players/effects/death_effects.tscn" id="6_ybd4l"]
 [ext_resource type="Script" path="res://enemies/modules/properties.gd" id="7_05ehy"]
 [ext_resource type="Resource" uid="uid://cx3oq84spkyut" path="res://progression/data/progression_data.tres" id="7_5mb6d"]
 [ext_resource type="PackedScene" uid="uid://dhky6fwi0a47v" path="res://elements/element_sprite/element_sprite.tscn" id="8_0im4v"]
@@ -22,11 +24,14 @@ height = 108.0
 radius = 475.232
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_mask = 2
 script = ExtResource("1_1wsl5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_kbvb1")
+
+[node name="Shadow" parent="." instance=ExtResource("2_7epnh")]
 
 [node name="Visuals" type="Node2D" parent="."]
 script = ExtResource("2_7vga5")
@@ -40,6 +45,7 @@ vframes = 3
 [node name="State" type="Node2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("3_217kc")
 health = NodePath("../Health")
+death_effects_scene = ExtResource("6_ybd4l")
 
 [node name="Mover" parent="." node_paths=PackedStringArray("sensor", "visuals", "map_tracker") instance=ExtResource("3_s3wwf")]
 sensor = NodePath("../Sensor")

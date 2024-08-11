@@ -30,7 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://bwupnql05qe80" path="res://progression/waves/unlock.tscn" id="26_54vj8"]
 [ext_resource type="Script" path="res://progression/choices/choices.gd" id="27_c56us"]
 [ext_resource type="Script" path="res://ui/tutorial/tutorial.gd" id="27_ja7uo"]
-[ext_resource type="AudioStream" uid="uid://mscgcndj7lsa" path="res://game_loop/menu/game_start_stop.ogg" id="28_i42e1"]
+[ext_resource type="AudioStream" uid="uid://mscgcndj7lsa" path="res://game_loop/main/game_start_stop.ogg" id="28_i42e1"]
 [ext_resource type="Texture2D" uid="uid://d47x7khqmsjq" path="res://ui/tutorials.webp" id="28_rbs7y"]
 [ext_resource type="Script" path="res://ui/game_over/game_over.gd" id="30_na3s7"]
 [ext_resource type="FontFile" uid="uid://dofqtr0sig1gj" path="res://ui/fonts/heading.ttf" id="31_iyqix"]
@@ -259,6 +259,7 @@ color = Color(0.0567, 0.21, 0.161455, 1)
 [node name="Progression" type="Node2D" parent="." node_paths=PackedStringArray("game_over")]
 script = ExtResource("2_gb10w")
 game_over = NodePath("../UI/GameOver")
+prog_data = ExtResource("17_nxj7e")
 
 [node name="Map" type="Node2D" parent="."]
 script = ExtResource("1_5tnlf")
@@ -278,6 +279,7 @@ layer_names = Array[String](["bg", "floor", "entities", "overlay"])
 [node name="BorderBodies" type="Node2D" parent="Map"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 script = ExtResource("5_6bxij")
 map_data = ExtResource("2_espwm")
 
@@ -352,6 +354,7 @@ autowrap_mode = 3
 
 [node name="Choices" type="Node2D" parent="UI/WavesDisplayer/Container"]
 script = ExtResource("27_c56us")
+prog_data = ExtResource("17_nxj7e")
 
 [node name="LabelHeading" type="Label" parent="UI/WavesDisplayer/Container/Choices"]
 offset_left = -142.0
@@ -370,6 +373,10 @@ offset_left = -203.0
 offset_top = 128.0
 offset_right = -11.0
 offset_bottom = 242.0
+focus_neighbor_left = NodePath("../ChoiceRight")
+focus_neighbor_right = NodePath("../ChoiceRight")
+focus_next = NodePath("../ChoiceRight")
+focus_previous = NodePath("../ChoiceRight")
 theme = ExtResource("5_1hth8")
 theme_override_font_sizes/font_size = 16
 text = "Lalal"
@@ -381,6 +388,10 @@ offset_left = 11.0
 offset_top = 128.0
 offset_right = 203.0
 offset_bottom = 242.0
+focus_neighbor_left = NodePath("../ChoiceLeft")
+focus_neighbor_right = NodePath("../ChoiceLeft")
+focus_next = NodePath("../ChoiceLeft")
+focus_previous = NodePath("../ChoiceLeft")
 theme = ExtResource("5_1hth8")
 theme_override_font_sizes/font_size = 16
 text = "Lalal"
@@ -472,16 +483,24 @@ offset_left = -318.0
 offset_top = -71.0
 offset_right = -2.0
 offset_bottom = 57.0
+focus_neighbor_left = NodePath("../Restart")
+focus_neighbor_right = NodePath("../Restart")
+focus_next = NodePath("../Restart")
+focus_previous = NodePath("../Restart")
 theme = ExtResource("5_1hth8")
-text = "Back to Menu (ESC)"
+text = "Back to Menu"
 
 [node name="Restart" type="Button" parent="UI/GameOver/Container/Buttons"]
 offset_left = 6.0
 offset_top = -71.0
 offset_right = 312.0
 offset_bottom = 57.0
+focus_neighbor_left = NodePath("../Back")
+focus_neighbor_right = NodePath("../Back")
+focus_next = NodePath("../Back")
+focus_previous = NodePath("../Back")
 theme = ExtResource("5_1hth8")
-text = "Try Again (SPACE)"
+text = "Try Again"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GameOver"]
 libraries = {

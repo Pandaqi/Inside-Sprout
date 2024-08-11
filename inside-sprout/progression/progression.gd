@@ -1,6 +1,10 @@
 class_name Progression extends Node2D
 
 @export var game_over : GameOver
+@export var prog_data : ProgressionData
+
+func preactivate() -> void:
+	prog_data.reset()
 
 func activate() -> void:
 	GSignal.game_over.connect(on_game_over)

@@ -27,8 +27,11 @@ func set_radius(r:float) -> void:
 	radius_changed.emit(r)
 	radius_viewer.update(r)
 
-func on_attack_target_found(_n) -> void:
-	reset_target()
+func on_attack_target_found(n) -> void:
+	if not (n is Element): 
+		reset_target()
+		return
+	set_target_element(n)
 
 func on_attack_target_lost(_n) -> void:
 	recheck_bodies()
@@ -40,6 +43,7 @@ func set_target_element(e:Element) -> void:
 func reset_target() -> void:
 	target_lost.emit(target)
 	target = null
+	recheck_bodies()
 
 func get_target_element() -> Element:
 	if target and not is_instance_valid(target): reset_target()

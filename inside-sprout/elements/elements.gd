@@ -48,7 +48,7 @@ func get_spawn_factor() -> float:
 
 func restart_timer() -> void:
 	if method != ElementSpawnMethod.AUTOMATIC: return
-	timer.wait_time = Global.config.elements_spawn_tick * get_spawn_factor()
+	timer.wait_time = Global.config.elements_spawn_tick / get_spawn_factor()
 	timer.start()
 
 func on_timer_timeout() -> void:
@@ -58,16 +58,17 @@ func on_timer_timeout() -> void:
 func refresh() -> void:
 	var num_bounds := Global.config.elements_spawn_bounds.clone()
 	num_bounds.scale( get_spawn_factor() )
-	num_bounds.scale( Global.config.elements_spawn_bounds_scale_per_wave * enemy_data.spawner.wave_index )
-	
-	var cur_num := element_data.count()
+	num_bounds.scale( pow( Global.config.elements_spawn_bounds_scale_per_wave, clamp(enemy_data.spawner.wave_index + 1, 1, Global.config.waves_max)) )
+	num_bounds.floor_both()
+
+	var cur_num := element_data.count_spawnables()
 	if cur_num >= num_bounds.end: return
 	
 	while cur_num < num_bounds.start:
 		spawn()
 		cur_num += 1
 	
-	if randf() <= Global.config.elements_spawn_extra_prob:
+	if randf() <= Global.config.elements_spawn_extra_prob and cur_num < num_bounds.end:
 		spawn()
 		cur_num += 1
 
@@ -90,7 +91,7 @@ func spawn(et:ElementType = null, pos:Vector2 = Vector2.ZERO) -> void:
 	node.activate()
 
 func get_random_valid_position() -> Vector2:
-	var avoid := players_data.players.duplicate(false)
+	var avoid := players_data.players.duplicate(false) + element_data.elements.duplicate(false)
 	var min_dist := Global.config.elements_spawn_min_dist_to_player * Global.config.cell_size
 	var pos := map_data.query_position({ "avoid": avoid, "dist": min_dist })
 	return pos

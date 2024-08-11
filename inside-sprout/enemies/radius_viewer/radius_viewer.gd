@@ -9,5 +9,5 @@ func _ready() -> void:
 
 func update(r:float) -> void:
 	sprite.set_scale(2.0 * r / Global.config.sprite_size * Vector2.ONE)
-	sprite.material.set_shader_parameter("thickness", 0.02 / sprite.scale.x)
-	sprite.material.set_shader_parameter("frequency", 25 / sprite.scale.x)
+	sprite.material.set_shader_parameter("thickness", 0.03 / sprite.scale.x)
+	sprite.material.set_shader_parameter("frequency", 25 * sprite.scale.x)

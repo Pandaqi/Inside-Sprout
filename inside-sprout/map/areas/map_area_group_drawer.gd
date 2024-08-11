@@ -8,6 +8,9 @@ var polygon : PackedVector2Array
 @onready var debug_label_cont := $DebugLabel
 @onready var debug_label := $DebugLabel/Label
 
+func _ready() -> void:
+	debug_label_cont.set_visible(OS.is_debug_build() and Global.config.show_area_label)
+
 func update(g:MapAreaGroup) -> void:
 	area_group = g
 	
@@ -18,4 +21,4 @@ func update(g:MapAreaGroup) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	draw_polyline(polygon, Color(1,0,0), 16)
+	draw_polyline(polygon, Color(0.5,0.25,0.12), 4)

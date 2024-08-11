@@ -4,6 +4,8 @@ class_name ModuleProperties extends Node2D
 @export var sprite_scene : PackedScene
 var sprites : Array[ElementSprite] = []
 
+var scale_factor := 1.45
+
 func set_type(tp:EnemyType) -> void:
 	# collect them all
 	var distractions := tp.distractions
@@ -13,8 +15,8 @@ func set_type(tp:EnemyType) -> void:
 	if tp.weaknesses_all: weaknesses = element_data.area_types
 	
 	# only display the relevant ones ( = those elements are actually in the level)
-	var dis_filtered := []
-	var weak_filtered := []
+	var dis_filtered : Array[ElementType] = []
+	var weak_filtered : Array[ElementType] = []
 	for dis in distractions:
 		if element_data.area_types.has(dis):
 			dis_filtered.append(dis)
@@ -36,11 +38,12 @@ func visualize(dis:Array[ElementType], weak:Array[ElementType]) -> void:
 		add_child(new_sprite)
 		sprites.append(new_sprite)
 	
-	var offset_per_sprite := Vector2.RIGHT * Global.config.sprite_size
+	var offset_per_sprite := Vector2.RIGHT * Global.config.sprite_size * scale_factor
 	var global_offset := -0.5 * (dis.size() - 1) * offset_per_sprite
 	for i in range(sprites.size()):
 		var sprite = sprites[i]
 		var is_weak := weak.has(dis[i])
-		sprite.set_data(dis[i].frame, is_weak)
+		sprite.set_scale(scale_factor * Vector2.ONE)
+		sprite.set_data(dis[i], is_weak)
 		sprite.set_position(global_offset + i * offset_per_sprite)
 		

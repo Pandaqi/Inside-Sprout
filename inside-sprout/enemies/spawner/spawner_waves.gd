@@ -27,21 +27,32 @@ func set_config(scene:PackedScene, ed:EnemyData, md:MapData, eld:ElementData, pr
 	prepare_unlock_order()
 
 func prepare_unlock_order() -> void:
-	var all_enemies = enemy_data.all_enemies.duplicate(false)
+	var all_enemies := enemy_data.all_enemies.duplicate(false)
 	unlock_order = []
 	
 	# only include all enemies that are actually relevant to types currently selected for play
 	for enemy in all_enemies:
+		var distraction := false
 		var weakness := false
+		for dis in enemy.distractions:
+			if element_data.area_types.has(dis):
+				distraction = true
+		
+		if enemy.distractions_all:
+			distraction = true
+		
 		for weak in enemy.weaknesses:
-			if element_data.area_types.has(weak):
+			if element_data.area_types.has(weakness):
 				weakness = true
 		
-		if not weakness: continue
+		if enemy.weaknesses_all:
+			weakness = distraction
+		
+		if (not weakness) and (not distraction): continue
 		unlock_order.append(enemy)
 	
+	unlock_order.shuffle()
 	unlock_order.sort_custom(func(a:EnemyType, b:EnemyType):
-		if a.strength == b.strength: return randf() <= 0.5
 		if a.strength < b.strength: return true
 		return false
 	)
@@ -73,10 +84,14 @@ func on_enemy_removed(_e:Enemy) -> void:
 
 func end_wave_if_needed() -> void:
 	if enemy_data.count() > 0: return
+	if has_items_left_to_spawn(): return
 	end()
 
+func has_items_left_to_spawn() -> bool:
+	return spawn_events.size() > 0
+
 func spawn_if_needed() -> void:
-	if spawn_events.size() <= 0: return
+	if not has_items_left_to_spawn(): return
 	
 	var should_trigger : bool = (Time.get_ticks_msec() - last_spawn_time) / 1000.0 >= spawn_events.front().time_diff
 	if not should_trigger: return
@@ -98,6 +113,8 @@ func spawn(ev:SpawnEvent) -> void:
 	enemy_data.add_enemy(e)
 	e.state.died.connect(func(_enem): enemy_data.remove_enemy(e))
 	e.activate()
+	
+	last_spawn_time = Time.get_ticks_msec()
 
 func unlock_types_if_needed() -> void:
 	last_unlocked_type = null
@@ -108,6 +125,10 @@ func unlock_types_if_needed() -> void:
 	enemy_data.unlock(new_type)
 	last_unlocked_type = new_type
 	next_unlock_wave = wave_index + Global.config.waves_unlock_interval_bounds.rand_int()
+	
+	# the first few waves should just be unlocking enemies, for variety
+	if wave_index < Global.config.waves_min_before_non_unlocks:
+		next_unlock_wave = wave_index + 1
 
 func generate_wave() -> void:
 	var target_strength := Global.config.waves_strength_bounds.interpolate(get_progression_ratio())
@@ -115,12 +136,18 @@ func generate_wave() -> void:
 
 	var cur_strength := 0.0
 	spawn_events = []
-
+	
+	# ensure a newly unlocked type appears in the wave at least twice
+	if Global.config.waves_ensure_new_type_appears_freq > 0 and last_unlocked_type:
+		for i in range(Global.config.waves_ensure_new_type_appears_freq):
+			cur_strength += last_unlocked_type.strength
+			spawn_events.append(SpawnEvent.new(last_unlocked_type))
+	
 	# first determine all types
 	while cur_strength < target_strength:
 		var rand_enemy := enemy_data.get_random_available()
 		cur_strength += rand_enemy.strength
-		spawn_events.append(SpawnEvent.new(rand_enemy, 0.0))
+		spawn_events.append(SpawnEvent.new(rand_enemy))
 	spawn_events.shuffle()
 	
 	# then spread them randomly across the duration of the wave

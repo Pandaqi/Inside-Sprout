@@ -7,12 +7,16 @@ class_name Heart extends StaticBody2D
 var type : MachineType
 
 func _ready() -> void:
-	health.set_base_health(Global.config.heart_health * Global.config.enemy_damage_factor, true)
+	var base_health := Global.config.heart_health * Global.config.enemy_damage_factor
+	health.set_base_health(base_health, true)
 
 func activate() -> void:
 	state.activate()
 
 func set_direction(angle:float) -> void:
+	if is_equal_approx(angle, PI) or is_equal_approx(angle, -PI):
+		angle = 0
+	
 	set_rotation(angle)
 
 func set_type(tp:MachineType) -> void:

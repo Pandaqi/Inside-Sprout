@@ -71,7 +71,7 @@ func regenerate() -> void:
 	
 	# create hedges on the edges (sick rhyme)
 	for group in areas.area_groups:
-		for i in range(group.hedges_available.size()-1,-1,-1):
+		for i in range(group.hedges_taken.size()-1,-1,-1):
 			place_hedge(group)
 	
 	# the heart cells where they need to be
@@ -100,6 +100,7 @@ func create_map_bounds() -> void:
 	
 	for i in range(4):
 		var body := StaticBody2D.new()
+		body.set_collision_layer_value(3, true)
 		var col_shape := CollisionShape2D.new()
 		col_shape.shape = shp
 		body.add_child(col_shape)
@@ -109,7 +110,7 @@ func create_map_bounds() -> void:
 
 func place_heart(cell:MapCell) -> void:
 	var node : Heart = heart_scene.instantiate()
-	node.set_position( map_data.grid.grid_pos_to_real_pos( cell.get_center() ) )
+	node.set_position( map_data.grid.grid_pos_float_to_real_pos( cell.get_center() ) )
 	map_layers.add_to_layer("entities", node)
 	cell.heart_node = node
 	

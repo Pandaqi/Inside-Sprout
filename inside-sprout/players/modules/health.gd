@@ -13,8 +13,12 @@ class_name ModuleHealth extends Node2D
 var base_health := 100.0
 var health := 0.0
 var last_attacker : Node2D
+var valid := false
 
 signal depleted()
+
+func _ready() -> void:
+	valid = true
 
 func set_base_health(h:float, fill := false) -> void:
 	base_health = h
@@ -31,6 +35,8 @@ func get_health_ratio() -> float:
 	return health / base_health
 
 func change(h:float) -> void:
+	if not valid: return
+	
 	health = clamp(health + h, 0.0, base_health)
 	
 	prog_bar_cont.set_visible(show_progress_bar)
@@ -42,7 +48,7 @@ func change(h:float) -> void:
 	audio_player.pitch_scale = randf_range(0.9, 1.1)
 	audio_player.play()
 	
-	if show_hit_flash:
+	if show_hit_flash and health > 0:
 		var tw := get_tree().create_tween()
 		tw.tween_property(entity, "modulate", Color(3,2,2), 0.05)
 		tw.parallel().tween_property(entity, "scale", 1.05*Vector2.ONE, 0.05)
@@ -50,6 +56,7 @@ func change(h:float) -> void:
 		tw.parallel().tween_property(entity, "scale", Vector2.ONE, 0.05)
 	
 	if health <= 0:
+		valid = false
 		depleted.emit()
 
 func register_attacker(body:Node2D) -> void:

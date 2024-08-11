@@ -23,18 +23,34 @@ func _ready() -> void:
 		area_group.object_exited.connect(on_object_exited)
 
 func on_object_entered(o) -> void:
-	if (o is Player): targets.append(o)
+	if (o is Player): 
+		add_target(o)
 	if (o is Element) and o.type.can_be_bullet: 
 		add_bullet(o)
 
 func on_object_exited(o) -> void:
-	if (o is Player): targets.erase(o)
+	if (o is Player):
+		remove_target(o)
 	if (o is Element) and bullets.has(o): 
 		remove_bullet(o)
 
+func add_target(p:Player) -> void:
+	targets.append(p)
+	if not is_busy(): restart_timer()
+
+func remove_target(p:Player) -> void:
+	targets.erase(p)
+	if is_busy(): stop_timer()
+
 func add_bullet(b:Element) -> void:
 	bullets.append(b)
+	if bullets.size() > Global.config.gun_bullet_max_num:
+		expend_first_bullet()
+		
 	if not is_busy(): restart_timer()
+
+func expend_first_bullet() -> void:
+	bullets.pop_back().state.kill()
 
 func remove_bullet(b:Element) -> void:
 	bullets.erase(b)
@@ -57,21 +73,23 @@ func _physics_process(_dt:float) -> void:
 func shoot() -> void:
 	if not has_bullets(): return
 	
-	bullets.pop_back().kill()
+	# destroy the element we used for aiming
+	expend_first_bullet()
 	
 	var b = bullet_scene.instantiate()
 	b.global_position = sprite.global_position
 	b.rotation = get_rotation()
 	b.damage_factor = prog_data.get_rules().bullet_damage_factor
-	GSignal.place_on_map.emit("entities", b)
 	
 	var base_speed := Global.config.gun_bullet_speed * Global.config.cell_size * Global.config.map_size.x
 	var impulse := Vector2.from_angle(b.rotation) * base_speed
 	b.velocity = impulse
-	
 	restart_timer()
+	
+	GSignal.place_on_map.emit("entities", b)
 
 func restart_timer() -> void:
+	if not has_bullets(): return
 	timer.wait_time = Global.config.gun_timer_duration * prog_data.get_rules().bullet_speed_factor
 	timer.start()
 

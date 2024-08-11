@@ -3,7 +3,6 @@ class_name Enemy extends CharacterBody2D
 var type : EnemyType
 
 @onready var mover := $Mover
-@onready var sprite : Sprite2D = $Sprite2D
 @onready var health := $Health
 @onready var properties := $Properties
 @onready var map_tracker := $MapTracker
@@ -23,7 +22,7 @@ func set_type(tp:EnemyType) -> void:
 	
 	visuals.set_data(tp)
 	mover.res_move = tp.movement_type
-	mover.extra_speed_factor = tp.speed
+	mover.speed_factor = tp.speed
 	health.set_base_health(tp.health * Global.config.enemy_health_factor, true)
 	properties.set_type(tp)
 	sensor.set_type(tp)

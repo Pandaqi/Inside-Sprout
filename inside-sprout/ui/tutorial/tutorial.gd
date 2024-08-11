@@ -15,7 +15,7 @@ func activate() -> void:
 
 func load_next() -> void:
 	set_visible(true)
-	set_position(get_viewport_rect().size)
+	set_position(0.5*get_viewport_rect().size)
 	
 	get_tree().paused = true
 	ui.set_bg(true)

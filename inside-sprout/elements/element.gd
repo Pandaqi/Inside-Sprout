@@ -8,8 +8,6 @@ var type : ElementType
 @onready var map_tracker : ModuleMapTracker = $MapTracker
 @onready var state := $State
 
-signal died(e:Element)
-
 func activate() -> void:
 	state.activate()
 	map_tracker.activate()
@@ -20,3 +18,8 @@ func set_type(tp:ElementType) -> void:
 	var base_health := tp.health * map_tracker.get_rules().elements_health_factor * Global.config.elements_health_factor
 	health.set_base_health(base_health, true)
 	sprite.set_frame(tp.frame)
+	
+	var no_need_for_health := tp.enemy_ignore or tp.pickupable
+	if no_need_for_health:
+		health.show_progress_bar = false
+		health.show_hit_flash = false

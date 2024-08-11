@@ -1,22 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://bx5047cj80nnx"]
+[gd_scene load_steps=7 format=3 uid="uid://bx5047cj80nnx"]
 
 [ext_resource type="Script" path="res://machines/hearts/heart.gd" id="1_j4xoq"]
 [ext_resource type="Texture2D" uid="uid://7y2s6n6cc5aj" path="res://game_loop/main/misc.webp" id="2_bm1mt"]
 [ext_resource type="PackedScene" uid="uid://dy0f3m12rq7tj" path="res://players/modules/health.tscn" id="3_pn6kp"]
 [ext_resource type="Script" path="res://players/modules/state.gd" id="4_1ky8e"]
+[ext_resource type="PackedScene" uid="uid://ekhpfd7olbcy" path="res://players/effects/death_effects.tscn" id="5_due0b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k46lp"]
-size = Vector2(256, 48)
+size = Vector2(192, 24)
 
 [node name="Machines" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_j4xoq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_k46lp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -56)
-scale = Vector2(2, 2)
+position = Vector2(0, -84)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_bm1mt")
 hframes = 4
 vframes = 4
@@ -27,3 +30,4 @@ frame = 8
 [node name="State" type="Node2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("4_1ky8e")
 health = NodePath("../Health")
+death_effects_scene = ExtResource("5_due0b")

@@ -5,7 +5,10 @@ class_name Players extends Node2D
 @export var map_data : MapData
 
 func preactivate() -> void:
-	GInput.create_debugging_players()
+	players_data.reset()
+	# GInput.create_debugging_players()
+	if GInput.get_player_count() <= 0:
+		GInput.add_new_player(GInput.InputDevice.KEYBOARD)
 
 func activate() -> void:
 	place_players()

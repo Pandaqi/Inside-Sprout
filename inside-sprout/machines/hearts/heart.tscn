@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://coed4jc64xcuo"]
+[gd_scene load_steps=13 format=3 uid="uid://coed4jc64xcuo"]
 
 [ext_resource type="Script" path="res://machines/hearts/heart.gd" id="1_1j50u"]
 [ext_resource type="Texture2D" uid="uid://7y2s6n6cc5aj" path="res://game_loop/main/misc.webp" id="2_dufbi"]
 [ext_resource type="Script" path="res://players/modules/state.gd" id="3_wo02t"]
 [ext_resource type="PackedScene" uid="uid://dy0f3m12rq7tj" path="res://players/modules/health.tscn" id="3_xgapb"]
 [ext_resource type="Script" path="res://machines/modules/tree_gun.gd" id="4_h70m0"]
+[ext_resource type="PackedScene" uid="uid://ekhpfd7olbcy" path="res://players/effects/death_effects.tscn" id="4_kpwfc"]
 [ext_resource type="Resource" uid="uid://umdjeh5iwhd1" path="res://players/data/players_data.tres" id="5_oa2tq"]
 [ext_resource type="Resource" uid="uid://dx6cw7nxy341v" path="res://map/data/map_data.tres" id="6_grgrp"]
 [ext_resource type="PackedScene" uid="uid://bbb8esrdahbyj" path="res://machines/modules/bullet.tscn" id="7_6liub"]
@@ -32,6 +33,7 @@ frame = 6
 [node name="State" type="Node2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("3_wo02t")
 health = NodePath("../Health")
+death_effects_scene = ExtResource("4_kpwfc")
 
 [node name="Health" parent="." instance=ExtResource("3_xgapb")]
 

@@ -16,6 +16,9 @@ func update(dt:float) -> void:
 func get_ratio() -> float:
 	return time_spent / duration
 
+func get_time_remaining() -> float:
+	return duration - time_spent
+
 func finish() -> void:
 	change(duration)
 

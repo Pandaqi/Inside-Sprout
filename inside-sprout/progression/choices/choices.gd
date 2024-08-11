@@ -19,7 +19,7 @@ func update() -> void:
 	choices = [all_options.pop_back(), all_options.pop_back()]
 	
 	choice_left.set_text(choices.front().desc)
-	choice_left.set_text(choices.back().desc)
+	choice_right.set_text(choices.back().desc)
 
 func on_left_pressed() -> void:
 	if not active: return

@@ -10,6 +10,7 @@ class_name Ruleset
 @export var speed_factor_player := 1.0
 
 @export var elements_health_factor := 1.0
+@export var element_damage_factor := 1.0
 
 @export var drop_heal_factor := 0.0
 @export var drop_regrow_hedge := false

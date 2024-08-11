@@ -39,3 +39,8 @@ func interpolate(factor:float) -> float:
 
 func average() -> float:
 	return 0.5 * (start + end)
+
+func floor_both() -> Bounds:
+	start = floor(start)
+	end = floor(end)
+	return self

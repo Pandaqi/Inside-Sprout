@@ -13,15 +13,16 @@ point_count = 3
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Mover" type="Node2D"]
+show_behind_parent = true
 script = ExtResource("1_w37ss")
 res_move = ExtResource("2_32l3x")
 map_data = ExtResource("2_a7rwc")
-extra_speed_factor = null
 
 [node name="TimerPause" type="Timer" parent="."]
 one_shot = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 32
 texture = ExtResource("4_upcr0")
 spread = 180.0
 gravity = Vector2(0, 0)

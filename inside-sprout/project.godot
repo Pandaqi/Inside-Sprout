@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Inside Sprout"
-run/main_scene="res://game_loop/main/main.tscn"
+run/main_scene="res://game_loop/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 Global="*res://game_loop/globals/global.tscn"
 GSignal="*res://game_loop/globals/gsignal.gd"
 GInput="*res://game_loop/globals/input/GInput.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [rendering]
 
