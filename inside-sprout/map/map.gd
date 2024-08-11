@@ -72,7 +72,7 @@ func regenerate() -> void:
 	# create hedges on the edges (sick rhyme)
 	for group in areas.area_groups:
 		for i in range(group.hedges_taken.size()-1,-1,-1):
-			place_hedge(group)
+			place_hedge(group, group.hedges_taken[i])
 	
 	# the heart cells where they need to be
 	for heart_cell in hearts.cells:
@@ -117,10 +117,12 @@ func place_heart(cell:MapCell) -> void:
 	node.state.died.connect(map_data.hearts.on_heart_died)
 	node.activate()
 
-func place_hedge(group:MapAreaGroup) -> void:
-	if not group.can_place_hedge(): return
+func place_hedge(group:MapAreaGroup, known_hedge:Line = null) -> void:
+	if not known_hedge and (not group.can_place_hedge()): return
 	
-	var hedge : Line = group.hedges_available.back()
+	var hedge := known_hedge 
+	if not hedge:
+		hedge = group.hedges_available.back()
 	
 	var node = machine_scene.instantiate()
 	node.set_position( map_data.grid.grid_pos_float_to_real_pos( hedge.get_center() ))

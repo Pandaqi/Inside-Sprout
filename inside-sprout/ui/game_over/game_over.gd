@@ -36,10 +36,3 @@ func _on_back_pressed() -> void:
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
-
-func _input(ev:InputEvent) -> void:
-	if not active: return
-	if ev.is_action_released("game_over_restart"):
-		_on_restart_pressed()
-	if ev.is_action_released("game_over_back"):
-		_on_back_pressed()

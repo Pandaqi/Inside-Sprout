@@ -291,8 +291,12 @@ map_data = ExtResource("2_espwm")
 element_data = ExtResource("7_wibnk")
 prog_data = ExtResource("17_nxj7e")
 
+[node name="Timer" type="Timer" parent="Enemies"]
+autostart = true
+
 [node name="Elements" type="Node2D" parent="."]
 script = ExtResource("11_22wdb")
+method = null
 element_data = ExtResource("7_wibnk")
 map_data = ExtResource("2_espwm")
 players_data = ExtResource("14_jflrc")
@@ -430,6 +434,7 @@ vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/WavesDisplayer"]
 stream = ExtResource("28_i42e1")
+volume_db = -5.0
 
 [node name="Tutorial" type="Node2D" parent="UI"]
 script = ExtResource("27_ja7uo")
@@ -515,5 +520,6 @@ libraries = {
 "": SubResource("AnimationLibrary_tc5nh")
 }
 
+[connection signal="timeout" from="Enemies/Timer" to="Enemies" method="_on_timer_timeout"]
 [connection signal="pressed" from="UI/GameOver/Container/Buttons/Back" to="UI/GameOver" method="_on_back_pressed"]
 [connection signal="pressed" from="UI/GameOver/Container/Buttons/Restart" to="UI/GameOver" method="_on_restart_pressed"]

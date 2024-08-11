@@ -46,6 +46,7 @@ var waves_unlock_interval_bounds := Bounds.new(2, 2) # min/max waves before next
 @export var enemy_sight_range_def := 2.0 # ~cell_size
 @export var enemy_kill_range_def := 0.33 # ~cell_size
 var enemy_seed_drop_bounds := Bounds.new(0, 2)
+@export var attack_delay_on_first_strike := true
 
 @export_group("Movement")
 @export var movement_speed_def := 100.0
@@ -71,8 +72,8 @@ var elements_spawn_bounds := Bounds.new(2.0, 4.0)
 var elements_num_selected_bounds := Bounds.new(3,4)
 
 @export_subgroup("Defaults")
-@export var element_damage_factor := 40.0 # equal to enemies
-@export var elements_health_factor := 75.0 # equal to enemies
+@export var element_damage_factor := 30.0 # all slightly lower than enemies
+@export var elements_health_factor := 50.0 # all slightly lower than enemies
 
 @export_group("Machines")
 @export_subgroup("TreeGun")

@@ -24,3 +24,8 @@ func _process(_dt:float) -> void:
 
 func on_wave_ended() -> void:
 	print("WAVE OVER ", spawner.wave_index)
+
+# @TODO: Very rarely, it doesn't end the wave when it should (if enemy died -> check if all enemies died -> if so, end)
+# I have no fucking clue why, but it's unacceptable, so let's just do a 1-second tick to check for this anyway, to catch that error.
+func _on_timer_timeout() -> void:
+	spawner.end_wave_if_needed()

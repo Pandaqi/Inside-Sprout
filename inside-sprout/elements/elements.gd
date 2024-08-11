@@ -91,7 +91,7 @@ func spawn(et:ElementType = null, pos:Vector2 = Vector2.ZERO) -> void:
 	node.activate()
 
 func get_random_valid_position() -> Vector2:
-	var avoid := players_data.players.duplicate(false) + element_data.elements.duplicate(false)
+	var avoid := players_data.players.duplicate(false) + element_data.get_spawnables()
 	var min_dist := Global.config.elements_spawn_min_dist_to_player * Global.config.cell_size
 	var pos := map_data.query_position({ "avoid": avoid, "dist": min_dist })
 	return pos

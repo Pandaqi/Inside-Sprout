@@ -79,12 +79,19 @@ func get_target() -> Node2D:
 	if target and not (("health" in target) or target.health): reset_target()
 	return target
 
-func set_target(t:Node2D) -> void:
+func set_target(t:Node2D, instant_response := false) -> void:
 	if is_busy(): return
 	if not can_damage_target(t): return
 	
 	target = t
 	target_found.emit(target)
+	prepare_attack(instant_response)
+
+# @NOTE: its delay also is in effect for the FIRST strike?
+func prepare_attack(instant_response := false) -> void:
+	if Global.config.attack_delay_on_first_strike and not instant_response:
+		restart_timer()
+		return
 	attack()
 
 func reset_target() -> void:
@@ -115,7 +122,7 @@ func _on_kill_area_body_exited(body: Node2D) -> void:
 func provoke(attacker:Node2D) -> void:
 	if not attack_if_provoked: return
 	if get_target(): return
-	set_target(attacker)
+	set_target(attacker, true)
 
 # @TODO @IMPROV: some cleaner code structure/module/resource/whatever to check if things can hit each other
 func can_damage_target(body = target) -> bool:

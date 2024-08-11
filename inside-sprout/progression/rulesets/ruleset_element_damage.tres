@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_dvqg1")
-desc = "Flowers do 15% more damage"
+desc = "Flowers do more damage"
 conversion_timer_factor = 1.0
 conversion_insta_finish = false
 speed_factor = 1.0

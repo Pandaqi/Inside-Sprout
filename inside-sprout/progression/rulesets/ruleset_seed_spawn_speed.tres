@@ -4,13 +4,14 @@
 
 [resource]
 script = ExtResource("1_2wwhv")
-desc = "New seeds spawn 15% faster."
+desc = "New seeds spawn faster."
 conversion_timer_factor = 1.0
 conversion_insta_finish = false
 speed_factor = 1.0
 speed_factor_enemy = 1.0
 speed_factor_player = 1.0
 elements_health_factor = 1.0
+element_damage_factor = 1.0
 drop_heal_factor = 0.0
 drop_regrow_hedge = false
 recolor_upon_entry = false

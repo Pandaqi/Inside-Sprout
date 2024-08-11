@@ -18,6 +18,7 @@ func set_direction(angle:float) -> void:
 		angle = 0
 	
 	set_rotation(angle)
+	health.set_rotation(-angle) # to make sure progress bar stays up top
 
 func set_type(tp:MachineType) -> void:
 	type = tp

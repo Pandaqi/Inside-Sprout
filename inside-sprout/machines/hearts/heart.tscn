@@ -38,6 +38,7 @@ death_effects_scene = ExtResource("4_kpwfc")
 [node name="Health" parent="." instance=ExtResource("3_xgapb")]
 
 [node name="TreeGun" type="Node2D" parent="."]
+top_level = true
 position = Vector2(0, -83)
 script = ExtResource("4_h70m0")
 players_data = ExtResource("5_oa2tq")

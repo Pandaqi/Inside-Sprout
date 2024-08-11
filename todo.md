@@ -2,9 +2,8 @@
 
 # To-Do (for Sunday)
 
-INSIDE SPROUT:
-* Probably want a little bit faster conversions? (Or does that ruin the idea of the game?) => Shouldn't they be displayed much higher on the player?
-* Ugh, seems like the web build will not properly show characters not in the font.
+
+
 
 
 
@@ -20,6 +19,8 @@ ADVANCE FINSIDE OUT:
 At the end of the day, I want _both_ entries submittable.
 
 # To-Do (for Monday)
+
+* INSIDE SPROUT => Marketing Image + Screenshots => Final build
 
 * Merely create the page and simple marketing, decide which one to send in.
 * Most of the day should be free.
@@ -44,6 +45,8 @@ At the end of the day, I want _both_ entries submittable.
 **Major: Save Game & More Customization** => such as choosing what you want to include, actually modifying the map in some way as you go, more machines, etcetera
 
 ## Leftover Rules & Ideas
+
+@IDEA: An enemy that does _area_ damage => it can target multiple flowers at once, or all flowers within the same area, potentially making it _really strong_ (and combatting the strategy of just "put more flowers everywhere in the same spot")
 
 @IDEA: Certain monsters _drop_ stuff too, that you can then use (or must avoid) => It feels like the "medicine" for the heart should be _changing_, otherwise one specific element will always be way more important.
 
@@ -73,6 +76,10 @@ At the end of the day, I want _both_ entries submittable.
   * Maybe there are bridges to the inside. Destroying/changing those bridges are a crucial part of strategy, but it takes resources/timing/being at the correct station to do so obviously.
 
 ## Leftover polishing
+
+* Tutorial => clarify the bullet mechanic / clarify that it's a "last ditch resort" and it's really about the flowers?
+  * A "flower noticed!" effect, or animating the preferences of each animal, might also work better. => Maybe HIGHLIGHT someone's preference if their current target is the same type?
+* Should the element conversion progress bar be displayed HIGHER on the player? Or larger?
 
 Sound: Walking? Flower noticed?
 

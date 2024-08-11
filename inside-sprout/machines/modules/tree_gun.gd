@@ -4,6 +4,7 @@ extends Node2D
 @export var map_data : MapData
 @export var prog_data : ProgressionData
 @export var bullet_scene : PackedScene
+@onready var entity : Heart = get_parent()
 
 var targets : Array[Player] = []
 var area_group : MapAreaGroup
@@ -14,6 +15,8 @@ var bullets : Array[Element] = []
 @onready var prog_bar := $SpriteArrow/TextureProgressBar
 
 func _ready() -> void:
+	global_position = entity.global_position + Vector2(0, -84)
+	
 	var cell := map_data.grid.get_cell_at( map_data.grid.real_pos_to_grid_pos(global_position) )
 	area_group = cell.area.group
 	
@@ -77,7 +80,7 @@ func shoot() -> void:
 	expend_first_bullet()
 	
 	var b = bullet_scene.instantiate()
-	b.global_position = sprite.global_position
+	b.global_position = self.global_position
 	b.rotation = get_rotation()
 	b.damage_factor = prog_data.get_rules().bullet_damage_factor
 	

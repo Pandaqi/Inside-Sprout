@@ -20,11 +20,14 @@ func reset() -> void:
 	area_types = []
 
 func count_spawnables() -> int:
-	var num := 0
+	return get_spawnables().size()
+
+func get_spawnables() -> Array[Element]:
+	var arr : Array[Element] = []
 	for elem in elements:
 		if not elem.type.spawnable: continue
-		num += 1
-	return num
+		arr.append(elem)
+	return arr
 
 func count() -> int:
 	return elements.size()

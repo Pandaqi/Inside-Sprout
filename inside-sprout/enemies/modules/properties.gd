@@ -4,7 +4,7 @@ class_name ModuleProperties extends Node2D
 @export var sprite_scene : PackedScene
 var sprites : Array[ElementSprite] = []
 
-var scale_factor := 1.45
+var scale_factor := 1.52
 
 func set_type(tp:EnemyType) -> void:
 	# collect them all
