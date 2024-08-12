@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://db0bce6hwasvt" path="res://ui/default_theme.tres" id="1_025kj"]
 [ext_resource type="Script" path="res://game_loop/menu/menu.gd" id="1_81gtj"]
-[ext_resource type="Texture2D" uid="uid://cobj5poeergo0" path="res://icon.svg" id="1_bid0w"]
+[ext_resource type="Texture2D" uid="uid://cri2kkth7clfs" path="res://game_loop/menu/itch_logo.png" id="2_vpvwt"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -42,7 +42,8 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_bid0w")
+texture = ExtResource("2_vpvwt")
+expand_mode = 5
 stretch_mode = 5
 
 [node name="Play" type="Button" parent="CenterContainer/VBoxContainer"]

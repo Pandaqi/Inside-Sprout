@@ -30,9 +30,9 @@ var area_group_max_size_bounds := Bounds.new(1,1)
 @export_group("Enemies")
 @export_subgroup("Spawning")
 @export var waves_max := 16
-var waves_strength_bounds := Bounds.new(3.0, 25.0)
+var waves_strength_bounds := Bounds.new(2.0, 25.0)
 var waves_duration_bounds := Bounds.new(10.0, 60.0)
-var waves_time_diff_bounds := Bounds.new(0.05, 8.0) # min/max time diff between subsequent spawns
+var waves_time_diff_bounds := Bounds.new(0.8, 8.0) # min/max time diff between subsequent spawns
 var waves_unlock_interval_bounds := Bounds.new(2, 2) # min/max waves before next type unlock
 @export var waves_min_before_non_unlocks := 3
 @export var waves_delay_before_start := 3 # how many seconds to keep the message on the screen before the wave eventually starts

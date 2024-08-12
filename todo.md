@@ -1,31 +1,5 @@
 
 
-# To-Do (for Sunday)
-
-
-
-
-
-
-ADVANCE FINSIDE OUT:
-* Water current fix => With that, we can make swimming much slower, to stop it from being too big of an advantage
-* The absolutely necessary graphics
-  * For the menus and game over
-  * For stuff in the game
-* Create Health+ powerup (remove the _mass one)
-* Create tutorial to explain how the game even works.
-* I should write a list of SFX/Particles/Juice, but not actually do it.
-
-At the end of the day, I want _both_ entries submittable.
-
-# To-Do (for Monday)
-
-* INSIDE SPROUT => Marketing Image + Screenshots => Final build
-
-* Merely create the page and simple marketing, decide which one to send in.
-* Most of the day should be free.
-
-
 
 ## Collision Layers
 
@@ -43,6 +17,8 @@ At the end of the day, I want _both_ entries submittable.
 **Major: Animate** => we probably want flowers to actually grow, enemies to actually walk/fly, etcetera.
 
 **Major: Save Game & More Customization** => such as choosing what you want to include, actually modifying the map in some way as you go, more machines, etcetera
+
+**Major: Distinguish areas not only by color.** => include a repeating icon/pattern on the area that also communicates what will grow there.
 
 ## Leftover Rules & Ideas
 
