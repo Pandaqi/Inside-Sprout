@@ -20,6 +20,11 @@
 
 **Major: Distinguish areas not only by color.** => include a repeating icon/pattern on the area that also communicates what will grow there.
 
+**Major: A simpler first wave that doesn't "throw you right in"** => Just track NUM_PLAYS or something, and make it slower/easier/more interactive at play = 0/1.
+
+@IDEA: A way to drop seeds faster in certain situations. Maybe they convert faster when inside. Maybe specific _areas_ give a boost/slowdown, if I end up implementing varying area traits.
+
+
 ## Leftover Rules & Ideas
 
 @IDEA: An enemy that does _area_ damage => it can target multiple flowers at once, or all flowers within the same area, potentially making it _really strong_ (and combatting the strategy of just "put more flowers everywhere in the same spot")
